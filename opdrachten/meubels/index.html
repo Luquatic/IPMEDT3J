@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meubels VR</title>
+
+    <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+    <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
+    <script type ="text/javascript"    src="assets/js/jquery-3.1.1.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</head>
+<body>
+
+    <a-scene>
+        <!--CAMERA-->
+        <a-entity id="camera" camera="userHeight: 5.6" look-controls position="0 0 0">
+            <a-cursor color="black"></a-cursor>
+        </a-entity>
+
+        <!--ASSETS-->
+        <a-assets>
+            <img id="sky" src="assets/img/sky.jpg">
+            <img id="grass" src="assets/img/grass.jpg">
+            <img id="laminaat" src="assets/img/laminaat.jpg">
+            <img id="rainbow" src="assets/img/rainbow.jpg">
+        </a-assets>
+
+        <!--SKY-->
+        <a-sky src="#sky"></a-sky>
+
+        <!-- GROUND -->
+        <a-entity id="ground" position="0 0.10 0" geometry="depth:200;height:2;width:200;skipCache:false" material="src: #grass; repeat: 25 25"></a-entity>
+
+        <!--MUREN-->
+        <a-entity id="muur01" position="0 4.39 -20" scale="40 40 1" geometry="" material=""></a-entity>
+        <a-entity id="muur02" position="0 4.39 20" scale="40 40 1" geometry="" material=""></a-entity>
+        <a-entity id="muur03" position="-20 4.39 0" scale="40 40 1" geometry="" material="" rotation="0 90 0"></a-entity>
+        <a-entity id="muur04" position="20 4.39 0" scale="40 40 1" geometry="" material="" rotation="0 90 0"></a-entity>
+
+        <a-entity id="randomBehang" position="0 8.98 19.28" scale="4 4 1" geometry="" material="src: #rainbow"></a-entity>
+
+        <!--VLOER-->
+        <a-entity id="vloer" position="0 0.65 0" scale="40 1 40" geometry="" material="src: #laminaat; repeat: 10 10"></a-entity>
+
+    </a-scene>
+
+</body>
+</html>
