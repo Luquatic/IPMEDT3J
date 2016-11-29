@@ -19,7 +19,27 @@
     <a-scene>
       <!--CAMERA-->
       <a-entity id="camera" camera="userHeight: 5.6" look-controls position="0 0 0" rotation="0 180 0">
-          <a-cursor color="black"></a-cursor>
+          <a-cursor color="black">
+            <!--KRUK-->
+            <a-entity id="krukCursor" position="0 0 -5" rotation="0 0 0" scale="0.5 0.5 0.5" visible="false">
+              <a-entity id="poot1" class="kruk" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot2" class="kruk" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot3" class="kruk" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot4" class="kruk" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="zit" class="kruk" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+            </a-entity>
+
+            <!--STOEL-->
+            <a-entity id="stoelCursor" position="0 0 -5" rotation="0 0 0" scale="0.5 0.5 0.5" visible="false">
+              <a-entity id="poot1" class="stoel" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot2" class="stoel" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot3" class="stoel" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot4" class="stoel" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="zit" class="stoel" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="rug" class="stoel" geometry="" material="color:#804000" position="0 5.78 -0.89" scale="0.5 3 2.3"></a-entity>
+            </a-entity>
+
+          </a-cursor>
       </a-entity>
 
       <!--ASSETS-->
