@@ -15,7 +15,15 @@ $(document).ready(function () {
       muur02 = document.getElementById('muur02'),
       muur03 = document.getElementById('muur03'),
       muur04 = document.getElementById('muur04'),
-      random = document.getElementById('randomBehang');
+
+      kruk = document.getElementsByClassName('kruk'),
+      stoel = document.getElementsByClassName('stoel'),
+      bank = document.getElementsByClassName('bank'),
+
+      random = document.getElementById('randomBehang'),
+      randomKruk = document.getElementById('randomKruk'),
+      randomStoel = document.getElementById('randomStoel'),
+      randomBank = document.getElementById('randomBank');
 
   // Voeg een event listener toe aan de random kleur kiezer.
   random.addEventListener('mouseenter', function() {
@@ -29,4 +37,36 @@ $(document).ready(function () {
     $(muur03).attr('material', 'color:' + color);
     $(muur04).attr('material', 'color:' + color);
   });
+
+  // Voeg een event listener toe aan de random kleur kiezer.
+  randomKruk.addEventListener('mouseenter', function() {
+
+    // Verkrijg een random kleur.
+    var color = getRandomColor();
+
+    // Verander de kruk van kleur.
+    $(kruk).attr('material', 'color:' + color);
+  });
+
+  // Voeg een event listener toe aan de random kleur kiezer.
+  randomStoel.addEventListener('mouseenter', function() {
+
+    // Verkrijg een random kleur.
+    var color = getRandomColor();
+
+    // Verander de stoel van kleur.
+    $(stoel).attr('material', 'color:' + color);
+  });
+
+  // Voeg een event listener toe aan de random kleur kiezer.
+  randomBank.addEventListener('mouseenter', function() {
+
+    // Verkrijg een random kleur.
+    var color = getRandomColor();
+
+    // Verander de bank van kleur.
+    $(bank).attr('material', 'color:' + color);
+  });
+
+
 });
