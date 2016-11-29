@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <title>Meubels VR</title>
 
+    <!-- Externe libraries -->
     <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
     <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
-    <script type ="text/javascript"    src="assets/js/jquery-3.1.1.min.js"></script>
+
+    <!-- Vendor -->
+    <script type ="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
+
+    <!-- Eigen javascript -->
     <script src="assets/js/main.js"></script>
 </head>
 <body>
@@ -30,7 +35,7 @@
 
       <!-- GROUND -->
       <a-entity id="ground" position="0 0.10 0" geometry="depth:200;height:2;width:200;skipCache:false" material="src: #grass; repeat: 25 25"></a-entity>
-
+      
       <!--MUREN-->
       <a-entity id="muur01" position="0 4.39 -20" scale="40 40 1" geometry="" material=""></a-entity>
       <a-entity id="muur02" position="0 4.39 20" scale="40 40 1" geometry="" material=""></a-entity>
