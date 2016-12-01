@@ -21,22 +21,32 @@
       <a-entity id="camera" camera="userHeight: 5.6" look-controls position="0 0 0" rotation="0 180 0">
           <a-cursor color="black">
             <!--KRUK-->
-            <a-entity id="krukCursor" position="0 0 -5" rotation="0 0 0" scale="0.5 0.5 0.5" visible="false">
-              <a-entity id="poot1" class="kruk" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="poot2" class="kruk" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="poot3" class="kruk" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="poot4" class="kruk" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="zit" class="kruk" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+            <a-entity id="krukCursorID" position="0 0 -5" rotation="0 0 0" scale="0.5 0.5 0.5" visible="false">
+              <a-entity id="poot1KC" class="kruk" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot2KC" class="kruk" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot3KC" class="kruk" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot4KC" class="kruk" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="zitKC" class="kruk" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
             </a-entity>
 
             <!--STOEL-->
-            <a-entity id="stoelCursor" position="0 0 -5" rotation="0 0 0" scale="0.5 0.5 0.5" visible="false">
-              <a-entity id="poot1" class="stoel" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="poot2" class="stoel" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="poot3" class="stoel" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="poot4" class="stoel" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="zit" class="stoel" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
-              <a-entity id="rug" class="stoel" geometry="" material="color:#804000" position="0 5.78 -0.89" scale="0.5 3 2.3"></a-entity>
+            <a-entity id="stoelCursorID" position="0 0 -5" rotation="0 0 0" scale="0.5 0.5 0.5" visible="false">
+              <a-entity id="poot1SC" class="stoel" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot2SC" class="stoel" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot3SC" class="stoel" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot4SC" class="stoel" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="zitSC" class="stoel" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="rugSC" class="stoel" geometry="" material="color:#804000" position="0 5.78 -0.89" scale="0.5 3 2.3"></a-entity>
+            </a-entity>
+
+            <!--BANK-->
+            <a-entity id="bankCursorID" position="0 0 -5" rotation="0 -90 0" scale="0.5 0.5 0.5" visible="false">
+              <a-entity id="poot1BC" class="bank" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot2BC" class="bank" position="0 2.47 -7.09" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot3BC" class="bank" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="poot4BC" class="bank" position="1.8 2.47 -7.09" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="zitBankBC" class="bank" position="0.9 4.09 -3.56" scale="2.3 0.3 7.6" geometry="" material="color:#804000"></a-entity>
+              <a-entity id="rugBankBC" class="bank" geometry="" material="color:#804000" position="0 5.37 -3.57" scale="0.5 2.3 7.6"></a-entity>
             </a-entity>
 
           </a-cursor>
@@ -77,31 +87,55 @@
 
       <!--KRUK-->
       <a-entity id="kruk" position="11.85 0 17.95">
-        <a-entity id="poot1" class="kruk" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot2" class="kruk" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot3" class="kruk" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot4" class="kruk" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="zit" class="kruk" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot1Kruk" class="kruk" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot2Kruk" class="kruk" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot3Kruk" class="kruk" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot4Kruk" class="kruk" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="zitKruk" class="kruk" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+      </a-entity>
+
+      <a-entity id="kruk01" position="-12.4 0 -14.57" visible="false">
+        <a-entity id="poot1Kruk01" class="kruk" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot2Kruk01" class="kruk" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot3Kruk01" class="kruk" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot4Kruk01" class="kruk" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="zitKruk01" class="kruk" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+      </a-entity>
+
+      <a-entity id="kruk02" position="15.38 0 1.69" visible="false">
+        <a-entity id="poot1Kruk02" class="kruk" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot2Kruk02" class="kruk" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot3Kruk02" class="kruk" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot4Kruk02" class="kruk" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="zitKruk02" class="kruk" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+      </a-entity>
+
+      <a-entity id="kruk03" position="-16.26 0 3.33" visible="false">
+        <a-entity id="poot1Kruk03" class="kruk" position="0 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot2Kruk03" class="kruk" position="0 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot3Kruk03" class="kruk" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot4Kruk03" class="kruk" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="zitKruk03" class="kruk" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
       </a-entity>
 
       <!--STOEL-->
       <a-entity id="stoel" position="2.43 0 18.79" rotation="0 90 0">
-        <a-entity id="poot1" class="stoel" position="0 2.47 0" scale="0.5 8 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot2" class="stoel" position="0 2.47 -1.8" scale="0.5 8 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot3" class="stoel" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot4" class="stoel" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="zit" class="stoel" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="rug" class="stoel" geometry="" material="color:#804000" position="0 5.78 -0.89" scale="0.5 3 2.3"></a-entity>
+        <a-entity id="poot1Stoel" class="stoel" position="0 2.47 0" scale="0.5 8 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot2Stoel" class="stoel" position="0 2.47 -1.8" scale="0.5 8 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot3Stoel" class="stoel" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot4Stoel" class="stoel" position="1.8 2.47 -1.8" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="zitStoel" class="stoel" position="0.9 4.09 -0.9" scale="2.3 0.3 2.3" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="rugStoel" class="stoel" geometry="" material="color:#804000" position="0 5.78 -0.89" scale="0.5 3 2.3"></a-entity>
       </a-entity>
 
       <!--BANK-->
       <a-entity id="bank" position="-6.71 0 18.71" rotation="0 90 0">
-        <a-entity id="poot1" class="bank" position="0 2.47 0" scale="0.5 8 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot2" class="bank" position="0 2.47 -7.09" scale="0.5 8 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot3" class="bank" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="poot4" class="bank" position="1.8 2.47 -7.09" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="zit" class="bank" position="0.9 4.09 -3.56" scale="2.3 0.3 7.6" geometry="" material="color:#804000"></a-entity>
-        <a-entity id="rug" class="bank" geometry="" material="color:#804000" position="0 5.37 -3.57" scale="0.5 2.3 7.6"></a-entity>
+        <a-entity id="poot1Bank" class="bank" position="0 2.47 0" scale="0.5 8 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot2Bank" class="bank" position="0 2.47 -7.09" scale="0.5 8 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot3Bank" class="bank" position="1.8 2.47 0" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="poot4Bank" class="bank" position="1.8 2.47 -7.09" scale="0.5 3 0.5" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="zitBank" class="bank" position="0.9 4.09 -3.56" scale="2.3 0.3 7.6" geometry="" material="color:#804000"></a-entity>
+        <a-entity id="rugBank" class="bank" geometry="" material="color:#804000" position="0 5.37 -3.57" scale="0.5 2.3 7.6"></a-entity>
       </a-entity>
 
 
