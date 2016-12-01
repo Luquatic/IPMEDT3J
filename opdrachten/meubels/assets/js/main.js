@@ -7,6 +7,7 @@ function getRandomColor() {
   }
   return color;
 }
+
 // Wacht todat de dom klaar is.
 $(document).ready(function () {
 
