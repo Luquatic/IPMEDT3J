@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Opdracht 3 - Pokedex</title>
+  <meta charset="UTF-8">
+  <title>Pokédex VR | Groep J</title>
+
+  <!-- Externe libraries -->
+  <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
+  <script src="node_modules/aframe-text-component/dist/aframe-text-component.min.js"></script>
+
+  <!-- Vendor -->
+  <script type ="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
+
+  <!-- Eigen javascript -->
+  <script src="assets/js/main.js"></script>
 </head>
 <body>
+<a-scene>
 
+  <!--Camera-->
+  <a-camera look-controls>
+    <a-cursor color="white"></a-cursor>
+  </a-camera>
+
+  <!--Assets-->
+  <a-assets>
+    <img id="pokedex" src="assets/img/pokedex.png">
+  </a-assets>
+
+  <!--Image-->
+  <a-image id="pokedex" src="#pokedex" position="0 1.6 -0.8" width="1.5"></a-image>
+
+  <a-sky src="assets/img/sky.jpg"></a-sky>
+
+</a-scene>
 </body>
 </html>
