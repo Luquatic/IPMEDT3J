@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
   // Variables
-  var cube      = document.getElementById('rubix-cube'),
+  var cube      = document.getElementById('rubiks-cube'),
     leftBox   = document.getElementById('leftBox'),
     upperBox  = document.getElementById('upperBox'),
     rightBox  = document.getElementById('rightBox'),
