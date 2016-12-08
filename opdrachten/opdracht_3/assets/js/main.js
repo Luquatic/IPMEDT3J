@@ -1,8 +1,9 @@
 // Wacht totdat het document geladen is.
 $(document).ready(function () {
 
-  // Pokedex
+  // Alle benodigde variables.
   var go_vr            = document.getElementById('go-vr'),
+      undo_vr          = document.getElementById('undo-vr'),
       naam_vr          = document.getElementById('naam-vr'),
       totaal_nummer_vr = document.getElementById('nummer-totaal-vr'),
       pokemon_vr       = document.getElementById('pokemon-vr'),
@@ -12,6 +13,9 @@ $(document).ready(function () {
 
   // Voeg een event listener toe op de go knop.
   goEvent();
+
+  // Voeg een event listener toe op de undo knop.
+  undoEvent();
 
   // Voeg een event listener toe op de nummer knoppen.
   nummerEvents();
@@ -78,6 +82,32 @@ $(document).ready(function () {
     $(totaal_nummer_vr).attr('text', 'text:' + nummer)
   }
 
+  // Undo knop.
+  function undoEvent() {
+
+    //
+    undo_vr.addEventListener('mouseenter', function () {
+      haalEenGetalWeg();
+    })
+  }
+
+  // Haal een getal weg.
+  function haalEenGetalWeg() {
+
+    // Controleer of er geen pauze is.
+    if(!pause) {
+
+      // Haal het laatste getal weg.
+      totaal_nummer = totaal_nummer.substring(0, totaal_nummer.length - 1);
+
+      // Toon het nummer.
+      toonNummer(totaal_nummer);
+    }
+
+    // Doe een pauze.
+    maakPauze();
+  }
+
   // Go knop.
   function goEvent() {
 
@@ -102,6 +132,7 @@ $(document).ready(function () {
     });
   }
 
+  // Voer de API call uit.
   function apiCall(id) {
 
     // Controleer of er al een pauze is.
