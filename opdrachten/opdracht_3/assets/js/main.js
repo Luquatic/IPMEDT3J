@@ -7,7 +7,8 @@ $(document).ready(function () {
       totaal_nummer_vr = document.getElementById('nummer-totaal-vr'),
       pokemon_vr       = document.getElementById('pokemon-vr'),
       nummers          = document.getElementsByClassName('nummer'),
-      totaal_nummer    = "";
+      totaal_nummer    = "",
+      pause            = false;
 
   // Voeg een event listener toe op de go knop.
   goEvent();
@@ -38,11 +39,36 @@ $(document).ready(function () {
   // Pas het ingetoetse getal aan.
   function toetsGetal(nummer) {
 
-    // Voeg het getal toe aan de string.
-    totaal_nummer += $(nummer).attr('data-nummer');
+    // Controleer of er al een pauze is.
+    if(!pause) {
 
-    // Toon het nummer.
-    toonNummer(totaal_nummer);
+      // Voeg het getal toe aan de string.
+      totaal_nummer += $(nummer).attr('data-nummer');
+
+      // Toon het nummer.
+      toonNummer(totaal_nummer);
+    }
+
+    // Voer een pauze uit.
+    maakPauze();
+  }
+
+  // Maake een pauze aan.
+  function maakPauze() {
+
+    // Controleer of er al een pauze is.
+    if(!pause) {
+
+      // Zet de pauze op true.
+      pause = true;
+
+      // Wacht voor 2 seconden.
+      setTimeout(function () {
+
+        // Zet de pauze op false.
+        pause = false;
+      }, 1000)
+    }
   }
 
   // Toon het totale nummer in de Pokedex.
@@ -78,23 +104,30 @@ $(document).ready(function () {
 
   function apiCall(id) {
 
-    // Verkrijg de Pokemon gegevens.
-    $.ajax({
-      url: 'http://pokeapi.co/api/v2/pokemon/' + id + '/',
-      method: 'GET',
-      dataType: 'json',
-      success: function (msg) {
+    // Controleer of er al een pauze is.
+    if(!pause) {
 
-        // Sla de afbeelding van de Pokemon op.
-        var afbeelding = msg.sprites.front_default;
+      // Verkrijg de Pokemon gegevens.
+      $.ajax({
+        url: 'http://pokeapi.co/api/v2/pokemon/' + id + '/',
+        method: 'GET',
+        dataType: 'json',
+        success: function (msg) {
 
-        // Sla de naam van de Pokemon op.
-        var naam = msg.species.name;
+          // Sla de afbeelding van de Pokemon op.
+          var afbeelding = msg.sprites.front_default;
 
-        // Toon de Pokemon.
-        toonPokemon(afbeelding, naam);
-      }
-    })
+          // Sla de naam van de Pokemon op.
+          var naam = msg.species.name;
+
+          // Toon de Pokemon.
+          toonPokemon(afbeelding, naam);
+        }
+      });
+    }
+
+    // Voer een pauze uit.
+    maakPauze();
   }
 
   // Toon de naam van de Pokemon.
