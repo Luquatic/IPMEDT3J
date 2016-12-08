@@ -5,11 +5,11 @@
   <title>Pokédex VR | Groep J</title>
 
   <!-- Externe libraries -->
-  <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
-  <script src="node_modules/aframe-text-component/dist/aframe-text-component.min.js"></script>
+  <script src="../../bower_components/aframe/dist/aframe.min.js"></script>
+  <script src="../../node_modules/aframe-text-component/dist/aframe-text-component.min.js"></script>
 
   <!-- Vendor -->
-  <script type ="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
+  <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 
   <!-- Eigen javascript -->
   <script src="assets/js/main.js"></script>
@@ -24,11 +24,29 @@
 
   <!--Assets-->
   <a-assets>
-    <img id="pokedex" src="assets/img/pokedex.png">
+    <img id="pokedex" src="assets/img/pokedex.png" alt="Pokedex">
   </a-assets>
 
   <!--Image-->
-  <a-image id="pokedex" src="#pokedex" position="0 1.6 -1" width="1.5" material="color:#FFF;shader:flat;side:double;transparent:true;src:#pokedex" geometry="primitive:plane;width:1.5" scale="1.5 1.5 1.5"></a-image>
+  <a-image id="pokedex-vr" src="#pokedex" position="0 1.6 -1" width="1.5" material="color:#FFF;shader:flat;side:double;transparent:true;src:#pokedex" geometry="primitive:plane;width:1.5" scale="1.5 1.5 1.5"></a-image>
+
+  <!-- Nummers -->
+  <a-entity id="nummer-1-vr" class="nummer" data-nummer="1" mixin="font" text="text:1" position="0.32 1.49 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+  <a-entity id="nummer-2-vr" class="nummer" data-nummer="2" mixin="font" text="text:2" position="0.45 1.49 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+  <a-entity id="nummer-3-vr" class="nummer" data-nummer="3" mixin="font" text="text:3" position="0.57 1.49 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+  <a-entity id="nummer-4-vr" class="nummer" data-nummer="4" mixin="font" text="text:4" position="0.69 1.49 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+  <a-entity id="nummer-5-vr" class="nummer" data-nummer="5" mixin="font" text="text:5" position="0.82 1.49 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+
+  <!-- Nummers -->
+  <a-entity id="nummer-6-vr" class="nummer" data-nummer="6" mixin="font" text="text:6" position="0.32 1.41 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+  <a-entity id="nummer-7-vr" class="nummer" data-nummer="7" mixin="font" text="text:7" position="0.45 1.41 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+  <a-entity id="nummer-8-vr" class="nummer" data-nummer="8" mixin="font" text="text:8" position="0.57 1.41 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+  <a-entity id="nummer-9-vr" class="nummer" data-nummer="9" mixin="font" text="text:9" position="0.69 1.41 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+  <a-entity id="nummer-0-vr" class="nummer" data-nummer="0" mixin="font" text="text:0" position="0.82 1.41 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+
+  <a-entity id="nummer-totaal-vr" mixin="font" text="text:0" position="0.31 1.72 -1" scale="0.1 0.1 0.1" blend-character-model="" material="color:#000000"></a-entity>
+
+  <a-entity id="go-vr" mixin="font" text="text:GO!" position="0.62 1.30 -1" scale="0.05 0.05 0.05" blend-character-model="" material="color:#000000"></a-entity>
 
   <a-sky src="assets/img/sky.jpg"></a-sky>
 

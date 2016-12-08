@@ -1,26 +1,40 @@
-/**
- * Created by maartenpaauw on 07-12-16.
- */
-$(function(){
-  var data;
-  var dataString;
+// Wacht totdat het document geladen is.
+$(document).ready(function () {
 
-  function getData(data)
-  {
+  // Pokedex
+  var pokedex  = document.getElementById('pokedex-vr'),
+      nummer   = document.getElementsByClassName('nummer'),
+      totaal_nummer_vr = document.getElementById('nummer-totaal-vr'),
+      totaal_nummer = "";
 
-    $.ajax({
-      url: 'https://swapi.co/api' + dataString,
-      method: 'GET', // or GET
-      dataType : "json",
-      success: function(msg) {
-        var x = msg['name'] !== undefined ? msg['name'] : msg['title'];
+  // Ga door elk nummer heen.
+  for(var i = 0; i < nummer.length; i++) {
 
-        $('#text').attr('text','text: ' + x);
+    // Voeg een event listener toe aan elk nummer.
+    document.getElementsByClassName('nummer')[i].addEventListener('mouseenter', function() {
 
-
-      }
+      // Verkrijg het getal.
+      toetsGetal(this)
     });
   }
+
+  function toetsGetal(nummer) {
+
+    // Verkrijg het getal.
+    var getal = $(nummer).attr('data-nummer');
+
+    // Toon het nummer.
+    toonNummer();
+
+    // Voeg het getal toe aan de string.
+    totaal_nummer += getal;
+  }
+
+  function toonNummer() {
+
+    // Toon het totale nummer.
+    $(totaal_nummer_vr).attr('text', 'text:' + totaal_nummer)
+  }
+
+
 });
-
-
