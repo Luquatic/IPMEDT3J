@@ -26,46 +26,45 @@
   </head>
   <body>
     <!--[if lt IE 10]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+      your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">IPMEDT3J</h3>
-      </div>
+    <!-- VR SCENE -->
+    <a-scene>
 
-      <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-      </div>
+      <!--Camera-->
+      <a-camera look-controls="look-controls">
+        <a-cursor color="white">
+          <a-obj-model id="timer" src="#timer_obj" mtl="#timer_mtl" position="1 -0.5 0" rotation="90 0 0" scale="0.2 0.2 0.2"></a-obj-model>
+        </a-cursor>
+      </a-camera>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>HTML5 Boilerplate</h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
+      <!-- Assets -->
+      <a-asset-item id="rubix-cube_obj" src="assets/model/rubix-cube.obj"></a-asset-item>
+      <a-asset-item id="rubix-cube_mtl" src="assets/model/rubix-cube.mtl"></a-asset-item>
+      <a-asset-item id="timer_obj" src="assets/model/test_timer.obj"></a-asset-item>
+      <a-asset-item id="timer_mtl" src="assets/model/test_timer.mtl"></a-asset-item>
 
-          <h4>Sass</h4>
-          <p>Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.</p>
+      <!-- Objects -->
+      <a-obj-model id="rubix-cube" src="#rubix-cube_obj" mtl="#rubix-cube_mtl" position="0 1 -8" rotation="0 0 0" visible="true"></a-obj-model>
 
-          <h4>Bootstrap</h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
+      <!-- Boxes -->
+      <a-entity id="leftBox" position="-4 1 -8" geometry="height:3;width:1.5" material="visible:false"></a-entity>
+      <a-entity id="upperBox" position="0 5 -8" geometry="height:3;width:1.5" material="visible:false" rotation="0 0 90"></a-entity>
+      <a-entity id="rightBox" position="4 1 -8" geometry="height:3;width:1.5" material="visible:false"></a-entity>
+      <a-entity id="bottomBox" position="0 -3 -8" geometry="height:3;width:1.5" material="visible:false" rotation="0 0 90"></a-entity>
 
-          <h4>Modernizr</h4>
-          <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
-        </div>
-      </div>
+      <!-- Sky -->
+      <a-sky src="assets/img/sky.jpg"></a-sky>
 
-      <div class="footer">
-        <p>♥ from the Yeoman team</p>
-      </div>
-    </div>
+      <!-- Images -->
+      <a-image id="leftArrow" src="assets/img/arrow.png" position="-4 1 -8" material="opacity:0.7" geometry="primitive:plane"></a-image>
+      <a-image id="upperArrow" src="assets/img/arrow.png" position="0 5 -8" material="opacity:0.7" rotation="0 0 270"></a-image>
+      <a-image id="rightArrow" src="assets/img/arrow.png" position="4 1 -8" material="opacity:0.7" rotation="0 0 180"></a-image>
+      <a-image id="bottomArrow" src="assets/img/arrow.png" position="0 -3 -8" material="opacity:0.7" rotation="0 0 90"></a-image>
 
+    </a-scene>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
