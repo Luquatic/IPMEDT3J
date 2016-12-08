@@ -117,8 +117,8 @@ $(document).ready(function () {
       // Controleer of de pokemons binnen de range vallen.
       if (totaal_nummer == 0) {
         totaal_nummer = 1
-      } else  if (totaal_nummer >= 150) {
-        totaal_nummer = 150
+      } else  if (totaal_nummer >= 151) {
+        totaal_nummer = 151
       }
 
       // Haal de Pokemon gegevens op.
