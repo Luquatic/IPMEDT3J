@@ -18,7 +18,7 @@ $(document).ready(function () {
     this.iid = setInterval(function() {
       y = y - 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
-    }, 1000);
+    }, 250);
   });
   leftBox.addEventListener('mouseleave', function () {
     this.iid && clearInterval(this.iid);
@@ -28,7 +28,7 @@ $(document).ready(function () {
     this.iid = setInterval(function() {
       x = x - 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
-    }, 1000);
+    }, 250);
   });
   upperBox.addEventListener('mouseleave', function () {
     this.iid && clearInterval(this.iid);
@@ -38,7 +38,7 @@ $(document).ready(function () {
     this.iid = setInterval(function() {
       y = y + 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
-    }, 1000);
+    }, 250);
   });
   rightBox.addEventListener('mouseleave', function () {
     this.iid && clearInterval(this.iid);
@@ -48,7 +48,7 @@ $(document).ready(function () {
     this.iid = setInterval(function() {
       x = x + 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
-    }, 1000);
+    }, 250);
   });
   bottomBox.addEventListener('mouseleave', function () {
     this.iid && clearInterval(this.iid);
