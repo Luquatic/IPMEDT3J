@@ -47,10 +47,13 @@
       <a-asset-item id="timer_mtl" src="assets/model/test_timer.mtl"></a-asset-item>
 
       <!--Objects-->
-      <a-obj-model id="rubix-cube" src="#rubix-cube_obj" mtl="#rubix-cube_mtl" position="0 1 -8"></a-obj-model>
+      <a-obj-model id="rubix-cube" src="#rubix-cube_obj" mtl="#rubix-cube_mtl" position="0 1 -8" rotation="0 0 0" visible="true"></a-obj-model>
 
-      <!--Linker box-->
-      <a-entity id="leftBox" position="-4 1 -8" geometry="height:3;width:1.5" material=""></a-entity>
+      <!--Boxes-->
+      <a-entity id="leftBox" position="-4 1 -8" geometry="height:3;width:1.5" material="visible:false"></a-entity>
+      <a-entity id="upperBox" position="0 5 -8" geometry="height:3;width:1.5" material="visible:false" rotation="0 0 90"></a-entity>
+      <a-entity id="rightBox" position="4 1 -8" geometry="height:3;width:1.5" material="visible:false"></a-entity>
+      <a-entity id="bottomBox" position="0 -3 -8" geometry="height:3;width:1.5" material="visible:false" rotation="0 0 90"></a-entity>
 
       <!--Sky-->
       <a-sky src="assets/img/sky.jpg"></a-sky>
