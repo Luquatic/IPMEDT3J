@@ -12,15 +12,16 @@ $(document).ready(function() {
   });
 
   $kopen.click(function () {
-    if($nieuw_venster.is(':visible')) {
-      $nieuw_venster.toggle();
-    }
+    buttonCheck(true);
   });
 
   $virtual_reality.click(function () {
-    if(!$nieuw_venster.is(':visible')) {
-      $nieuw_venster.toggle();
-    }
+    buttonCheck(false);
   });
 
+  function buttonCheck(check) {
+    if($nieuw_venster.is(':visible') == check) {
+      $nieuw_venster.toggle();
+    }
+  }
 });
