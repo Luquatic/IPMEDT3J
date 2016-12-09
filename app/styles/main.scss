@@ -249,7 +249,7 @@ html, body {
   }
 }
 
-.image {
+.image, .foto-rubiks-cube {
 
   background-size: cover;
 
@@ -261,6 +261,11 @@ html, body {
     background-image: url("../images/jessey.png");
     background-color: transparent !important;
   }
+}
+
+.foto-rubiks-cube {
+  background-position: center center;
+  background-image: url("../images/rubiks-cube.jpg");
 }
 
 .mdl-mega-footer--bottom-section {
