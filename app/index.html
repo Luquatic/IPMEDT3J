@@ -7,14 +7,14 @@
     <title>Jessey & CO. | Rubik's Cube</title>
 
     <!-- Humans -->
-    <link type="text/plain" rel="author" href="humans.txt" />
+    <link type="text/plain" rel="author" href="humans.txt"/>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css" />
+    <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css"/>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -28,74 +28,96 @@
     <!-- endbuild -->
   </head>
 
-  <body>
-    <!--[if lt IE 10]>
-    <p class="browserupgrade">Je gebruikt een <strong>oude</strong> browser. Alsjeblieft <a href="http://browsehappy.com/">update je browser</a> voor een betere ervaring.</p>
-    <![endif]-->
+  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+  <!--[if lt IE 10]>
+  <p class="browserupgrade">Je gebruikt een <strong>oude</strong> browser. Alsjeblieft <a href="http://browsehappy.com/">update
+    je browser</a> voor een betere ervaring.</p>
+  <![endif]-->
 
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">IPMEDT3J</h3>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+      <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+      </div>
+      <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        <h3>Rubik's Cube</h3>
+      </div>
+      <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+      </div>
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+        <a href="#kopen" id="kopen-menu" class="mdl-layout__tab is-active">Kopen</a>
+        <a href="#virtual-reality" id="virtual-reality-menu" class="mdl-layout__tab">Virtual Reality</a>
+        <button
+          class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent"
+          id="nieuw-venster">
+            <i class="material-icons" role="presentation">open_in_new</i>
+            <span class="visuallyhidden">Open in een nieuw venster</span>
+        </button>
+      </div>
+    </header>
+    <main class="mdl-layout__content">
+      <div class="mdl-layout__tab-panel is-active" id="kopen">
+        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+          <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white"></header>
+          <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-card__supporting-text">
+              <h4>Rubik's Cube</h4>
+              Mooi verhaal over een Rubik's Cube.
+            </div>
+            <div class="mdl-card__actions">
+              <a href="#" class="mdl-button">Koop hem nu</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section--footer mdl-color--white mdl-grid">
+          <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+            <div class="section__circle-container__circle mdl-color--accent section__circle--big"></div>
+          </div>
+          <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+            <h5>Jessey Fransen</h5>
+            Mooi verhaal man.
+          </div>
+          <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+            <div class="section__circle-container__circle mdl-color--accent section__circle--big">
+            </div>
+          </div>
+          <div class="section__text mdl-cell mdl-cell--4-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+            <h5>Maarten Paauw</h5>
+            Ook echt een prachtig verhaal.
+          </div>
+        </section>
+      </div>
+      <div class="mdl-layout__tab-panel" id="virtual-reality">
+          <iframe id="iframe-aframe" width="100%" height="100%" src="aframe.html" allowfullscreen="yes" allowvr="yes" scrolling="no"></iframe>
       </div>
 
-      <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
-      </div>
-
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>HTML5 Boilerplate</h4>
-          <p>HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.</p>
-
-          <h4>Sass</h4>
-          <p>Sass is the most mature, stable, and powerful professional grade CSS extension language in the world.</p>
-
-          <h4>Bootstrap</h4>
-          <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
-
-          <h4>Modernizr</h4>
-          <p>Modernizr is an open-source JavaScript library that helps you build the next generation of HTML5 and CSS3-powered websites.</p>
+      <footer class="mdl-mega-footer">
+        <div class="mdl-mega-footer--bottom-section">
+          <div class="mdl-logo">
+            Groep J
+          </div>
+          <ul class="mdl-mega-footer--link-list">
+            <li><a href="#">Jessey Fransen</a></li>
+            <li><a href="#">Maarten Paauw</a></li>
+          </ul>
         </div>
-      </div>
+      </footer>
+    </main>
+  </div>
 
-      <div class="footer">
-        <p>♥ from the Yeoman team</p>
-      </div>
-    </div>
+  <!-- build:js scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/modernizr/modernizr.js"></script>
+  <script src="/bower_components/material-design-lite/material.min.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
 
+  <!-- build:js scripts/plugins.js -->
+  <!-- endbuild -->
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/modernizr/modernizr.js"></script>
-    <script src="/bower_components/material-design-lite/material.min.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:js scripts/plugins.js -->
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
-    <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:js scripts/main.js -->
-    <script src="scripts/main.js"></script>
-    <!-- endbuild -->
+  <!-- build:js scripts/main.js -->
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
   </body>
 </html>

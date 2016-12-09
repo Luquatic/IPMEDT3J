@@ -1,5 +1,160 @@
-$icon-font-path: '../fonts/';
+//$icon-font-path: '../fonts/';
 
 // bower:scss
-@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+//@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
+
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+// Titel wordt uitgelijnd met het menu.
+
+.mdl-demo {
+
+  .mdl-layout__header-row {
+    padding-left: 40px;
+  }
+
+  .mdl-layout__tab-bar-button {
+    display: none;
+  }
+
+  .mdl-layout {
+
+    &.is-small-screen .mdl-layout__tab-bar .mdl-button {
+      display: none;
+    }
+
+    &:not(.is-small-screen) {
+
+      .mdl-layout__tab-bar, .mdl-layout__tab-bar-container {
+        overflow: visible;
+      }
+    }
+  }
+
+  .mdl-layout__tab-bar-container {
+    height: 64px;
+  }
+
+  .mdl-layout__tab-bar {
+    padding: 0 0 0 16px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+
+    .mdl-layout__tab {
+      height: 64px;
+      line-height: 64px;
+    }
+  }
+
+  main > .mdl-layout__tab-panel {
+    padding: 48px 8px 8px;
+  }
+
+  .mdl-card .mdl-card__supporting-text {
+    margin: 40px;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    padding: 0;
+    color: inherit;
+    width: calc(100% - 80px);
+  }
+
+  .mdl-card__supporting-text h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  .mdl-card__actions {
+    margin: 0;
+    padding: 4px 40px;
+    color: inherit;
+
+    a {
+      color: #00BCD4;
+      margin: 0;
+
+      &:hover, &:active {
+        color: inherit;
+        background-color: transparent;
+      }
+    }
+  }
+
+  .mdl-card__supporting-text + .mdl-card__actions {
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  #nieuw-venster {
+    position: absolute;
+    right: 40px;
+    top: 36px;
+    z-index: 999;
+  }
+
+  .mdl-layout__content section:not(:last-of-type) {
+    position: relative;
+    margin-bottom: 48px;
+  }
+  section {
+
+    &.section--center {
+      max-width: 860px;
+    }
+
+    .section__text {
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      padding-top: 8px;
+
+      h5 {
+        font-size: inherit;
+        margin: 0 0 0.5em;
+      }
+    }
+
+    &.section--footer .section__circle--big {
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      margin: 8px 32px;
+    }
+  }
+  .is-small-screen section.section--footer .section__circle--big {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin: 8px 16px;
+  }
+  section.section--footer {
+    padding: 64px 0;
+    margin: 0 -8px -8px -8px;
+  }
+}
+
+.mdl-layout.is-upgraded .mdl-layout__tab.is-active::after {
+  height: 5px;
+}
+
+#virtual-reality {
+  padding: 0;
+  height: 700px;
+
+  iframe {
+    border: none;
+  }
+}
+
+#nieuw-venster {
+  display: none;
+}
