@@ -4,6 +4,28 @@ html, body {
   padding: 0;
 }
 
+a {
+  color: #1FBAB5;
+}
+
+header {
+  h3 {
+    text-transform: uppercase;
+  }
+}
+
+.mdl-color--primary {
+  background-color: #FB8C00 !important;
+}
+.mdl-color--primary-dark {
+  background-color: #EF6C00 !important;
+}
+
+.mdl-button--fab.mdl-button--colored {
+  background: #1FBAB5 !important;
+  color: #fff;
+}
+
 .mdl-demo {
   .mdl-layout__header-row {
     padding-left: 40px;
