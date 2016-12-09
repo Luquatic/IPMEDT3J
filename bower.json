@@ -6,7 +6,8 @@
     "modernizr": "~2.8.1",
     "jquery": "^3.1.1",
     "aframe": "^0.3.2",
-    "material-design-lite": "^1.2.1"
+    "material-design-lite": "^1.2.1",
+    "material-design-icons": "^3.0.1"
   },
   "overrides": {
     "bootstrap-sass": {
@@ -14,6 +15,17 @@
         "assets/stylesheets/_bootstrap.scss",
         "assets/fonts/bootstrap/*",
         "assets/javascripts/bootstrap.js"
+      ]
+    },
+    "material-design-icons": {
+      "main": [
+        "./iconfont/material-icons.css",
+        "./iconfont/MaterialIcons-Regular.eot",
+        "./iconfont/MaterialIcons-Regular.ijmap",
+        "./iconfont/MaterialIcons-Regular.svg",
+        "./iconfont/MaterialIcons-Regular.ttf",
+        "./iconfont/MaterialIcons-Regular.woff",
+        "./iconfont/MaterialIcons-Regular.woff2"
       ]
     }
   },
