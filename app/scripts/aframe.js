@@ -26,7 +26,7 @@ $(document).ready(function () {
 
   upperBox.addEventListener('mouseenter', function () {
     this.iid = setInterval(function() {
-      x = x + 10;
+      x = x - 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
     }, 250);
   });
@@ -48,7 +48,7 @@ $(document).ready(function () {
 
   bottomBox.addEventListener('mouseenter', function () {
     this.iid = setInterval(function() {
-      x = x - 10;
+      x = x + 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
     }, 250);
   });
