@@ -7,6 +7,7 @@ $(document).ready(function () {
     upperBox  = document.getElementById('upperBox'),
     rightBox  = document.getElementById('rightBox'),
     bottomBox = document.getElementById('bottomBox'),
+    audio = new Audio('../sounds/drag.mp3'),
 
     // X, Y en Z van de Rubik's Cube.
     x = 0,
@@ -17,6 +18,7 @@ $(document).ready(function () {
     this.iid = setInterval(function() {
       y = y - 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
+      audio.play();
     }, 250);
   });
 
@@ -28,6 +30,7 @@ $(document).ready(function () {
     this.iid = setInterval(function() {
       x = x - 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
+      audio.play();
     }, 250);
   });
 
@@ -39,6 +42,7 @@ $(document).ready(function () {
     this.iid = setInterval(function() {
       y = y + 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
+      audio.play();
     }, 250);
   });
 
@@ -50,6 +54,7 @@ $(document).ready(function () {
     this.iid = setInterval(function() {
       x = x + 10;
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
+      audio.play();
     }, 250);
   });
 
