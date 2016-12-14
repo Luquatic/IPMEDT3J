@@ -5,6 +5,7 @@ $(document).ready(function () {
   var go_vr            = document.getElementById('go-vr'),
       undo_vr          = document.getElementById('undo-vr'),
       naam_vr          = document.getElementById('naam-vr'),
+      type_vr          = document.getElementById('type-vr'),
       totaal_nummer_vr = document.getElementById('nummer-totaal-vr'),
       pokemon_vr       = document.getElementById('pokemon-vr'),
       nummers          = document.getElementsByClassName('nummer'),
@@ -151,8 +152,11 @@ $(document).ready(function () {
           // Sla de naam van de Pokemon op.
           var naam = msg.species.name;
 
+          // Haal het type op.
+          var poke_type = msg.types[0].type.name;
+
           // Toon de Pokemon.
-          toonPokemon(afbeelding, naam);
+          toonPokemon(afbeelding, naam, poke_type);
         }
       });
     }
@@ -175,13 +179,23 @@ $(document).ready(function () {
     $(pokemon_vr).attr('src', afbeelding)
   }
 
+  // Verander de poke type.
+  function toonType(poke_type) {
+
+    // Verander het text attribuut.
+    $(type_vr).attr('text', 'text:' + poke_type)
+  }
+
   // Toon de Pokemon.
-  function toonPokemon(afbeelding, naam) {
+  function toonPokemon(afbeelding, naam, poke_type) {
 
     // Toon de naam van de Pokemon.
     toonNaam(naam);
 
     // Toon de afbeelding van de Pokemon.
     toonAfbeelding(afbeelding);
+
+    // Toon het type.
+    toonType(poke_type);
   }
 });
