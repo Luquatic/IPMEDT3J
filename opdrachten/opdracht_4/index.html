@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Groep J - Opdracht 4</title>
+
+    <!-- JavaScript -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/aframe/dist/aframe.js"></script>
+    <script src="assets/js/main.js"></script>
+  </head>
+
+    <body>
+
+    <!-- VR -->
+    <a-scene id="scene" stats="stats">
+
+      <!-- ASSETS -->
+      <a-assets>
+
+        <!-- KLEUREN -->
+        <a-mixin id="r" material="color:#ff0000"></a-mixin>
+        <a-mixin id="g" material="color:#00ff00"></a-mixin>
+        <a-mixin id="b" material="color:#0000ff"></a-mixin>
+
+        <!-- BOX -->
+        <a-mixin id="box" geometry="depth: 1; height: 1; width:1"></a-mixin>
+      </a-assets>
+
+      <!-- CAMERA -->
+      <a-camera>
+        <a-cursor color="black"></a-cursor>
+      </a-camera>
+
+    </a-scene>
+  </body>
+</html>

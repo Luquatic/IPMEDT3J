@@ -1,0 +1,21 @@
+{
+  "name": "opdracht_4",
+  "homepage": "https://github.com/m44rt3np44uw/IPMEDT3J",
+  "authors": [
+    "Maarten Paauw <maartenpaauw@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "aframe": "^0.3.2",
+    "jquery": "^3.1.1"
+  }
+}
