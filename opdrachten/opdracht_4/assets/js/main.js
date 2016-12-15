@@ -13,33 +13,32 @@ $(document).ready(function () {
       // Voeg de box toe aan de scene.
       $(scene).append(generateBox((x * 1.25), (y * 1.25), -7.5));
     }
-
   }
 
-  // Hove methode.
-  hover();
+  // Mouse enter methode.
+  mouseenter();
 
   // Genereer een box.
   function generateBox(x, y, z) {
 
     // Geef een HTML string terug.
-    return '<a-entity class="hover" position="' + x + " " + y + " " + z + '" mixin="r box" ></a-entity>';
+    return '<a-entity class="boxes" position="' + x + " " + y + " " + z + '" mixin="r box" ></a-entity>';
   }
 
-  // Hover methode.
-  function hover() {
+  // Mouse enter methode.
+  function mouseenter() {
 
     // Haal alle boxes op.
-    var boxes = document.getElementsByClassName('hover');
+    var boxes = document.getElementsByClassName('boxes');
 
     // Ga door elke box heen.
     for(var i = 0; i < boxes.length; i++) {
 
       // Voeg een event listener toe aan elke box.
-      document.getElementsByClassName('hover')[i].addEventListener('mouseenter', function() {
+      document.getElementsByClassName('boxes')[i].addEventListener('mouseenter', function() {
 
         // Verander de mixin van de box.
-        $(this).attr('mixin', 'g box')
+        $(this).attr('mixin', 'g box');
       });
     }
   }
