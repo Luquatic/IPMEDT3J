@@ -22,7 +22,7 @@ $(document).ready(function () {
   function generateBox(x, y, z) {
 
     // Geef een HTML string terug.
-    return '<a-entity class="boxes" position="' + x + " " + y + " " + z + '" mixin="r box" ></a-entity>';
+    return '<a-entity class="boxes" position="' + x + " " + y + " " + z + '" mixin="color-r box" ></a-entity>';
   }
 
   // Mouse enter methode.
@@ -38,7 +38,7 @@ $(document).ready(function () {
       document.getElementsByClassName('boxes')[i].addEventListener('mouseenter', function() {
 
         // Verander de mixin van de box.
-        $(this).attr('mixin', 'g box');
+        $(this).attr('mixin', 'color-g box');
       });
     }
   }
