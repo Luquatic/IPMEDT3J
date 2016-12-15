@@ -45,28 +45,36 @@
       </a-camera>
 
       <!-- ASSETS -->
-      <a-asset-item id="rubiks-cube-obj" src="models/rubiks_cube.obj"></a-asset-item>
-      <a-asset-item id="rubiks-cube-mtl" src="models/rubiks_cube.mtl"></a-asset-item>
-      <a-asset-item id="timer-obj" src="models/test_timer.obj"></a-asset-item>
-      <a-asset-item id="timer-mtl" src="models/test_timer.mtl"></a-asset-item>
+      <a-assets>
+        <!--3D MODELS-->
+        <a-asset-item id="rubiks-cube-obj" src="models/rubiks_cube.obj"></a-asset-item>
+        <a-asset-item id="rubiks-cube-mtl" src="models/rubiks_cube.mtl"></a-asset-item>
+        <a-asset-item id="timer-obj" src="models/test_timer.obj"></a-asset-item>
+        <a-asset-item id="timer-mtl" src="models/test_timer.mtl"></a-asset-item>
+        <!--MIXINS-->
+        <a-mixin id="box" geometry="height:3;width:1.5" material="visible:false"></a-mixin>
+        <!--IMAGES-->
+        <img id="arrow" src="images/arrow.png">
+        <img id="sky" src="images/sky.jpg">
+      </a-assets>
 
       <!-- OBJECTS -->
       <a-obj-model id="rubiks-cube" src="#rubiks-cube-obj" mtl="#rubiks-cube-mtl" position="0 1 -8" rotation="0 0 0" visible="true"></a-obj-model>
 
       <!-- BOXES -->
-      <a-entity id="leftBox" position="-4 1 -8" geometry="height:3;width:1.5" material="visible:false"></a-entity>
-      <a-entity id="upperBox" position="0 5 -8" geometry="height:3;width:1.5" material="visible:false" rotation="0 0 90"></a-entity>
-      <a-entity id="rightBox" position="4 1 -8" geometry="height:3;width:1.5" material="visible:false"></a-entity>
-      <a-entity id="bottomBox" position="0 -3 -8" geometry="height:3;width:1.5" material="visible:false" rotation="0 0 90"></a-entity>
+      <a-entity id="leftBox" position="-4 1 -8" mixin="box"></a-entity>
+      <a-entity id="upperBox" position="0 5 -8" mixin="box" rotation="0 0 90"></a-entity>
+      <a-entity id="rightBox" position="4 1 -8" mixin="box"></a-entity>
+      <a-entity id="bottomBox" position="0 -3 -8" mixin="box" rotation="0 0 90"></a-entity>
 
       <!-- SKY -->
-      <a-sky src="images/sky.jpg"></a-sky>
+      <a-sky src="#sky"></a-sky>
 
-      <!-- IMAGES -->
-      <a-image id="leftArrow" src="images/arrow.png" position="-4 1 -8" material="opacity:0.7" geometry="primitive:plane"></a-image>
-      <a-image id="upperArrow" src="images/arrow.png" position="0 5 -8" material="opacity:0.7" rotation="0 0 270"></a-image>
-      <a-image id="rightArrow" src="images/arrow.png" position="4 1 -8" material="opacity:0.7" rotation="0 0 180"></a-image>
-      <a-image id="bottomArrow" src="images/arrow.png" position="0 -3 -8" material="opacity:0.7" rotation="0 0 90"></a-image>
+      <!-- ARROWS -->
+      <a-image id="leftArrow" src="#arrow" position="-4 1 -8" material="opacity:0.7" geometry="primitive:plane"></a-image>
+      <a-image id="upperArrow" src="#arrow" position="0 5 -8" material="opacity:0.7" rotation="0 0 270"></a-image>
+      <a-image id="rightArrow" src="#arrow" position="4 1 -8" material="opacity:0.7" rotation="0 0 180"></a-image>
+      <a-image id="bottomArrow" src="#arrow" position="0 -3 -8" material="opacity:0.7" rotation="0 0 90"></a-image>
 
     </a-scene>
 
