@@ -19,12 +19,19 @@
       <a-assets>
 
         <!-- KLEUREN -->
-        <a-mixin id="color-r" material="color:#ff0000"></a-mixin>
-        <a-mixin id="color-g" material="color:#00ff00"></a-mixin>
-        <a-mixin id="color-b" material="color:#0000ff"></a-mixin>
+        <a-mixin id="color-a" material="color:#ff0000"></a-mixin>
+        <a-mixin id="color-b" material="color:#00ff00"></a-mixin>
+
+        <!-- TEXTURES -->
+        <img id="texture-a" src="assets/img/texture-a.jpg" alt="Texture A">
+        <img id="texture-b" src="assets/img/texture-b.jpg" alt="Texture A">
 
         <!-- BOX -->
         <a-mixin id="box" geometry="depth: 1; height: 1; width:1"></a-mixin>
+
+        <!-- BOX TEXTURES -->
+        <a-mixin id="box-a" material="src: #texture-a"></a-mixin>
+        <a-mixin id="box-b" material="src: #texture-b"></a-mixin>
       </a-assets>
 
       <!-- CAMERA -->
