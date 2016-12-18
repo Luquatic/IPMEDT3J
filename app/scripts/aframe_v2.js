@@ -52,12 +52,11 @@ var RUBIKSCUBE = {
              '</a-entity>'
     },
 
-    // Zet de kleuren van de Rubiks Cube.
-    set_kleuren: function () {
+    // Verkrijg de kleuren.
+    verkrijg_kleuren: function () {
 
-      // De standaard kleuren.
-      // TODO: API
-      var kleuren = [
+      // 6 random kleuren.
+      return [
         '#009B48',
         '#B71234',
         '#0246AD',
@@ -65,6 +64,13 @@ var RUBIKSCUBE = {
         '#FFD500',
         '#FFFFFF'
       ];
+    },
+
+    // Zet de kleuren van de Rubiks Cube.
+    set_kleuren: function () {
+
+      // De standaard kleuren.
+      var kleuren = RUBIKSCUBE.functions.verkrijg_kleuren();
 
       // Kleuren mixins.
       var kleuren_mixins = [];
@@ -125,5 +131,5 @@ var RUBIKSCUBE = {
 $(document).ready(function() {
 
   // Initialiseer de Rubik's Cube.
-  var RC = RUBIKSCUBE.init(3);
+  RUBIKSCUBE.init(3);
 });
