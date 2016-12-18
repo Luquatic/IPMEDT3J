@@ -43,7 +43,7 @@
       </a-camera>
 
       <!-- ASSETS -->
-      <a-assets>
+      <a-assets id="assets">
 
         <!-- 3D MODEL -->
         <a-asset-item id="rubiks-cube-onderdeel-obj" src="models/rubiks_cube_onderdeel.obj"></a-asset-item>
@@ -51,39 +51,10 @@
 
         <!-- KUBUS -->
         <a-mixin id="kubus-mixin" obj-model="obj: #rubiks-cube-onderdeel-obj; mtl: #rubiks-cube-onderdeel-mtl"></a-mixin>
-
-        <!-- KLEUREN -->
-        <a-mixin id="kleur-1-mixin" material="color: #009B48"></a-mixin>
-        <a-mixin id="kleur-2-mixin" material="color: #B71234"></a-mixin>
-        <a-mixin id="kleur-3-mixin" material="color: #0246AD"></a-mixin>
-        <a-mixin id="kleur-4-mixin" material="color: #FF5800"></a-mixin>
-        <a-mixin id="kleur-5-mixin" material="color: #FFD500"></a-mixin>
-        <a-mixin id="kleur-6-mixin" material="color: #FFFFFF"></a-mixin>
-
-        <!-- GEOMETRY -->
-        <a-mixin id="geometry-1-mixin" geometry="depth:0.10; height:1.75; width:1.75;"></a-mixin>
-        <a-mixin id="geometry-2-mixin" geometry="depth:1.75; height:0.10; width:1.75;"></a-mixin>
-        <a-mixin id="geometry-3-mixin" geometry="depth:1.75; height:1.75; width:0.10;"></a-mixin>
       </a-assets>
 
       <!-- RUBIKS CUBE -->
-      <a-entity id="rubiks-cube">
-
-        <!-- 1 KUBUS -->
-        <a-entity id="kubus-1" position="0 0 -10">
-
-          <!-- ZIJDES -->
-          <a-entity mixin="kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>
-          <a-entity mixin="kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>
-          <a-entity mixin="kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>
-          <a-entity mixin="kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>
-          <a-entity mixin="kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>
-          <a-entity mixin="kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>
-
-          <!-- BLENDER OBJECT -->
-          <a-obj-model mixin="kubus-mixin" position="0 1.6 0"></a-obj-model>
-        </a-entity>
-      </a-entity>
+      <a-entity id="rubiks-cube"></a-entity>
     </a-scene>
 
     <!-- build:js scripts/vendor.js -->
