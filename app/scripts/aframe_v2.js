@@ -47,8 +47,8 @@ var RUBIKSCUBE = {
 
       // Verkrijg een enkele Rubik's Cube kubus met het opgegeven ID en positie.
       return '<a-entity id="kubus-' + id + '" class="kubus" position="' + x + ' ' + y + ' ' +  z + '">' +
-                RUBIKSCUBE.functions.verkrijg_zijdes(id) +
                 RUBIKSCUBE.functions.verkrijg_blender_kubus(id) +
+                RUBIKSCUBE.functions.verkrijg_zijdes(id) +
              '</a-entity>'
     },
 
@@ -113,9 +113,9 @@ var RUBIKSCUBE = {
           for(var z = 0; z < grid; z++) {
 
             // Formule voor de X, Y en Z variabelen.
-            var x_pos =  -2 + (x*2),
-                y_pos =  -2 + (y*2),
-                z_pos = -20 + (z*2),
+            var x_pos = -(grid - 1) + (x * 2),
+                y_pos = -(grid - 1) + (y * 2),
+                z_pos = -(grid * 5) + (z * 2),
                 id    = x + y + z + 1;
 
             // Voeg de box toe.
