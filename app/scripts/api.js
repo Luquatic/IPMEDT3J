@@ -5,9 +5,7 @@ var KLEUR = {
   api_url: "http://www.colr.org/json/colors/random/",
 
   // Init functie.
-  init: function () {
-
-  },
+  init: function () {},
 
   // Alle functies.
   functions: {
@@ -44,7 +42,6 @@ var KLEUR = {
       });
     }
   }
-
 };
 
 // Wacht G
