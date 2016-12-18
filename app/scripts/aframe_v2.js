@@ -36,19 +36,19 @@ var RUBIKSCUBE = {
     },
 
     // Verkijg de blender kubus.
-    verkrijg_blender_kubus: function () {
+    verkrijg_blender_kubus: function (id) {
 
       // Verkijg het object als HTML tag.
-      return '<a-obj-model mixin="kubus-mixin" position="0 1.6 0"></a-obj-model>';
+      return '<a-obj-model id="kubus-' + id + '-blender" class="kubus-blender" mixin="kubus-mixin" position="0 1.6 0"></a-obj-model>';
     },
 
     // Verkijg een enkele kubus.
     verkrijg_enkele_kubus: function (id, x, y, z) {
 
       // Verkrijg een enkele Rubik's Cube kubus met het opgegeven ID en positie.
-      return '<a-entity id="kubus-' + id + '" position="' + x + ' ' + y + ' ' +  z + '">' +
-              RUBIKSCUBE.functions.verkrijg_zijdes(id) +
-              RUBIKSCUBE.functions.verkrijg_blender_kubus() +
+      return '<a-entity id="kubus-' + id + '" class="kubus" position="' + x + ' ' + y + ' ' +  z + '">' +
+                RUBIKSCUBE.functions.verkrijg_zijdes(id) +
+                RUBIKSCUBE.functions.verkrijg_blender_kubus(id) +
              '</a-entity>'
     },
 
@@ -88,16 +88,14 @@ var RUBIKSCUBE = {
 
       // Voeg aan het assets HTML element de volgende HTML toe.
       RUBIKSCUBE.$assets.append(
-        '<a-mixin id="geometry-1-mixin" geometry="depth:0.10; height:1.75; width:1.75;"></a-mixin>',
-        '<a-mixin id="geometry-2-mixin" geometry="depth:1.75; height:0.10; width:1.75;"></a-mixin>',
-        '<a-mixin id="geometry-3-mixin" geometry="depth:1.75; height:1.75; width:0.10;"></a-mixin>'
+        '<a-mixin id="geometry-1-mixin" class="geometry-mixin" geometry="depth:0.10; height:1.75; width:1.75;"></a-mixin>',
+        '<a-mixin id="geometry-2-mixin" class="geometry-mixin" geometry="depth:1.75; height:0.10; width:1.75;"></a-mixin>',
+        '<a-mixin id="geometry-3-mixin" class="geometry-mixin" geometry="depth:1.75; height:1.75; width:0.10;"></a-mixin>'
       );
     },
 
     // Voeg de Rubik's Cube toe.
     voeg_rubiks_cube_toe: function (grid) {
-
-      var id = 1;
 
       // Loop door X heen.
       for (var x = 0; x < grid; x ++) {
@@ -111,13 +109,11 @@ var RUBIKSCUBE = {
             // Formule voor de X, Y en Z variabelen.
             var x_pos =  -2 + (x*2),
                 y_pos =  -2 + (y*2),
-                z_pos = -20 + (z*2);
+                z_pos = -20 + (z*2),
+                id    = x + y + z + 1;
 
             // Voeg de box toe.
             RUBIKSCUBE.$rubiks_cube.append(RUBIKSCUBE.functions.verkrijg_enkele_kubus(id, x_pos, y_pos, z_pos));
-
-            // Tel het ID op.
-            id += 1;
           }
         }
       }
