@@ -8,7 +8,7 @@ var RUBIKSCUBE = {
   $rubiks_cube: $('#rubiks-cube'),
 
   // Init function.
-  init: function () {
+  init: function (grid) {
 
     // Voeg de kleuren toe.
     RUBIKSCUBE.functions.set_kleuren();
@@ -17,7 +17,7 @@ var RUBIKSCUBE = {
     RUBIKSCUBE.functions.set_geometry();
 
     // Voeg de Rubik's Cube toe.
-    RUBIKSCUBE.functions.voeg_rubiks_cube_toe();
+    RUBIKSCUBE.functions.voeg_rubiks_cube_toe(grid);
   },
 
   // Functions
@@ -95,10 +95,9 @@ var RUBIKSCUBE = {
     },
 
     // Voeg de Rubik's Cube toe.
-    voeg_rubiks_cube_toe: function () {
+    voeg_rubiks_cube_toe: function (grid) {
 
-      var grid = 3,
-          id = 1;
+      var id = 1;
 
       // Loop door X heen.
       for (var x = 0; x < grid; x ++) {
@@ -109,6 +108,7 @@ var RUBIKSCUBE = {
           // Loop door Z heen.
           for(var z = 0; z < grid; z++) {
 
+            // Formule voor de X, Y en Z variabelen.
             var x_pos =  -2 + (x*2),
                 y_pos =  -2 + (y*2),
                 z_pos = -20 + (z*2);
@@ -129,5 +129,5 @@ var RUBIKSCUBE = {
 $(document).ready(function() {
 
   // Initialiseer de Rubik's Cube.
-  var RC = RUBIKSCUBE.init();
+  var RC = RUBIKSCUBE.init(3);
 });
