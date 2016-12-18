@@ -8,6 +8,7 @@ $(document).ready(function () {
     rightBox  = document.getElementById('rightBox'),
     bottomBox = document.getElementById('bottomBox'),
     audio = new Audio('../sounds/drag.mp3'),
+    text1 = document.getElementById('--:--:-x'),
 
     // X, Y en Z van de Rubik's Cube.
     x = 0,
@@ -20,6 +21,13 @@ $(document).ready(function () {
       $(cube).attr('rotation', x + ' ' +  y + ' ' + z);
       audio.play();
     }, 250);
+  });
+
+  leftBox.addEventListener('mouseenter', function () {
+    for(var i = 0, while i < 10, i++) {
+      setInterval(function() {
+        $(text1).attr('text', text: + i);
+      }, 1000);}
   });
 
   leftBox.addEventListener('mouseleave', function () {
