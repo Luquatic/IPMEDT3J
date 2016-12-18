@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js" lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Het vak IPMEDT3 / Projectgroep J (Project Mediatechnologie 3) op Hogeschool Leiden">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jessey & CO. | Rubik's Cube - A Frame</title>
+
+    <!-- Humans -->
+    <link type="text/plain" rel="author" href="humans.txt" />
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css" />
+    <link rel="stylesheet" href="/bower_components/material-design-icons/iconfont/material-icons.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/aframe.css -->
+    <link rel="stylesheet" href="styles/aframe.css">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <script src="/bower_components/aframe/dist/aframe.min.js"></script>
+    <!-- endbuild -->
+  </head>
+
+  <body>
+    <!--[if lt IE 10]>
+    <p class="browserupgrade">Je gebruikt een <strong>oude</strong> browser. Alsjeblieft <a href="http://browsehappy.com/">update je browser</a> voor een betere ervaring.</p>
+    <![endif]-->
+
+    <!-- VR SCENE -->
+    <a-scene stats="stats">
+
+      <!-- CAMERA -->
+      <a-camera look-controls="look-controls">
+        <a-cursor color="white"></a-cursor>
+      </a-camera>
+
+      <!-- ASSETS -->
+      <a-assets>
+
+        <!-- 3D MODEL -->
+        <a-asset-item id="rubiks-cube-onderdeel-obj" src="models/rubiks_cube_onderdeel.obj"></a-asset-item>
+        <a-asset-item id="rubiks-cube-onderdeel-mtl" src="models/rubiks_cube_onderdeel.mtl"></a-asset-item>
+
+        <!-- KUBUS -->
+        <a-mixin id="kubus-mixin" obj-model="obj: #rubiks-cube-onderdeel-obj; mtl: #rubiks-cube-onderdeel-mtl"></a-mixin>
+
+        <!-- KLEUREN -->
+        <a-mixin id="kleur-1-mixin" material="color: #009B48"></a-mixin>
+        <a-mixin id="kleur-2-mixin" material="color: #B71234"></a-mixin>
+        <a-mixin id="kleur-3-mixin" material="color: #0246AD"></a-mixin>
+        <a-mixin id="kleur-4-mixin" material="color: #FF5800"></a-mixin>
+        <a-mixin id="kleur-5-mixin" material="color: #FFD500"></a-mixin>
+        <a-mixin id="kleur-6-mixin" material="color: #FFFFFF"></a-mixin>
+
+        <!-- GEOMETRY -->
+        <a-mixin id="geometry-1-mixin" geometry="depth:0.10; height:1.75; width:1.75;"></a-mixin>
+        <a-mixin id="geometry-2-mixin" geometry="depth:1.75; height:0.10; width:1.75;"></a-mixin>
+        <a-mixin id="geometry-3-mixin" geometry="depth:1.75; height:1.75; width:0.10;"></a-mixin>
+      </a-assets>
+
+      <!-- RUBIKS CUBE -->
+      <a-entity id="rubiks-cube">
+
+        <!-- 1 KUBUS -->
+        <a-entity id="kubus-1" position="0 0 -10">
+
+          <!-- ZIJDES -->
+          <a-entity mixin="kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>
+          <a-entity mixin="kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>
+          <a-entity mixin="kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>
+          <a-entity mixin="kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>
+          <a-entity mixin="kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>
+          <a-entity mixin="kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>
+
+          <!-- BLENDER OBJECT -->
+          <a-obj-model mixin="kubus-mixin" position="0 1.6 0"></a-obj-model>
+        </a-entity>
+      </a-entity>
+    </a-scene>
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <script src="/bower_components/material-design-lite/material.min.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/plugins.js -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/aframe.js -->
+    <script src="scripts/aframe_v2.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
