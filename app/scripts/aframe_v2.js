@@ -57,10 +57,10 @@ var RUBIKSCUBE = {
 
       // 6 random kleuren.
       return [
-        '#009B48',
         '#B71234',
-        '#0246AD',
         '#FF5800',
+        '#0246AD',
+        '#009B48',
         '#FFD500',
         '#FFFFFF'
       ];
