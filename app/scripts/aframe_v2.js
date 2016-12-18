@@ -24,15 +24,15 @@ var RUBIKSCUBE = {
   functions: {
 
     // Verkijg de 6 zijdes.
-    verkrijg_zijdes: function () {
+    verkrijg_zijdes: function (id) {
 
       // Maak de 6 zijdes als entities.
-      return '<a-entity mixin="kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
-             '<a-entity mixin="kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
-             '<a-entity mixin="kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
-             '<a-entity mixin="kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
-             '<a-entity mixin="kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
-             '<a-entity mixin="kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+      return '<a-entity id="kubus-' + id + '-zijde-1" class="zijde" mixin="kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-2" class="zijde" mixin="kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-3" class="zijde" mixin="kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-4" class="zijde" mixin="kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-5" class="zijde" mixin="kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-6" class="zijde" mixin="kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
     },
 
     // Verkijg de blender kubus.
@@ -47,7 +47,7 @@ var RUBIKSCUBE = {
 
       // Verkrijg een enkele Rubik's Cube kubus met het opgegeven ID en positie.
       return '<a-entity id="kubus-' + id + '" position="' + x + ' ' + y + ' ' +  z + '">' +
-              RUBIKSCUBE.functions.verkrijg_zijdes() +
+              RUBIKSCUBE.functions.verkrijg_zijdes(id) +
               RUBIKSCUBE.functions.verkrijg_blender_kubus() +
              '</a-entity>'
     },
