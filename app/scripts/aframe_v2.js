@@ -128,14 +128,15 @@ var RUBIKSCUBE = {
         // Kleuren mixins.
         var kleuren_mixins = [];
 
-        // Loop door alle kleuren heen.
-        for(var i = 0; i < kleuren.length; i++)
-        {
-          // Sla de kleur op.
-          var kleur = kleuren[i];
+        for(var kleur in kleuren) {
+          if (kleuren.hasOwnProperty(kleur)) {
 
-          // Voeg de kleuren mixin toe.
-          kleuren_mixins.push('<a-mixin id="kleur-' + (i + 1) + '-mixin" material="color: ' + kleur + '"></a-mixin>');
+            // ID.
+            var id = Object.keys(kleuren).indexOf(kleur);
+
+            // Voeg de kleuren mixin toe.
+            kleuren_mixins.push('<a-mixin id="kleur-' + id + '-mixin" material="color: ' + kleuren[kleur] + '"></a-mixin>');
+          }
         }
 
         // Voeg de mixins toe aan de assets.
