@@ -30,12 +30,12 @@ var RUBIKSCUBE = {
     verkrijg_zijdes: function (id) {
 
       // Maak de 6 zijdes als entities.
-      return '<a-entity id="kubus-' + id + '-zijde-1" class="zijde" mixin="kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-2" class="zijde" mixin="kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-3" class="zijde" mixin="kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-4" class="zijde" mixin="kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-5" class="zijde" mixin="kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-6" class="zijde" mixin="kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+      return '<a-entity id="kubus-' + id + '-zijde-1" class="zijde" mixin="kleur-init-mixin kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-2" class="zijde" mixin="kleur-init-mixin kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-3" class="zijde" mixin="kleur-init-mixin kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-4" class="zijde" mixin="kleur-init-mixin kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-5" class="zijde" mixin="kleur-init-mixin kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-6" class="zijde" mixin="kleur-init-mixin kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
     },
 
     // Verkijg de blender kubus.
@@ -69,7 +69,7 @@ var RUBIKSCUBE = {
       // ];
 
       // Doe een promise.
-      return new Promise(function(resolve, reject) {
+      return new Promise(function(resolve) {
 
         // Haal 10 random kleuren op.
         RUBIKSCUBE.functions.verkrijg_kleuren_van_api(10).then(function (response) {
