@@ -58,16 +58,6 @@ var RUBIKSCUBE = {
     // Verkrijg de kleuren.
     verkrijg_kleuren: function () {
 
-      // 6 random kleuren.
-      // return [
-      //   '#B71234',
-      //   '#FF5800',
-      //   '#0246AD',
-      //   '#009B48',
-      //   '#FFD500',
-      //   '#FFFFFF'
-      // ];
-
       // Doe een promise.
       return new Promise(function(resolve) {
 
@@ -97,6 +87,7 @@ var RUBIKSCUBE = {
     // Verkrijg een X aantal kleuren.
     verkrijg_kleuren_van_api: function(aantal_kleuren) {
 
+      // Creeer promise.
       return new Promise(function (resolve, reject) {
 
         // Doe een API call.
@@ -119,7 +110,7 @@ var RUBIKSCUBE = {
           },
 
           // API API API toch....
-          error: function (jqXHR, textStatus, errorThrown) {
+          error: function () {
 
             // Geef een fout terug.
             reject(false);
