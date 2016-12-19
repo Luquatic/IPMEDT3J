@@ -24,9 +24,9 @@ $(document).ready(function () {
   });
 
   leftBox.addEventListener('mouseenter', function () {
-    for(var i = 0, while i < 10, i++) {
+    for(var i = 0; i < 10; i++) {
       setInterval(function() {
-        $(text1).attr('text', text: + i);
+        $(text1).attr('text', text =+ i);
       }, 1000);}
   });
 

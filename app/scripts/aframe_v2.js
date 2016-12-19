@@ -7,6 +7,9 @@ var RUBIKSCUBE = {
   // De Rubik's Cube HTML tag.
   $rubiks_cube: $('#rubiks-cube'),
 
+  // API url.
+  api_url: "http://www.colr.org/json/colors/random/",
+
   // Init function.
   init: function (grid) {
 
@@ -56,37 +59,97 @@ var RUBIKSCUBE = {
     verkrijg_kleuren: function () {
 
       // 6 random kleuren.
-      return [
-        '#B71234',
-        '#FF5800',
-        '#0246AD',
-        '#009B48',
-        '#FFD500',
-        '#FFFFFF'
-      ];
+      // return [
+      //   '#B71234',
+      //   '#FF5800',
+      //   '#0246AD',
+      //   '#009B48',
+      //   '#FFD500',
+      //   '#FFFFFF'
+      // ];
+
+      // Doe een promise.
+      return new Promise(function(resolve, reject) {
+
+        // Haal 10 random kleuren op.
+        RUBIKSCUBE.functions.verkrijg_kleuren_van_api(10).then(function (response) {
+
+          // Lijst met kleuren.
+          var kleuren = response.matching_colors;
+
+          // Verkijg alleen gevulde kleuren.
+          kleuren = kleuren.filter(Boolean);
+
+          // Voeg overal een # aan toe.
+          kleuren = kleuren.map(function (code){
+            return '#' + code;
+          });
+
+          // Pak alleen 6 kleuren.
+          kleuren = kleuren.slice(0, 6);
+
+          // Geef de kleuren.
+          resolve(kleuren);
+        });
+      });
+    },
+
+    // Verkrijg een X aantal kleuren.
+    verkrijg_kleuren_van_api: function(aantal_kleuren) {
+
+      return new Promise(function (resolve, reject) {
+
+        // Doe een API call.
+        $.ajax({
+
+          // De URL.
+          url: RUBIKSCUBE.api_url + aantal_kleuren,
+
+          // Het is een GET call.
+          method: 'GET',
+
+          // We willen JSON terug krijgen.
+          dataType: 'json',
+
+          // Als de call met succes afgerond is.
+          success: function (response) {
+
+            // Doe resolve.
+            resolve(response);
+          },
+
+          // API API API toch....
+          error: function (jqXHR, textStatus, errorThrown) {
+
+            // Geef een fout terug.
+            reject(false);
+          }
+        });
+      });
     },
 
     // Zet de kleuren van de Rubiks Cube.
     set_kleuren: function () {
 
       // De standaard kleuren.
-      var kleuren = RUBIKSCUBE.functions.verkrijg_kleuren();
+      RUBIKSCUBE.functions.verkrijg_kleuren().then(function(kleuren) {
 
-      // Kleuren mixins.
-      var kleuren_mixins = [];
+        // Kleuren mixins.
+        var kleuren_mixins = [];
 
-      // Loop door alle kleuren heen.
-      for(var i = 0; i < kleuren.length; i++)
-      {
-        // Sla de kleur op.
-        var kleur = kleuren[i];
+        // Loop door alle kleuren heen.
+        for(var i = 0; i < kleuren.length; i++)
+        {
+          // Sla de kleur op.
+          var kleur = kleuren[i];
 
-        // Voeg de kleuren mixin toe.
-        kleuren_mixins.push('<a-mixin id="kleur-' + (i + 1) + '-mixin" material="color: ' + kleur + '"></a-mixin>');
-      }
+          // Voeg de kleuren mixin toe.
+          kleuren_mixins.push('<a-mixin id="kleur-' + (i + 1) + '-mixin" material="color: ' + kleur + '"></a-mixin>');
+        }
 
-      // Voeg de mixins toe aan de assets.
-      RUBIKSCUBE.$assets.append(kleuren_mixins);
+        // Voeg de mixins toe aan de assets.
+        RUBIKSCUBE.$assets.append(kleuren_mixins);
+      });
     },
 
     // Voeg de geometries van de Rubik's Cube toe aan de assets.
