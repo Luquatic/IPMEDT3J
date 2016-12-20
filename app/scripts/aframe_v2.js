@@ -464,22 +464,48 @@ var OPTIES = {
       // Hoe het grid opgebouwd moet worden.
       var stappen = 2;
 
+      // De X positie.
+      var teller = 0;
+
       // Loop door het aantal grid stappen heen.
       for(var i = vanaf; i < (vanaf + aantal_keuzes * stappen); i += 2) {
 
+        var actief = false;
+
+        if(teller == 0) {
+          actief = true;
+        }
+
         // Voeg grid keuze toe.
-        OPTIES.functions.voeg_grid_keuze_toe(i);
+        OPTIES.functions.voeg_grid_keuze_toe(i, teller, actief);
+
+        // X positie die nodig is.
+        teller += 4;
       }
     },
 
     // Voeg een grid keuze toe.
-    voeg_grid_keuze_toe: function (grid_nummer) {
-      $('#optie-grid').append(OPTIES.functions.verkijg_grid_knop(grid_nummer));
+    voeg_grid_keuze_toe: function (grid_nummer, x_verschuiving, actief) {
+      $('#optie-grid').append(OPTIES.functions.verkijg_grid_knop(grid_nummer, x_verschuiving, actief));
     },
 
-    verkijg_grid_knop: function (grid_nummer) {
-      return '<a-entity id="optie-grid-' + grid_nummer + '-achtergrond" class="optie-grid-achtergrond">' +
-               '<a-entity id="optie-grid-' + grid_nummer + '-tekst" class="optie-grid-tekst" text="text: ' + grid_nummer + '" mixin="mixin-kleur-zwart"></a-entity>' +
+    // Verkijg een grid knop.
+    verkijg_grid_knop: function (grid_nummer, x_verschuiving, actief) {
+
+      // De X verschuiving die nodig is.
+      var x = -2 + x_verschuiving;
+
+      var achtergrond_mixin = 'mixin-kleur-wit',
+          tekst_mixin       = 'mixin-kleur-zwart';
+
+      if(actief) {
+        achtergrond_mixin = 'mixin-kleur-zwart';
+        tekst_mixin       = 'mixin-kleur-wit';
+      }
+
+      // Geef een opgemaakte knop terug.
+      return '<a-entity id="optie-grid-' + grid_nummer + '-achtergrond" class="optie-grid-achtergrond" position="' + x + ' -4.25 0.1" geometry="depth:0.1; height:1.5; width:2.5;" mixin="' + achtergrond_mixin + '">' +
+               '<a-entity id="optie-grid-' + grid_nummer + '-tekst" class="optie-grid-tekst" position="-0.3 -0.2 0.1" text="text: ' + grid_nummer + '" mixin="' + tekst_mixin + '"></a-entity>' +
              '</a-entity>';
     }
   }
