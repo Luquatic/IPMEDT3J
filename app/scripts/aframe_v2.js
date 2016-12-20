@@ -182,9 +182,42 @@ var RUBIKSCUBE = {
   }
 };
 
+// Old school manier om een JavaScript klasse te maken.
+var OPTIES = {
+
+  // De scene als Jquery object.
+  $scene: $('#scene'),
+
+  // Init functie.
+  init: function () {
+
+    // Voeg het optie paneel toe aan de body.
+    OPTIES.functions.voeg_paneel_toe(12.5, 1.5, -12.5);
+  },
+
+  // Alle functies.
+  functions : {
+
+    //  Voeg paneel toe.
+    voeg_paneel_toe: function (x, y, z) {
+
+      // Voeg het optie paneel toe aan de scene.
+      OPTIES.$scene.append('<a-entity position="' + x + " " + y + " " + z + '" mixin="kleur-2-mixin" geometry="depth:0.1; height:10; width:7.5"></a-entity>');
+    }
+  }
+};
+
+// Old school manier om een JavaScript klasse te maken.
+var PIJLEN = {
+
+};
+
 // Wacht totdat het document geladen is.
 $(document).ready(function() {
 
   // Initialiseer de Rubik's Cube.
   RUBIKSCUBE.init(3);
+
+  // Initialiseer de opties.
+  OPTIES.init();
 });
