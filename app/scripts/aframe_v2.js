@@ -1,4 +1,4 @@
-// Old school manier om een JavaScript klasse te maken.
+// Kleuren klasse.
 var KLEUREN = {
 
   // JQuery selectors:
@@ -12,23 +12,23 @@ var KLEUREN = {
   api_url: "http://www.colr.org/json/colors/random/",
 
   // Initialize functie.
-  init: function () {
+  init: function (aantal_paletten) {
 
     // Maak alle kleuren mixins aan.
-    KLEUREN.functions.maak_kleuren_mixins_aan()
+    KLEUREN.functions.maak_kleuren_mixins_aan(aantal_paletten)
   },
 
   // Functies.
   functions: {
 
     // Maak kleuren mixins aan.
-    maak_kleuren_mixins_aan: function () {
+    maak_kleuren_mixins_aan: function (aantal_paletten) {
 
       // Loop door elke kleur heen.
       return new Promise(function (resolve) {
 
         // Voeg de kleuren toe.
-        KLEUREN.functions.verkrijg_gegenereerde_kleuren().then(function (kleuren_paletten) {
+        KLEUREN.functions.verkrijg_gegenereerde_kleuren(aantal_paletten).then(function (kleuren_paletten) {
 
           // Kleuren mixins.
           var kleuren_mixins = [];
@@ -61,7 +61,7 @@ var KLEUREN = {
     },
 
     // Vul de gegenereerde kleuren.
-    verkrijg_gegenereerde_kleuren: function () {
+    verkrijg_gegenereerde_kleuren: function (aantal_paletten) {
 
       // Geef een nieuwe promise terug.
       return new Promise(function (resolve) {
@@ -83,7 +83,7 @@ var KLEUREN = {
         var promises = [];
 
         // Voeg nog 3 random kleur paletten toe.
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < aantal_paletten - 1; i++) {
 
           // Verkrijg random kleuren.
           promises.push(KLEUREN.functions.verkrijg_kleuren());
@@ -171,7 +171,7 @@ var KLEUREN = {
   }
 };
 
-// Old school manier om een JavaScript klasse te maken.
+// Rubik's Cube klasse.
 var RUBIKSCUBE = {
 
   // De assets HTML tag.
@@ -265,14 +265,14 @@ var RUBIKSCUBE = {
   }
 };
 
-// Old school manier om een JavaScript klasse te maken.
+// Opties klasse.
 var OPTIES = {
 
   // De scene als Jquery object.
   $opties: $('#opties'),
 
   // Init functie.
-  init: function () {
+  init: function (aantal_paletten) {
 
     // Voeg het optie paneel toe aan de body.
     OPTIES.functions.voeg_paneel_toe();
@@ -281,7 +281,7 @@ var OPTIES = {
     OPTIES.functions.voeg_optie_kleuren_toe();
 
     // Voeg de kleuren paletten toe.
-    OPTIES.functions.voeg_kleuren_paletten_toe();
+    OPTIES.functions.voeg_kleuren_paletten_toe(aantal_paletten);
   },
 
   // Alle functies.
@@ -338,10 +338,10 @@ var OPTIES = {
     },
 
     // Voeg kleuren paletten toe.
-    voeg_kleuren_paletten_toe: function () {
+    voeg_kleuren_paletten_toe: function (aantal_paletten) {
 
       // Loop door alle kleuren heen.
-      for(var i = 1; i <= 4; i++) {
+      for(var i = 1; i <= aantal_paletten; i++) {
 
         // Maak een kleuren palet aan.
         OPTIES.functions.voeg_kleuren_palet_toe(i);
@@ -370,8 +370,13 @@ var OPTIES = {
   }
 };
 
-// Old school manier om een JavaScript klasse te maken.
+// Pijlen klasse.
 var PIJLEN = {
+
+};
+
+// Timer klasse.
+var TIMER = {
 
 };
 
@@ -379,13 +384,14 @@ var PIJLEN = {
 $(document).ready(function() {
 
   // Het grid van de Rubik's Cube.
-  var grid = 3;
+  var grid            = 3,
+      aantal_paletten = 4;
 
-  KLEUREN.init();
+  KLEUREN.init(aantal_paletten);
 
   // Initialiseer de Rubik's Cube.
   RUBIKSCUBE.init(grid);
 
   // Initialiseer de opties.
-  OPTIES.init();
+  OPTIES.init(aantal_paletten);
 });
