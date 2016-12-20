@@ -4,8 +4,43 @@ var KLEUREN = {
   // API url.
   api_url: "http://www.colr.org/json/colors/random/",
 
+  // Kleuren
+  gegenereerde_kleuren: [],
+
+  // Initialiseer.
+  init: function () {
+
+    // Vul de gegenereerde kleuren.
+    KLEUREN.functions.vul_gegenereerde_kleuren();
+  },
+
   // Functies.
   functions: {
+
+    // Vul de gegenereerde kleuren.
+    vul_gegenereerde_kleuren: function () {
+
+      // Voeg de standaard kleuren toe.
+      KLEUREN.gegenereerde_kleuren.push([
+        '#B71234',
+        '#FF5800',
+        '#0246AD',
+        '#009B48',
+        '#FFD500',
+        '#FFFFFF'
+      ]);
+
+      // Voeg nog 3 random kleur paletten toe.
+      for (var i = 0; i < 3; i++) {
+
+        // Verkrijg random kleuren.
+        KLEUREN.functions.verkrijg_kleuren().then(function (response) {
+
+          // Voeg de kleuren toe.
+          KLEUREN.gegenereerde_kleuren.push(response);
+        });
+      }
+    },
 
     // Verkrijg de kleuren.
     verkrijg_kleuren: function () {
@@ -131,7 +166,9 @@ var RUBIKSCUBE = {
     set_kleuren: function () {
 
       // De standaard kleuren.
-      KLEUREN.functions.verkrijg_kleuren().then(function(kleuren) {
+      // KLEUREN.functions.verkrijg_kleuren().then(function(kleuren) {
+
+        var kleuren = KLEUREN.gegenereerde_kleuren[0];
 
         // Kleuren mixins.
         var kleuren_mixins = [];
@@ -149,7 +186,7 @@ var RUBIKSCUBE = {
 
         // Voeg de mixins toe aan de assets.
         RUBIKSCUBE.$assets.append(kleuren_mixins);
-      });
+      // });
     },
 
     // Voeg de geometries van de Rubik's Cube toe aan de assets.
@@ -205,6 +242,7 @@ var OPTIES = {
     // Voeg de optie kleuren paneel toe.
     OPTIES.functions.voeg_optie_kleuren_toe();
 
+    // TODO: dit is test code.
     OPTIES.functions.voeg_kleuren_palet_toe(1);
     OPTIES.functions.voeg_kleuren_palet_toe(2);
     OPTIES.functions.voeg_kleuren_palet_toe(3);
@@ -240,8 +278,14 @@ var OPTIES = {
 
       // Voeg een kleuren palet toe.
       $('#optie-kleuren').append(
+
+        // Voeg een kleuren palet wrapper toe.
         '<a-entity id="optie-kleuren-palet-' + id + '" position="0 ' + hoogte + ' 0.1" class="optie-kleuren-palet">' +
+
+          // Voeg een achtergrond toe.
           '<a-entity id="optie-kleuren-palet-' + id + '-achtergrond" geometry="depth:0.1; height:1.2; width:6.5;" material="">' +
+
+            // Genereer een palet van 6 kleuren en voeg het toe.
             OPTIES.functions.maak_palet(id) +
           '</a-entity>' +
         '</a-entity>'
@@ -280,6 +324,11 @@ $(document).ready(function() {
 
   // Het grid van de Rubik's Cube.
   var grid = 3;
+
+  // Initialiseer de kleuren.
+  KLEUREN.init();
+
+  console.log(KLEUREN.gegenereerde_kleuren);
 
   // Initialiseer de Rubik's Cube.
   RUBIKSCUBE.init(grid);
