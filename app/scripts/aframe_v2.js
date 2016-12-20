@@ -1,14 +1,64 @@
 // Old school manier om een JavaScript klasse te maken.
 var KLEUREN = {
 
+  // JQuery selectors:
+  $: {
+
+    // Assets
+    assets: $('#assets')
+  },
+
   // API url.
   api_url: "http://www.colr.org/json/colors/random/",
 
-  // Initialiseer.
-  init: function () {},
+  // Initialize functie.
+  init: function () {
+
+    // Maak alle kleuren mixins aan.
+    KLEUREN.functions.maak_kleuren_mixins_aan()
+  },
 
   // Functies.
   functions: {
+
+    // Maak kleuren mixins aan.
+    maak_kleuren_mixins_aan: function () {
+
+      // Loop door elke kleur heen.
+      return new Promise(function (resolve) {
+
+        // Voeg de kleuren toe.
+        KLEUREN.functions.verkrijg_gegenereerde_kleuren().then(function (kleuren_paletten) {
+
+          // Kleuren mixins.
+          var kleuren_mixins = [];
+
+          // Loop door elk kleurenpalet heen.
+          for (var x = 0; x < kleuren_paletten.length; x++) {
+
+            // Voeg een comment toe aan de HTML.
+            kleuren_mixins.push('<!-- PALET ' + (x + 1) + ' -->');
+
+            // Loop door elke kleur heen.s
+            for(var y = 0; y < kleuren_paletten[x].length; y++) {
+
+              // Sla het index nummer van het palet en de kleur op.
+              var palet_code = kleuren_paletten.indexOf(kleuren_paletten[x]) + 1,
+                kleur_code = kleuren_paletten[x].indexOf(kleuren_paletten[x][y]) + 1;
+
+              // Voeg de kleur toe.
+              kleuren_mixins.push('<a-mixin id="kleuren-palet-' + palet_code + '-kleur-' + kleur_code + '-mixin" material="color: ' + kleuren_paletten[x][y] + '"></a-mixin>');
+            }
+          }
+
+          // Voeg de mixins toe aan de assets.
+          KLEUREN.$.assets.append(kleuren_mixins);
+
+          // Kleuren zijn toegevoegd.
+          resolve();
+        });
+      });
+    },
 
     // Vul de gegenereerde kleuren.
     verkrijg_gegenereerde_kleuren: function () {
@@ -29,19 +79,29 @@ var KLEUREN = {
           '#FFFFFF'
         ]);
 
+        // Promises
+        var promises = [];
+
         // Voeg nog 3 random kleur paletten toe.
         for (var i = 0; i < 3; i++) {
 
           // Verkrijg random kleuren.
-          KLEUREN.functions.verkrijg_kleuren().then(function (response) {
-
-            // Voeg de kleuren toe.
-            gegenereerde_kleuren.push(response);
-          });
+          promises.push(KLEUREN.functions.verkrijg_kleuren());
         }
 
-        // Resolve de gegenereerde kleuren.
-        resolve(gegenereerde_kleuren);
+        // Ga door alle promises heen.
+        Promise.all(promises).then(function (data) {
+
+          // Loop door alle kleur paletten heen.
+          for(var i = 0; i < data.length; i++) {
+
+            // Voeg het kleurpalet toe.
+            gegenereerde_kleuren.push(data[i]);
+          }
+
+          // Resolve de gegenereerde kleuren.
+          resolve(gegenereerde_kleuren);
+        });
       });
     },
 
@@ -121,10 +181,7 @@ var RUBIKSCUBE = {
   $rubiks_cube: $('#rubiks-cube'),
 
   // Init function.
-  init: function (grid, kleuren) {
-
-    // Vul de kleuren van de Rubik's Cube.
-    RUBIKSCUBE.functions.set_kleuren(kleuren[0]);
+  init: function (grid) {
 
     // Voeg de geometry toe.
     RUBIKSCUBE.functions.set_geometry();
@@ -140,12 +197,12 @@ var RUBIKSCUBE = {
     verkrijg_zijdes: function (id) {
 
       // Maak de 6 zijdes als entities.
-      return '<a-entity id="kubus-' + id + '-zijde-1" class="zijde" mixin="kleur-wit-mixin kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-2" class="zijde" mixin="kleur-wit-mixin kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-3" class="zijde" mixin="kleur-wit-mixin kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-4" class="zijde" mixin="kleur-wit-mixin kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-5" class="zijde" mixin="kleur-wit-mixin kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-6" class="zijde" mixin="kleur-wit-mixin kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+      return '<a-entity id="kubus-' + id + '-zijde-1" class="zijde" mixin="kleur-wit-mixin kleuren-palet-1-kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-2" class="zijde" mixin="kleur-wit-mixin kleuren-palet-1-kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-3" class="zijde" mixin="kleur-wit-mixin kleuren-palet-1-kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-4" class="zijde" mixin="kleur-wit-mixin kleuren-palet-1-kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-5" class="zijde" mixin="kleur-wit-mixin kleuren-palet-1-kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-6" class="zijde" mixin="kleur-wit-mixin kleuren-palet-1-kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
     },
 
     // Verkijg de blender kubus.
@@ -168,25 +225,6 @@ var RUBIKSCUBE = {
     // Zet de kleuren van de Rubiks Cube.
     set_kleuren: function (kleuren) {
 
-      // Kleuren mixins.
-      var kleuren_mixins = [];
-
-      // Ga door alle kleuren heen.
-      for(var kleur in kleuren) {
-
-        // Alleen de kleuren zelf.
-        if (kleuren.hasOwnProperty(kleur)) {
-
-          // ID.
-          var id = Object.keys(kleuren).indexOf(kleur) + 1;
-
-          // Voeg de kleuren mixin toe.
-          kleuren_mixins.push('<a-mixin id="kleur-' + id + '-mixin" material="color: ' + kleuren[kleur] + '"></a-mixin>');
-        }
-      }
-
-      // Voeg de mixins toe aan de assets.
-      RUBIKSCUBE.$assets.append(kleuren_mixins);
     },
 
     // Voeg de geometries van de Rubik's Cube toe aan de assets.
@@ -234,7 +272,7 @@ var OPTIES = {
   $opties: $('#opties'),
 
   // Init functie.
-  init: function (kleuren) {
+  init: function () {
 
     // Voeg het optie paneel toe aan de body.
     OPTIES.functions.voeg_paneel_toe();
@@ -243,7 +281,7 @@ var OPTIES = {
     OPTIES.functions.voeg_optie_kleuren_toe();
 
     // Voeg de kleuren paletten toe.
-    OPTIES.functions.voeg_kleuren_paletten_toe(kleuren);
+    OPTIES.functions.voeg_kleuren_paletten_toe();
   },
 
   // Alle functies.
@@ -268,7 +306,7 @@ var OPTIES = {
     },
 
     // Voeg een kleuren palet toe.
-    voeg_kleuren_palet_toe: function (id, kleuren_palet) {
+    voeg_kleuren_palet_toe: function (id) {
 
       // Bereken de hoogte.
       var hoogte = 4.5 - (id * 1.5);
@@ -283,37 +321,37 @@ var OPTIES = {
           '<a-entity id="optie-kleuren-palet-' + id + '-achtergrond" geometry="depth:0.1; height:1.2; width:6.5;" material="">' +
 
             // Genereer een palet van 6 kleuren en voeg het toe.
-            OPTIES.functions.maak_palet(id, kleuren_palet) +
+            OPTIES.functions.maak_palet(id) +
           '</a-entity>' +
         '</a-entity>'
       );
     },
 
     // Voeg kleuren paletten toe.
-    voeg_kleuren_paletten_toe: function (kleuren) {
+    voeg_kleuren_paletten_toe: function () {
 
       // Loop door alle kleuren heen.
-      for(var i = 0; i < kleuren.length; i++) {
+      for(var i = 1; i <= 4; i++) {
 
         // Maak een kleuren palet aan.
-        OPTIES.functions.voeg_kleuren_palet_toe(i, kleuren[i]);
+        OPTIES.functions.voeg_kleuren_palet_toe(i);
       }
     },
 
     // Maak een kleuren palet van 6.
-    maak_palet: function (id, kleuren_palet) {
+    maak_palet: function (id) {
 
       // Placeholder
       var kleuren = '';
 
       // Loop door 6 heen.
-      for(var i = 0; i < kleuren_palet.length; i++) {
+      for(var i = 1; i <= 6; i++) {
 
         // Genereer 1 positie.
-        var positie = -2.5 + i;
+        var positie = -3.5 + i;
 
         // Voeg 1 kleurenbol toe.
-        kleuren += '<a-entity id="optie-kleuren-palet-' + id + '-kleur-' + i + 1 + '" material="color: ' + kleuren_palet[i] + ';" position="' + positie + ' 0 0.1" mixin="mixin-rotation-90-0-0 mixin-geometry-kleur"></a-entity>';
+        kleuren += '<a-entity id="optie-kleuren-palet-' + id + '-kleur-' + i + 1 + '" position="' + positie + ' 0 0.1" mixin="kleuren-palet-' + id + '-kleur-' + i + '-mixin mixin-rotation-90-0-0 mixin-geometry-kleur"></a-entity>';
       }
 
       // Geef de kleuren terug.
@@ -333,18 +371,11 @@ $(document).ready(function() {
   // Het grid van de Rubik's Cube.
   var grid = 3;
 
-  KLEUREN.functions.verkrijg_gegenereerde_kleuren().then(function (kleuren) {
+  KLEUREN.init();
 
-    // Timeout.
-    setTimeout(function () {
+  // Initialiseer de Rubik's Cube.
+  RUBIKSCUBE.init(grid);
 
-      // Initialiseer de Rubik's Cube.
-      RUBIKSCUBE.init(grid, kleuren);
-
-      // Initialiseer de opties.
-      OPTIES.init(kleuren);
-
-    }, 2000);
-
-  });
+  // Initialiseer de opties.
+  OPTIES.init();
 });
