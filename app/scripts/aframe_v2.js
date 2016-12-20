@@ -299,6 +299,12 @@ var OPTIES = {
 
     // Voeg hovers toe aan de kleuren
     OPTIES.functions.set_kleuren_hover();
+
+    // Voeg de optie grid toe.
+    OPTIES.functions.voeg_optie_grid_toe();
+
+    // Voeg een aantal grid opties toe.
+    OPTIES.functions.voeg_grid_keuzes_toe(2, 3);
   },
 
   // Alle functies.
@@ -317,8 +323,8 @@ var OPTIES = {
       // Voeg de suboptie kleuren toe.
       OPTIES.$opties.append(
         '<a-entity id="optie-kleuren">' +
-          '<a-entity id="optie-titel-kleuren" class="optie-titel" position="-3.25 4.25 0.1" text="text:Kies een kleurenschema.; size:0.3; style:normal" mixin="mixin-kleur-zwart"></a-entity>' +
-      '</a-entity>'
+          '<a-entity id="optie-titel-kleuren" class="optie-titel" position="-3.25 4.25 0.1" text="text:Kies een kleurenschema; size:0.3; style:normal" mixin="mixin-kleur-zwart"></a-entity>' +
+        '</a-entity>'
       );
     },
 
@@ -395,16 +401,16 @@ var OPTIES = {
       for(var i = 0; i < kleuren_paletten.length; i++) {
 
         // Voeg een event listener toe.
-        document.getElementsByClassName('optie-kleuren-palet')[i].addEventListener('mouseenter', function (event) {
+        document.getElementsByClassName('optie-kleuren-palet')[i].addEventListener('mouseenter', function () {
 
           // ID.
           var id = $(this).attr('data-kleuren-palet-id');
 
-          // Verander de kleur van de Rubik's Cube.
-          RUBIKSCUBE.functions.set_kleuren(id);
-
           // Zorg dat de kleuren veranderen van de achtergrond.
           OPTIES.functions.set_kleuren_achtergrond(id);
+
+          // Verander de kleur van de Rubik's Cube.
+          RUBIKSCUBE.functions.set_kleuren(id);
         });
       }
     },
@@ -434,6 +440,47 @@ var OPTIES = {
           $(achtergrond).attr('mixin', 'mixin-kleur-wit');
         }
       }
+    },
+
+    // Speel het optie geluid af.
+    speel_optie_geluid_af: function () {
+      // TODO: nog te implementeren.
+    },
+
+    // Voeg de optie voor de kleuren paletten toe.
+    voeg_optie_grid_toe: function () {
+
+      // Voeg de suboptie kleuren toe.
+      OPTIES.$opties.append(
+        '<a-entity id="optie-grid">' +
+          '<a-entity id="optie-titel-grid" class="optie-titel" position="-3.25 -3 0.1" text="text:Kies een grid; size:0.3; style:normal" mixin="mixin-kleur-zwart"></a-entity>' +
+        '</a-entity>'
+      );
+    },
+
+    // Voeg een aantal grid keuzes toe.
+    voeg_grid_keuzes_toe: function (aantal_keuzes, vanaf) {
+
+      // Hoe het grid opgebouwd moet worden.
+      var stappen = 2;
+
+      // Loop door het aantal grid stappen heen.
+      for(var i = vanaf; i < (vanaf + aantal_keuzes * stappen); i += 2) {
+
+        // Voeg grid keuze toe.
+        OPTIES.functions.voeg_grid_keuze_toe(i);
+      }
+    },
+
+    // Voeg een grid keuze toe.
+    voeg_grid_keuze_toe: function (grid_nummer) {
+      $('#optie-grid').append(OPTIES.functions.verkijg_grid_knop(grid_nummer));
+    },
+
+    verkijg_grid_knop: function (grid_nummer) {
+      return '<a-entity id="optie-grid-' + grid_nummer + '-achtergrond" class="optie-grid-achtergrond">' +
+               '<a-entity id="optie-grid-' + grid_nummer + '-tekst" class="optie-grid-tekst" text="text: ' + grid_nummer + '" mixin="mixin-kleur-zwart"></a-entity>' +
+             '</a-entity>';
     }
   }
 };
