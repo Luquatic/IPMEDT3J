@@ -507,6 +507,11 @@ var OPTIES = {
       return '<a-entity id="optie-grid-' + grid_nummer + '-achtergrond" class="optie-grid-achtergrond" position="' + x + ' -4.25 0.1" geometry="depth:0.1; height:1.5; width:2.5;" mixin="' + achtergrond_mixin + '">' +
                '<a-entity id="optie-grid-' + grid_nummer + '-tekst" class="optie-grid-tekst" position="-0.3 -0.2 0.1" text="text: ' + grid_nummer + '" mixin="' + tekst_mixin + '"></a-entity>' +
              '</a-entity>';
+    },
+
+    // Voeg een bestelknop toe.
+    voeg_bestelknop_toe: function () {
+      // TODO: nog te implementeren.
     }
   }
 };
@@ -528,6 +533,7 @@ $(document).ready(function() {
   var grid            = 3,
       aantal_paletten = 4;
 
+  // Initialiseer de kleuren.
   KLEUREN.init(aantal_paletten);
 
   // Initialiseer de Rubik's Cube.
