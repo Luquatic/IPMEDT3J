@@ -4,42 +4,45 @@ var KLEUREN = {
   // API url.
   api_url: "http://www.colr.org/json/colors/random/",
 
-  // Kleuren
-  gegenereerde_kleuren: [],
-
   // Initialiseer.
-  init: function () {
-
-    // Vul de gegenereerde kleuren.
-    KLEUREN.functions.vul_gegenereerde_kleuren();
-  },
+  init: function () {},
 
   // Functies.
   functions: {
 
     // Vul de gegenereerde kleuren.
-    vul_gegenereerde_kleuren: function () {
+    verkrijg_gegenereerde_kleuren: function () {
 
-      // Voeg de standaard kleuren toe.
-      KLEUREN.gegenereerde_kleuren.push([
-        '#B71234',
-        '#FF5800',
-        '#0246AD',
-        '#009B48',
-        '#FFD500',
-        '#FFFFFF'
-      ]);
+      // Geef een nieuwe promise terug.
+      return new Promise(function (resolve) {
 
-      // Voeg nog 3 random kleur paletten toe.
-      for (var i = 0; i < 3; i++) {
+        // Placeholder voor de kleuren.
+        var gegenereerde_kleuren = [];
 
-        // Verkrijg random kleuren.
-        KLEUREN.functions.verkrijg_kleuren().then(function (response) {
+        // Voeg de standaard kleuren toe.
+        gegenereerde_kleuren.push([
+          '#B71234',
+          '#FF5800',
+          '#0246AD',
+          '#009B48',
+          '#FFD500',
+          '#FFFFFF'
+        ]);
 
-          // Voeg de kleuren toe.
-          KLEUREN.gegenereerde_kleuren.push(response);
-        });
-      }
+        // Voeg nog 3 random kleur paletten toe.
+        for (var i = 0; i < 3; i++) {
+
+          // Verkrijg random kleuren.
+          KLEUREN.functions.verkrijg_kleuren().then(function (response) {
+
+            // Voeg de kleuren toe.
+            gegenereerde_kleuren.push(response);
+          });
+        }
+
+        // Resolve de gegenereerde kleuren.
+        resolve(gegenereerde_kleuren);
+      });
     },
 
     // Verkrijg de kleuren.
@@ -118,10 +121,10 @@ var RUBIKSCUBE = {
   $rubiks_cube: $('#rubiks-cube'),
 
   // Init function.
-  init: function (grid) {
+  init: function (grid, kleuren) {
 
-    // Voeg de kleuren toe.
-    RUBIKSCUBE.functions.set_kleuren();
+    // Vul de kleuren van de Rubik's Cube.
+    RUBIKSCUBE.functions.set_kleuren(kleuren[0]);
 
     // Voeg de geometry toe.
     RUBIKSCUBE.functions.set_geometry();
@@ -163,30 +166,27 @@ var RUBIKSCUBE = {
     },
 
     // Zet de kleuren van de Rubiks Cube.
-    set_kleuren: function () {
+    set_kleuren: function (kleuren) {
 
-      // De standaard kleuren.
-      // KLEUREN.functions.verkrijg_kleuren().then(function(kleuren) {
+      // Kleuren mixins.
+      var kleuren_mixins = [];
 
-        var kleuren = KLEUREN.gegenereerde_kleuren[0];
+      // Ga door alle kleuren heen.
+      for(var kleur in kleuren) {
 
-        // Kleuren mixins.
-        var kleuren_mixins = [];
+        // Alleen de kleuren zelf.
+        if (kleuren.hasOwnProperty(kleur)) {
 
-        for(var kleur in kleuren) {
-          if (kleuren.hasOwnProperty(kleur)) {
+          // ID.
+          var id = Object.keys(kleuren).indexOf(kleur) + 1;
 
-            // ID.
-            var id = Object.keys(kleuren).indexOf(kleur);
-
-            // Voeg de kleuren mixin toe.
-            kleuren_mixins.push('<a-mixin id="kleur-' + id + '-mixin" material="color: ' + kleuren[kleur] + '"></a-mixin>');
-          }
+          // Voeg de kleuren mixin toe.
+          kleuren_mixins.push('<a-mixin id="kleur-' + id + '-mixin" material="color: ' + kleuren[kleur] + '"></a-mixin>');
         }
+      }
 
-        // Voeg de mixins toe aan de assets.
-        RUBIKSCUBE.$assets.append(kleuren_mixins);
-      // });
+      // Voeg de mixins toe aan de assets.
+      RUBIKSCUBE.$assets.append(kleuren_mixins);
     },
 
     // Voeg de geometries van de Rubik's Cube toe aan de assets.
@@ -234,7 +234,7 @@ var OPTIES = {
   $opties: $('#opties'),
 
   // Init functie.
-  init: function () {
+  init: function (kleuren) {
 
     // Voeg het optie paneel toe aan de body.
     OPTIES.functions.voeg_paneel_toe();
@@ -242,11 +242,8 @@ var OPTIES = {
     // Voeg de optie kleuren paneel toe.
     OPTIES.functions.voeg_optie_kleuren_toe();
 
-    // TODO: dit is test code.
-    OPTIES.functions.voeg_kleuren_palet_toe(1);
-    OPTIES.functions.voeg_kleuren_palet_toe(2);
-    OPTIES.functions.voeg_kleuren_palet_toe(3);
-    OPTIES.functions.voeg_kleuren_palet_toe(4);
+    // Voeg de kleuren paletten toe.
+    OPTIES.functions.voeg_kleuren_paletten_toe(kleuren);
   },
 
   // Alle functies.
@@ -271,7 +268,7 @@ var OPTIES = {
     },
 
     // Voeg een kleuren palet toe.
-    voeg_kleuren_palet_toe: function (id) {
+    voeg_kleuren_palet_toe: function (id, kleuren_palet) {
 
       // Bereken de hoogte.
       var hoogte = 4.5 - (id * 1.5);
@@ -286,26 +283,37 @@ var OPTIES = {
           '<a-entity id="optie-kleuren-palet-' + id + '-achtergrond" geometry="depth:0.1; height:1.2; width:6.5;" material="">' +
 
             // Genereer een palet van 6 kleuren en voeg het toe.
-            OPTIES.functions.maak_palet(id) +
+            OPTIES.functions.maak_palet(id, kleuren_palet) +
           '</a-entity>' +
         '</a-entity>'
       );
     },
 
+    // Voeg kleuren paletten toe.
+    voeg_kleuren_paletten_toe: function (kleuren) {
+
+      // Loop door alle kleuren heen.
+      for(var i = 0; i < kleuren.length; i++) {
+
+        // Maak een kleuren palet aan.
+        OPTIES.functions.voeg_kleuren_palet_toe(i, kleuren[i]);
+      }
+    },
+
     // Maak een kleuren palet van 6.
-    maak_palet: function (id) {
+    maak_palet: function (id, kleuren_palet) {
 
       // Placeholder
       var kleuren = '';
 
       // Loop door 6 heen.
-      for(var i = 1; i <= 6; i++) {
+      for(var i = 0; i < kleuren_palet.length; i++) {
 
         // Genereer 1 positie.
-        var positie = -3.5 + i;
+        var positie = -2.5 + i;
 
         // Voeg 1 kleurenbol toe.
-        kleuren += '<a-entity id="optie-kleuren-palet-' + id + '-kleur-' + i + '" position="' + positie + ' 0 0.1" mixin="mixin-rotation-90-0-0 mixin-geometry-kleur kleur-zwart-mixin"></a-entity>';
+        kleuren += '<a-entity id="optie-kleuren-palet-' + id + '-kleur-' + i + 1 + '" material="color: ' + kleuren_palet[i] + ';" position="' + positie + ' 0 0.1" mixin="mixin-rotation-90-0-0 mixin-geometry-kleur"></a-entity>';
       }
 
       // Geef de kleuren terug.
@@ -325,14 +333,18 @@ $(document).ready(function() {
   // Het grid van de Rubik's Cube.
   var grid = 3;
 
-  // Initialiseer de kleuren.
-  KLEUREN.init();
+  KLEUREN.functions.verkrijg_gegenereerde_kleuren().then(function (kleuren) {
 
-  console.log(KLEUREN.gegenereerde_kleuren);
+    // Timeout.
+    setTimeout(function () {
 
-  // Initialiseer de Rubik's Cube.
-  RUBIKSCUBE.init(grid);
+      // Initialiseer de Rubik's Cube.
+      RUBIKSCUBE.init(grid, kleuren);
 
-  // Initialiseer de opties.
-  OPTIES.init();
+      // Initialiseer de opties.
+      OPTIES.init(kleuren);
+
+    }, 2000);
+
+  });
 });
