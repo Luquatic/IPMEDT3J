@@ -39,7 +39,7 @@
 
       <!-- CAMERA -->
       <a-camera look-controls="look-controls">
-        <a-cursor color="white"></a-cursor>
+        <a-cursor color="black"></a-cursor>
       </a-camera>
 
       <!-- ASSETS -->
@@ -50,7 +50,15 @@
         <a-asset-item id="rubiks-cube-onderdeel-mtl" src="models/rubiks_cube_onderdeel.mtl"></a-asset-item>
 
         <!-- KLEUREN -->
-        <a-mixin id="kleur-init-mixin" material="color: #FFFFFF"></a-mixin>
+        <a-mixin id="kleur-wit-mixin"   material="color: #FFFFFF"></a-mixin>
+        <a-mixin id="kleur-grijs-mixin" material="color: #CCCCCC"></a-mixin>
+        <a-mixin id="kleur-zwart-mixin" material="color: #000000"></a-mixin>
+
+        <!-- GEOMETRY-->
+        <a-mixin id="mixin-geometry-kleur" geometry="primitive:cylinder; height:0.1; radius:0.4;"></a-mixin>
+
+        <!-- ROTATION -->
+        <a-mixin id="mixin-rotation-90-0-0" rotation="90 0 0"></a-mixin>
 
         <!-- KUBUS MIXIN -->
         <a-mixin id="kubus-mixin" obj-model="obj: #rubiks-cube-onderdeel-obj; mtl: #rubiks-cube-onderdeel-mtl"></a-mixin>
@@ -58,21 +66,25 @@
 
       <!-- RUBIKS CUBE -->
       <a-entity id="rubiks-cube"></a-entity>
+
+      <!-- OPTIES -->
+      <a-entity id="opties" position="12.5, 1.5, -12.5"></a-entity>
     </a-scene>
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/modernizr/modernizr.js"></script>
-    <script src="/bower_components/material-design-lite/material.min.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/bower_components/modernizr/modernizr.js"></script>
+    <script type="text/javascript" src="/bower_components/material-design-lite/material.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js scripts/plugins.js -->
+    <script type="text/javascript" src="scripts/vendor/aframe-text-component.min.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/aframe.js -->
-    <script src="scripts/aframe_v2.js"></script>
+    <script type="text/javascript" src="scripts/aframe_v2.js"></script>
     <!-- endbuild -->
   </body>
 </html>
