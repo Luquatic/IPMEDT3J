@@ -8,8 +8,6 @@ $(document).ready(function () {
     rightBox  = document.getElementById('rightBox'),
     bottomBox = document.getElementById('bottomBox'),
     audio = new Audio('../sounds/drag.mp3'),
-    text1 = document.getElementById('--:--:-x'),
-    myWatch = new Stopwatch(),
 
     // X, Y en Z van de Rubik's Cube.
     x = 0,
@@ -24,21 +22,10 @@ $(document).ready(function () {
     }, 250);
   });
 
-
-  // leftBox.addEventListener('mouseenter', function timer() {
-  //   setTimeout(function () {
-  //     $(text1).attr('text', 'text:' + i);
-  //     i++
-  //     if (i < 10) {
-  //       timer();
-  //     }
-  //   }, 1000)
+  // leftBox.addEventListener('mouseenter', function () {
+  //   myWatch.start();
+  //   $(text1).attr('text', 'text:' + myWatch.toString());
   // });
-
-  leftBox.addEventListener('mouseenter', function () {
-    myWatch.start();
-    $(text1).attr('text', 'text:' + myWatch.toString());
-  });
 
   leftBox.addEventListener('mouseleave', function () {
     this.iid && clearInterval(this.iid);

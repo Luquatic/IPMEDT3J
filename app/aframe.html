@@ -64,7 +64,7 @@
         <a-asset-item id="rubiks-cube-mtl" src="models/rubiks_cube.mtl"></a-asset-item>
         <!--MIXINS-->
         <a-mixin id="box" geometry="height:3;width:1.5" material="visible:false"></a-mixin>
-        <a-mixin id="timer" scale="0.2 0.2 0.2" blend-character-model="" material="color:whitetimer"></a-mixin>
+        <a-mixin id="timer" scale="0.2 0.2 0.2" blend-character-model="" material="color:white"></a-mixin>
         <!--IMAGES-->
         <img id="arrow" src="images/arrow.png">
         <img id="sky" src="images/sky.jpg">
@@ -102,8 +102,10 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/aframe.js -->
-    <script src="scripts/stopwatch.js"></script>
+    <!--<script src="scripts/stopwatch.js"></script>-->
     <script src="scripts/aframe.js"></script>
+    <script src="scripts/aframe-gif-component.js"></script>
+    <!--<script src="scripts/aframe-gif-shader.js"></script>-->
     <!-- endbuild -->
   </body>
 </html>
