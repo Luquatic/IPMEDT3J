@@ -311,6 +311,16 @@ var OPTIES = {
       // Bereken de hoogte.
       var hoogte = 4.5 - (id * 1.5);
 
+      // Standaard achtergrond is wit.
+      var mixin = "mixin-kleur-wit";
+
+      // Als het de eerst is.
+      if(id == 1) {
+
+        // Geef het een actieve kleur.
+        mixin = "mixin-kleur-zwart";
+      }
+
       // Voeg een kleuren palet toe.
       $('#optie-kleuren').append(
 
@@ -318,7 +328,7 @@ var OPTIES = {
         '<a-entity id="optie-kleuren-palet-' + id + '" position="0 ' + hoogte + ' 0.1" class="optie-kleuren-palet">' +
 
           // Voeg een achtergrond toe.
-          '<a-entity id="optie-kleuren-palet-' + id + '-achtergrond" geometry="depth:0.1; height:1.2; width:6.5;" material="">' +
+          '<a-entity id="optie-kleuren-palet-' + id + '-achtergrond" geometry="depth:0.1; height:1.2; width:6.5;" mixin="' + mixin + '">' +
 
             // Genereer een palet van 6 kleuren en voeg het toe.
             OPTIES.functions.maak_palet(id) +
