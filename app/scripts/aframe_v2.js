@@ -223,8 +223,22 @@ var RUBIKSCUBE = {
     },
 
     // Zet de kleuren van de Rubiks Cube.
-    set_kleuren: function (kleuren) {
+    set_kleuren: function (id) {
 
+      // Loop door alle zijdes heen
+      for(var i = 1; i <= 6; i++) {
+
+        var $zijdes = $('.zijde-' + i);
+
+        // Haal alle zijdes op.
+        var mixins = $zijdes.attr('mixin').split(' ');
+
+        // Wijzig de kleur mixin.
+        mixins[1] = 'kleuren-palet-' + id + '-kleur-' + i + '-mixin';
+
+        // Wijzig de mixin attributen
+        $zijdes.attr('mixin', mixins.join(' '));
+      }
     },
 
     // Voeg de geometries van de Rubik's Cube toe aan de assets.
@@ -282,6 +296,9 @@ var OPTIES = {
 
     // Voeg de kleuren paletten toe.
     OPTIES.functions.voeg_kleuren_paletten_toe(aantal_paletten);
+
+    // Voeg hovers toe aan de kleuren
+    OPTIES.functions.set_kleuren_hover();
   },
 
   // Alle functies.
@@ -325,10 +342,10 @@ var OPTIES = {
       $('#optie-kleuren').append(
 
         // Voeg een kleuren palet wrapper toe.
-        '<a-entity id="optie-kleuren-palet-' + id + '" position="0 ' + hoogte + ' 0.1" class="optie-kleuren-palet">' +
+        '<a-entity id="optie-kleuren-palet-' + id + '" class="optie-kleuren-palet" data-kleuren-palet-id="' + id + '" position="0 ' + hoogte + ' 0.1" class="optie-kleuren-palet">' +
 
           // Voeg een achtergrond toe.
-          '<a-entity id="optie-kleuren-palet-' + id + '-achtergrond" geometry="depth:0.1; height:1.2; width:6.5;" mixin="' + mixin + '">' +
+          '<a-entity id="optie-kleuren-palet-' + id + '-achtergrond" class="optie-kleuren-palet-achtergrond" geometry="depth:0.1; height:1.2; width:6.5;" mixin="' + mixin + '">' +
 
             // Genereer een palet van 6 kleuren en voeg het toe.
             OPTIES.functions.maak_palet(id) +
@@ -361,11 +378,62 @@ var OPTIES = {
         var positie = -3.5 + i;
 
         // Voeg 1 kleurenbol toe.
-        kleuren += '<a-entity id="optie-kleuren-palet-' + id + '-kleur-' + i + 1 + '" position="' + positie + ' 0 0.1" mixin="mixin-kleur-wit kleuren-palet-' + id + '-kleur-' + i + '-mixin mixin-rotation-90-0-0 mixin-geometry-kleur"></a-entity>';
+        kleuren += '<a-entity id="optie-kleuren-palet-' + id + '-kleur-' + i + '" position="' + positie + ' 0 0.1" mixin="mixin-kleur-wit kleuren-palet-' + id + '-kleur-' + i + '-mixin mixin-rotation-90-0-0 mixin-geometry-kleur"></a-entity>';
       }
 
       // Geef de kleuren terug.
       return kleuren;
+    },
+
+    // Set een hover op alle kleuren paletten.
+    set_kleuren_hover: function () {
+
+      // Alle kleuren paletten.
+      var kleuren_paletten = document.getElementsByClassName('optie-kleuren-palet');
+
+      // Voeg aan elke optie kleuren palet een hover toe.
+      for(var i = 0; i < kleuren_paletten.length; i++) {
+
+        // Voeg een event listener toe.
+        document.getElementsByClassName('optie-kleuren-palet')[i].addEventListener('mouseenter', function (event) {
+
+          // ID.
+          var id = $(this).attr('data-kleuren-palet-id');
+
+          // Verander de kleur van de Rubik's Cube.
+          RUBIKSCUBE.functions.set_kleuren(id);
+
+          // Zorg dat de kleuren veranderen van de achtergrond.
+          OPTIES.functions.set_kleuren_achtergrond(id);
+        });
+      }
+    },
+
+    // Verander de kleuren achtergrond.
+    set_kleuren_achtergrond: function (id) {
+
+      // Alle kleuren paletten.
+      var kleuren_paletten_achtergrond = document.getElementsByClassName('optie-kleuren-palet-achtergrond');
+
+      // Loop door elke kleuren palet achtergrond.
+      for(var i = 0; i < kleuren_paletten_achtergrond.length; i++) {
+
+        // Wat variabelen die nodig zijn.
+        var achtergronden = document.getElementsByClassName('optie-kleuren-palet-achtergrond'),
+            achtergrond   = achtergronden[i],
+            index         = i + 1;
+
+        // Controleer het ID met de index.
+        if(id == index) {
+
+          // Geef het de achtergrond zwart.
+          $(achtergrond).attr('mixin', 'mixin-kleur-zwart');
+        } else {
+
+          // Geef het de achtergrond wit.
+          $(achtergrond).attr('mixin', 'mixin-kleur-wit');
+        }
+      }
     }
   }
 };
