@@ -121,7 +121,7 @@ Stopwatch.prototype.toString = function() {
 		return no;
 	}
 	var e = this.getElapsed();
-	return zpad(e.hours,2) + ":" + zpad(e.minutes,2) + ":" + zpad(e.seconds,2);
+	return zpad(e.hours,2) + ':' + zpad(e.minutes,2) + ':' + zpad(e.seconds,2);
 }
 Stopwatch.prototype.setListener = function(listener) {
 	this.listener = listener;
