@@ -688,8 +688,11 @@ var PIJLEN = {
           // Laat de Rubik's Cube roteren met een interval.
           this.iid = setInterval(function () {
 
-            // TODO: Rubik's Cube laten roteren.
+            // Laat de Rubik's Cube draaien.
             PIJLEN.functions.doe_rubiks_cube_draaien(as, met_de_klok_mee);
+
+            // Speel het draai geluid af.
+            GELUID.functions.speel_roteer_geluid();
           }, 250);
         });
 
@@ -709,7 +712,7 @@ var PIJLEN = {
       var huidige_rotatie = RUBIKSCUBE.functions.verkrijg_rotatie_rubiks_cube(),
           x               = huidige_rotatie.x,
           y               = huidige_rotatie.y,
-          teller          = 5;
+          teller          = 10;
 
       // Controleer of het met de klok mee moet.
       if(met_de_klok_mee == 0) {
@@ -734,6 +737,29 @@ var PIJLEN = {
 
       // Verander de Rubik's Cube van rotatie.
       RUBIKSCUBE.functions.roteer_rubiks_cube(x, y);
+    }
+  }
+};
+
+// Audio klasse.
+var GELUID = {
+
+  // Roteer geluid.
+  roteer_geluid: new Audio('../sounds/drag.mp3'),
+
+  // Init functie.
+  init: function () {
+
+  },
+
+  // Alle functies.
+  functions: {
+
+    // Speel het roteer geluid af.
+    speel_roteer_geluid: function () {
+
+      // Speel het geluid af.
+      GELUID.roteer_geluid.play();
     }
   }
 };
