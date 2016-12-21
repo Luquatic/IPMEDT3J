@@ -9,7 +9,7 @@ var KLEUREN = {
   },
 
   // API url.
-  api_url: "http://www.colr.org/json/colors/random/",
+  api_url: 'http://www.colr.org/json/colors/random/',
 
   // Initialize functie.
   init: function (aantal_paletten) {
@@ -301,7 +301,7 @@ var RUBIKSCUBE = {
           z = grid * -5;
 
       // Voeg de positie toe.
-      RUBIKSCUBE.$rubiks_cube.attr("position", x + ' ' + y + ' ' + z);
+      RUBIKSCUBE.$rubiks_cube.attr('position', x + ' ' + y + ' ' + z);
     },
 
     // Roteer de Rubik's Cube.
@@ -379,13 +379,13 @@ var OPTIES = {
       var hoogte = 4.5 - (id * 1.5);
 
       // Standaard achtergrond is wit.
-      var mixin = "mixin-kleur-FFFFFF";
+      var mixin = 'mixin-kleur-FFFFFF';
 
       // Als het de eerst is.
       if(id == 1) {
 
         // Geef het een actieve kleur.
-        mixin = "mixin-kleur-000000";
+        mixin = 'mixin-kleur-000000';
       }
 
       // Voeg een kleuren palet toe.
