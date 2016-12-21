@@ -258,6 +258,8 @@ var RUBIKSCUBE = {
     // Voeg de Rubik's Cube toe.
     voeg_rubiks_cube_toe: function (grid) {
 
+      var id = 0;
+
       // Loop door X heen.
       for (var x = 0; x < grid; x ++) {
 
@@ -275,11 +277,11 @@ var RUBIKSCUBE = {
 
             // TODO: FIX THIS FUCKED UP SHIT.
             var x_pos = (x * 2) - (2),
-                y_pos = (y * 2) - (3.5),
-                z_pos = (z * 2) - (2),
+                y_pos = (y * 2) - (4),
+                z_pos = (z * 2) - (2);
 
-                // TODO: ID klopt niet helemaal.
-                id    = (x + y + z) + 1;
+              // TODO: ID klopt niet helemaal.
+              id += 1;
 
 
             // Voeg de box toe.
@@ -295,7 +297,7 @@ var RUBIKSCUBE = {
       // TODO: FIX THIS FUCKED UP SHIT.
       // X Y en Z coordinaten.
       var x = 0,
-          y = 1.5,
+          y = 2,
           z = grid * -5;
 
       // Voeg de positie toe.
@@ -638,8 +640,10 @@ var PIJLEN = {
     PIJLEN.functions.pijl_hover();
   },
 
+  // De functions.
   functions: {
 
+    // Voeg de pijlen toe aan de scene.
     voeg_pijlen_toe: function () {
 
       // Pijlen array
