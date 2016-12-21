@@ -527,10 +527,16 @@ var OPTIES = {
         var grid_optie = document.getElementsByClassName('optie-grid')[i];
 
         // Voeg een event listener toe.
-        grid_optie.addEventListener('mouseenter', function (event) {
+        grid_optie.addEventListener('mouseenter', function () {
 
           // Verander de achtergrond.
           OPTIES.functions.set_grid_achtergrond(grid_opties, this);
+
+          // Het ID.
+          var id = $(this).attr('data-optie-grid');
+
+          // Verander het grid van de Rubik's Cube.
+          OPTIES.functions.verander_grid(id);
         });
       }
     },
@@ -561,16 +567,41 @@ var OPTIES = {
       }
     },
 
+    // Verander het grid.
+    verander_grid: function (id) {
+      // TODO: nog te implementeren.
+    },
+
     // Voeg een bestelknop toe.
     voeg_bestelknop_toe: function () {
       // TODO: nog te implementeren.
-    }
+    },
   }
 };
 
 // Pijlen klasse.
 var PIJLEN = {
 
+  // Initialiseer de klasse.
+  init: function () {
+
+  },
+
+  functions: {
+
+    voeg_pijlen_toe: function () {
+
+    },
+
+    verkrijg_pijl: function () {
+
+    },
+
+    pijl_hover: function () {
+
+    },
+
+  }
 };
 
 // Timer klasse.
@@ -593,4 +624,7 @@ $(document).ready(function() {
 
   // Initialiseer de opties.
   OPTIES.init(aantal_paletten);
+
+  // Initialiseer de pijlen.
+  PIJLEN.init();
 });
