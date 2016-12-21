@@ -277,7 +277,7 @@ var RUBIKSCUBE = {
 
             // TODO: FIX THIS FUCKED UP SHIT.
             var x_pos = (x * 2) - (2),
-                y_pos = (y * 2) - (4),
+                y_pos = (y * 2) - (3.5),
                 z_pos = (z * 2) - (2);
 
               // TODO: ID klopt niet helemaal.
@@ -297,7 +297,7 @@ var RUBIKSCUBE = {
       // TODO: FIX THIS FUCKED UP SHIT.
       // X Y en Z coordinaten.
       var x = 0,
-          y = 2,
+          y = 1.5,
           z = grid * -5;
 
       // Voeg de positie toe.
@@ -660,10 +660,10 @@ var PIJLEN = {
     verkrijg_pijlen: function () {
 
       // Geef de pijlen terug.
-      return '<a-image id="pijl-x-as-links"   class="pijl" data-as-rotatie="x" data-met-de-klok-mee="0" src="#image-pijl" position="-5  0 0" material="opacity: 0.7" rotation="0 0   0"></a-image>' +
-             '<a-image id="pijl-y-as-beneden" class="pijl" data-as-rotatie="y" data-met-de-klok-mee="0" src="#image-pijl" position=" 0 -5 0" material="opacity: 0.7" rotation="0 0  90"></a-image>' +
-             '<a-image id="pijl-x-as-rechts"  class="pijl" data-as-rotatie="x" data-met-de-klok-mee="1" src="#image-pijl" position=" 5  0 0" material="opacity: 0.7" rotation="0 0 180"></a-image>' +
-             '<a-image id="pijl-y-as-boven"   class="pijl" data-as-rotatie="y" data-met-de-klok-mee="1" src="#image-pijl" position=" 0  5 0" material="opacity: 0.7" rotation="0 0 270"></a-image>';
+      return '<a-image id="pijl-y-as-links"   class="pijl" data-as-rotatie="y" data-met-de-klok-mee="0" src="#image-pijl" position="-5  0 0" material="opacity: 0.7" rotation="0 0   0"></a-image>' +
+             '<a-image id="pijl-x-as-beneden" class="pijl" data-as-rotatie="x" data-met-de-klok-mee="0" src="#image-pijl" position=" 0 -5 0" material="opacity: 0.7" rotation="0 0  90"></a-image>' +
+             '<a-image id="pijl-y-as-rechts"  class="pijl" data-as-rotatie="y" data-met-de-klok-mee="1" src="#image-pijl" position=" 5  0 0" material="opacity: 0.7" rotation="0 0 180"></a-image>' +
+             '<a-image id="pijl-x-as-boven"   class="pijl" data-as-rotatie="x" data-met-de-klok-mee="1" src="#image-pijl" position=" 0  5 0" material="opacity: 0.7" rotation="0 0 270"></a-image>';
     },
 
     // Event listener voor de pijlen.
@@ -683,14 +683,13 @@ var PIJLEN = {
 
           // Verkijg de as en de rotatie.
           var as              = $(this).attr('data-as-rotatie'),
-              met_de_klok_mee = $(this).attr('data-met-de-klok-mee'),
-              huidige_rotatie = RUBIKSCUBE.functions.verkrijg_rotatie_rubiks_cube();
+              met_de_klok_mee = $(this).attr('data-met-de-klok-mee');
 
           // Laat de Rubik's Cube roteren met een interval.
           this.iid = setInterval(function () {
 
             // TODO: Rubik's Cube laten roteren.
-            console.log(as, met_de_klok_mee, huidige_rotatie);
+            PIJLEN.functions.doe_rubiks_cube_draaien(as, met_de_klok_mee);
           }, 250);
         });
 
@@ -702,6 +701,39 @@ var PIJLEN = {
         });
       }
     },
+
+    // Laat de Rubik's Cube draaien.
+    doe_rubiks_cube_draaien: function (as, met_de_klok_mee) {
+
+      // De assen die we gaan draaien.
+      var huidige_rotatie = RUBIKSCUBE.functions.verkrijg_rotatie_rubiks_cube(),
+          x               = 0,
+          y               = 0,
+          teller          = 5;
+
+      // Controleer of het met de klok mee moet.
+      if(met_de_klok_mee == 0) {
+
+        // Maak de teller negatief.
+        teller = -teller;
+      }
+
+      // Controleer welke as we gaan draaien.
+      if(as == 'x') {
+
+        // Verander de X waarde.
+        x = huidige_rotatie.x + teller;
+      }
+
+      // Controleer welke as we gaan draaien.
+      else if(as == 'y') {
+
+        // Verander de Y waarde.
+        y = huidige_rotatie.y + teller;
+      }
+
+      RUBIKSCUBE.functions.roteer_rubiks_cube(x, y)
+    }
   }
 };
 
