@@ -24,8 +24,11 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/vendor/modernizr.js -->
-    <script src="/bower_components/modernizr/modernizr.js"></script>
-    <script src="/bower_components/aframe/dist/aframe.min.js"></script>
+    <script type="text/javascript" src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor/aframe.js -->
+    <script type="text/javascript" src="/bower_components/aframe/dist/aframe.min.js"></script>
     <!-- endbuild -->
   </head>
 
@@ -53,9 +56,9 @@
         <img id="image-pijl" src="images/arrow.png">
 
         <!-- KLEUREN -->
-        <a-mixin id="mixin-kleur-wit"    material="color: #FFFFFF"></a-mixin>
-        <a-mixin id="mixin-kleur-grijs"  material="color: #CCCCCC"></a-mixin>
-        <a-mixin id="mixin-kleur-zwart"  material="color: #000000"></a-mixin>
+        <a-mixin id="mixin-kleur-FFFFFF" material="color: #FFFFFF"></a-mixin>
+        <a-mixin id="mixin-kleur-CCCCCC" material="color: #CCCCCC"></a-mixin>
+        <a-mixin id="mixin-kleur-000000" material="color: #000000"></a-mixin>
 
         <!-- GEOMETRY-->
         <a-mixin id="mixin-geometry-kleur" geometry="primitive:cylinder; height:0.1; radius:0.4;"></a-mixin>
@@ -79,9 +82,8 @@
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/modernizr/modernizr.js"></script>
-    <script src="/bower_components/material-design-lite/material.min.js"></script>
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

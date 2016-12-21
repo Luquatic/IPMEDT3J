@@ -200,12 +200,12 @@ var RUBIKSCUBE = {
     verkrijg_zijdes: function (id) {
 
       // Maak de 6 zijdes als entities.
-      return '<a-entity id="kubus-' + id + '-zijde-1" class="zijde zijde-1" mixin="mixin-kleur-wit kleuren-palet-1-kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-2" class="zijde zijde-2" mixin="mixin-kleur-wit kleuren-palet-1-kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-3" class="zijde zijde-3" mixin="mixin-kleur-wit kleuren-palet-1-kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-4" class="zijde zijde-4" mixin="mixin-kleur-wit kleuren-palet-1-kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-5" class="zijde zijde-5" mixin="mixin-kleur-wit kleuren-palet-1-kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-6" class="zijde zijde-6" mixin="mixin-kleur-wit kleuren-palet-1-kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+      return '<a-entity id="kubus-' + id + '-zijde-1" class="zijde zijde-1" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-2" class="zijde zijde-2" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-3" class="zijde zijde-3" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-4" class="zijde zijde-4" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-5" class="zijde zijde-5" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
+             '<a-entity id="kubus-' + id + '-zijde-6" class="zijde zijde-6" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
     },
 
     // Verkijg de blender kubus.
@@ -358,7 +358,7 @@ var OPTIES = {
     voeg_paneel_toe: function () {
 
       // Voeg het paneel toe.
-      OPTIES.$opties.append('<a-entity id="optie-paneel"  mixin="mixin-kleur-grijs" geometry="depth:0.1; height:11; width:7.5"></a-entity>');
+      OPTIES.$opties.append('<a-entity id="optie-paneel"  mixin="mixin-kleur-CCCCCC" geometry="depth:0.1; height:11; width:7.5"></a-entity>');
     },
 
     // Voeg de optie voor de kleuren paletten toe.
@@ -367,7 +367,7 @@ var OPTIES = {
       // Voeg de suboptie kleuren toe.
       OPTIES.$opties.append(
         '<a-entity id="optie-kleuren">' +
-          '<a-entity id="optie-titel-kleuren" class="optie-titel" position="-3.25 4.25 0.1" text="text:Kies een kleurenschema; size:0.3; style:normal" mixin="mixin-kleur-zwart"></a-entity>' +
+          '<a-entity id="optie-titel-kleuren" class="optie-titel" position="-3.25 4.25 0.1" text="text:Kies een kleurenschema; size:0.3; style:normal" mixin="mixin-kleur-000000"></a-entity>' +
         '</a-entity>'
       );
     },
@@ -379,13 +379,13 @@ var OPTIES = {
       var hoogte = 4.5 - (id * 1.5);
 
       // Standaard achtergrond is wit.
-      var mixin = "mixin-kleur-wit";
+      var mixin = "mixin-kleur-FFFFFF";
 
       // Als het de eerst is.
       if(id == 1) {
 
         // Geef het een actieve kleur.
-        mixin = "mixin-kleur-zwart";
+        mixin = "mixin-kleur-000000";
       }
 
       // Voeg een kleuren palet toe.
@@ -428,7 +428,7 @@ var OPTIES = {
         var positie = -3.5 + i;
 
         // Voeg 1 kleurenbol toe.
-        kleuren += '<a-entity id="optie-kleuren-palet-' + id + '-kleur-' + i + '" position="' + positie + ' 0 0.1" mixin="mixin-kleur-wit kleuren-palet-' + id + '-kleur-' + i + '-mixin mixin-rotation-90-0-0 mixin-geometry-kleur"></a-entity>';
+        kleuren += '<a-entity id="optie-kleuren-palet-' + id + '-kleur-' + i + '" position="' + positie + ' 0 0.1" mixin="mixin-kleur-FFFFFF kleuren-palet-' + id + '-kleur-' + i + '-mixin mixin-rotation-90-0-0 mixin-geometry-kleur"></a-entity>';
       }
 
       // Geef de kleuren terug.
@@ -477,11 +477,11 @@ var OPTIES = {
         if(id == index) {
 
           // Geef het de achtergrond zwart.
-          $(achtergrond).attr('mixin', 'mixin-kleur-zwart');
+          $(achtergrond).attr('mixin', 'mixin-kleur-000000');
         } else {
 
           // Geef het de achtergrond wit.
-          $(achtergrond).attr('mixin', 'mixin-kleur-wit');
+          $(achtergrond).attr('mixin', 'mixin-kleur-FFFFFF');
         }
       }
     },
@@ -497,7 +497,7 @@ var OPTIES = {
       // Voeg de suboptie kleuren toe.
       OPTIES.$opties.append(
         '<a-entity id="optie-grid">' +
-          '<a-entity id="optie-titel-grid" class="optie-titel" position="-3.25 -3 0.1" text="text:Kies een grid; size:0.3; style:normal" mixin="mixin-kleur-zwart"></a-entity>' +
+          '<a-entity id="optie-titel-grid" class="optie-titel" position="-3.25 -3 0.1" text="text:Kies een grid; size:0.3; style:normal" mixin="mixin-kleur-000000"></a-entity>' +
         '</a-entity>'
       );
     },
@@ -539,12 +539,12 @@ var OPTIES = {
       // De X verschuiving die nodig is.
       var x = -2 + x_verschuiving;
 
-      var achtergrond_mixin = 'mixin-kleur-wit',
-          tekst_mixin       = 'mixin-kleur-zwart';
+      var achtergrond_mixin = 'mixin-kleur-FFFFFF',
+          tekst_mixin       = 'mixin-kleur-000000';
 
       if(actief) {
-        achtergrond_mixin = 'mixin-kleur-zwart';
-        tekst_mixin       = 'mixin-kleur-wit';
+        achtergrond_mixin = 'mixin-kleur-000000';
+        tekst_mixin       = 'mixin-kleur-FFFFFF';
       }
 
       // Geef een opgemaakte knop terug.
@@ -597,13 +597,13 @@ var OPTIES = {
         if(knop_id == grid_id) {
 
           // Pas de kleuren aan.
-          $(grid_optie).children().attr('mixin', 'mixin-kleur-zwart');
-          $(grid_optie).children().children().attr('mixin', 'mixin-kleur-wit');
+          $(grid_optie).children().attr('mixin', 'mixin-kleur-000000');
+          $(grid_optie).children().children().attr('mixin', 'mixin-kleur-FFFFFF');
         } else {
 
           // Pas de kleuren aan.
-          $(grid_optie).children().attr('mixin', 'mixin-kleur-wit');
-          $(grid_optie).children().children().attr('mixin', 'mixin-kleur-zwart');
+          $(grid_optie).children().attr('mixin', 'mixin-kleur-FFFFFF');
+          $(grid_optie).children().children().attr('mixin', 'mixin-kleur-000000');
         }
       }
     },
