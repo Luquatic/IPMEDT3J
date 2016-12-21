@@ -9,3 +9,6 @@ opdrachten/test/
 
 # Geen zipmappen.
 *.zip
+
+# Vendor map is nodig
+!app/scripts/vendor/
