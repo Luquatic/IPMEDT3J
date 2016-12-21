@@ -188,6 +188,9 @@ var RUBIKSCUBE = {
 
     // Voeg de Rubik's Cube toe.
     RUBIKSCUBE.functions.voeg_rubiks_cube_toe(grid);
+
+    // Bepaal de positie van de Rubik's Cube.
+    RUBIKSCUBE.functions.bepaal_positie(grid);
   },
 
   // Functions
@@ -264,17 +267,39 @@ var RUBIKSCUBE = {
           // Loop door Z heen.
           for(var z = 0; z < grid; z++) {
 
-            // Formule voor de X, Y en Z variabelen.
-            var x_pos = -(grid - 1) + (x * 2),
-                y_pos = -(grid - 1) + (y * 2),
-                z_pos = -(grid * 5) + (z * 2),
-                id    = x + y + z + 1;
+            // Nodig voor de X, Y en Z coordinaten.
+            var verdubbelaar = grid - 3;
+
+            // Kleine check.
+            if(verdubbelaar == 0) { verdubbelaar = 1; }
+
+            // TODO: FIX THIS FUCKED UP SHIT.
+            var x_pos = (x * 2) - (2),
+                y_pos = (y * 2) - (3.5),
+                z_pos = (z * 2) - (2),
+
+                // TODO: ID klopt niet helemaal.
+                id    = (x + y + z) + 1;
+
 
             // Voeg de box toe.
             RUBIKSCUBE.$rubiks_cube.append(RUBIKSCUBE.functions.verkrijg_enkele_kubus(id, x_pos, y_pos, z_pos));
           }
         }
       }
+    },
+
+    // Bepaal de positie van de Rubik's Cube.
+    bepaal_positie: function (grid) {
+
+      // TODO: FIX THIS FUCKED UP SHIT.
+      // X Y en Z coordinaten.
+      var x = 0,
+          y = 1.5,
+          z = grid * -5;
+
+      // Voeg de positie toe.
+      RUBIKSCUBE.$rubiks_cube.attr("position", x + ' ' + y + ' ' + z);
     }
   }
 };
@@ -582,21 +607,48 @@ var OPTIES = {
 // Pijlen klasse.
 var PIJLEN = {
 
+  // JQuery selectors.
+  $: {
+
+    // Scene
+    pijlen: $('#pijlen')
+  },
+
   // Initialiseer de klasse.
   init: function () {
 
+    // Voeg de pijlen toe.
+    PIJLEN.functions.voeg_pijlen_toe();
+
+    // Voeg een event listener toe aan de pijlen.
+    PIJLEN.functions.pijl_hover();
   },
 
   functions: {
 
     voeg_pijlen_toe: function () {
 
+      // Pijlen array
+      var pijlen = [];
+
+      // Verkrijg de pijlen.
+      pijlen.push(PIJLEN.functions.verkrijg_pijlen());
+
+      // Voeg de pijlen toe aan de array.
+      PIJLEN.$.pijlen.append(pijlen);
     },
 
-    verkrijg_pijl: function () {
+    // Verkrijg de pijlen om de scene te draaien.
+    verkrijg_pijlen: function () {
 
+      // Geef de pijlen terug.
+      return '<a-image id="pijl-x-as-links"   class="pijl" data-as-rotatie="x" data-met-de-klok-mee="0" src="#image-pijl" position="-5  0 0" material="opacity: 0.7" rotation="0 0   0"></a-image>' +
+             '<a-image id="pijl-y-as-boven"   class="pijl" data-as-rotatie="y" data-met-de-klok-mee="0" src="#image-pijl" position=" 0 -5 0" material="opacity: 0.7" rotation="0 0  90"></a-image>' +
+             '<a-image id="pijl-x-as-rechts"  class="pijl" data-as-rotatie="x" data-met-de-klok-mee="1" src="#image-pijl" position=" 5  0 0" material="opacity: 0.7" rotation="0 0 180"></a-image>' +
+             '<a-image id="pijl-y-as-beneden" class="pijl" data-as-rotatie="y" data-met-de-klok-mee="1" src="#image-pijl" position=" 0  5 0" material="opacity: 0.7" rotation="0 0 270"></a-image>';
     },
 
+    // Event listener voor de pijlen.
     pijl_hover: function () {
 
     },
