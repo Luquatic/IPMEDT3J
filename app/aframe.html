@@ -32,6 +32,7 @@
     <!-- endbuild -->
     <!-- text -->
     <script src="scripts/aframe-text-component.min.js"></script>
+    <script src="scripts/aframe-gif-component.min.js"></script>
     <!-- endbuild -->
   </head>
 
@@ -68,6 +69,7 @@
         <!--IMAGES-->
         <img id="arrow" src="images/arrow.png">
         <img id="sky" src="images/sky.jpg">
+        <img id="snow" src="images/snow.gif">
       </a-assets>
 
       <!-- OBJECTS -->
@@ -78,6 +80,7 @@
       <a-entity id="upperBox" position="0 5 -8" mixin="box" rotation="0 0 90"></a-entity>
       <a-entity id="rightBox" position="4 1 -8" mixin="box"></a-entity>
       <a-entity id="bottomBox" position="0 -3 -8" mixin="box" rotation="0 0 90"></a-entity>
+      <a-entity position="0 1.28 -2.34" id="plane" geometry="primitive:plane;width:2;height:2;" material="shader:gif;src:#snow;opacity:.8;transparent:true;"></a-entity>
 
       <!-- SKY -->
       <a-sky src="#sky"></a-sky>
@@ -102,10 +105,9 @@
     <!-- endbuild -->
 
     <!-- build:js scripts/aframe.js -->
-    <!--<script src="scripts/stopwatch.js"></script>-->
     <script src="scripts/aframe.js"></script>
-    <script src="scripts/aframe-gif-component.js"></script>
-    <!--<script src="scripts/aframe-gif-shader.js"></script>-->
+    <script src="scripts/aframe-gif-shader.min.js"></script>
+    <script src="scripts/aframe-gif-component.min.js"></script>
     <!-- endbuild -->
   </body>
 </html>
