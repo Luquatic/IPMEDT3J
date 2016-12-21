@@ -305,6 +305,9 @@ var OPTIES = {
 
     // Voeg een aantal grid opties toe.
     OPTIES.functions.voeg_grid_keuzes_toe(2, 3);
+
+    // Voeg de grid hover toe.
+    OPTIES.functions.set_grid_hover();
   },
 
   // Alle functies.
@@ -504,9 +507,58 @@ var OPTIES = {
       }
 
       // Geef een opgemaakte knop terug.
-      return '<a-entity id="optie-grid-' + grid_nummer + '-achtergrond" class="optie-grid-achtergrond" position="' + x + ' -4.25 0.1" geometry="depth:0.1; height:1.5; width:2.5;" mixin="' + achtergrond_mixin + '">' +
-               '<a-entity id="optie-grid-' + grid_nummer + '-tekst" class="optie-grid-tekst" position="-0.3 -0.2 0.1" text="text: ' + grid_nummer + '" mixin="' + tekst_mixin + '"></a-entity>' +
+      return '<a-entity id="optie-grid-' + grid_nummer + '" data-optie-grid="' + grid_nummer + '" class="optie-grid" position="' + x + ' -4.25 0.1">' +
+               '<a-entity id="optie-grid-' + grid_nummer + '-achtergrond" class="optie-grid-achtergrond" data-optie-grid="' + grid_nummer + '" geometry="depth:0.1; height:1.5; width:2.5;" mixin="' + achtergrond_mixin + '">' +
+                 '<a-entity id="optie-grid-' + grid_nummer + '-tekst" class="optie-grid-tekst" data-optie-grid="' + grid_nummer + '" position="-0.3 -0.2 0.1" text="text: ' + grid_nummer + '" mixin="' + tekst_mixin + '"></a-entity>' +
+               '</a-entity>' +
              '</a-entity>';
+    },
+
+    // Voeg een hover toe.
+    set_grid_hover: function () {
+
+      // Haal alle grid opties op.
+      var grid_opties = document.getElementsByClassName('optie-grid');
+
+      // Loop door elke grid optie heen.
+      for(var i = 0; i < grid_opties.length; i++) {
+
+        // De grid optie.
+        var grid_optie = document.getElementsByClassName('optie-grid')[i];
+
+        // Voeg een event listener toe.
+        grid_optie.addEventListener('mouseenter', function (event) {
+
+          // Verander de achtergrond.
+          OPTIES.functions.set_grid_achtergrond(grid_opties, this);
+        });
+      }
+    },
+
+    // Verander de grid achtergrond.
+    set_grid_achtergrond: function (grid_opties, knop) {
+
+      // Loop door alle grid opties heen.
+      for(var i = 0; i < grid_opties.length; i++) {
+
+        // Verkrijg het grid optie element.
+        var grid_optie = grid_opties[i],
+            knop_id    = $(knop).attr('data-optie-grid'),
+            grid_id    = $(grid_optie).attr('data-optie-grid');
+
+        // Controleer het id.
+        if(knop_id == grid_id) {
+
+          // Pas de kleuren aan.
+          $(grid_optie).children().attr('mixin', 'mixin-kleur-zwart');
+          $(grid_optie).children().children().attr('mixin', 'mixin-kleur-wit');
+        } else {
+
+          // Pas de kleuren aan.
+          $(grid_optie).children().attr('mixin', 'mixin-kleur-wit');
+          $(grid_optie).children().children().attr('mixin', 'mixin-kleur-zwart');
+        }
+      }
     },
 
     // Voeg een bestelknop toe.
