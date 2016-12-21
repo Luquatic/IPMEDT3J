@@ -46,6 +46,6 @@
   "dependencies": {
     "aframe": "^0.4.0",
     "aframe-bmfont-text-component": "^0.1.4",
-    "aframe-text-component": "^0.3.0"
+    "aframe-text-component": "^0.4.0"
   }
 }
