@@ -258,6 +258,7 @@ var RUBIKSCUBE = {
     // Voeg de Rubik's Cube toe.
     voeg_rubiks_cube_toe: function (grid) {
 
+      // ID.
       var id = 0;
 
       // Loop door X heen.
@@ -269,20 +270,13 @@ var RUBIKSCUBE = {
           // Loop door Z heen.
           for(var z = 0; z < grid; z++) {
 
-            // Nodig voor de X, Y en Z coordinaten.
-            var verdubbelaar = grid - 3;
-
-            // Kleine check.
-            if(verdubbelaar == 0) { verdubbelaar = 1; }
-
             // TODO: FIX THIS FUCKED UP SHIT.
             var x_pos = (x * 2) - (2),
                 y_pos = (y * 2) - (3.5),
                 z_pos = (z * 2) - (2);
 
-              // TODO: ID klopt niet helemaal.
+              // Tel het ID op.
               id += 1;
-
 
             // Voeg de box toe.
             RUBIKSCUBE.$rubiks_cube.append(RUBIKSCUBE.functions.verkrijg_enkele_kubus(id, x_pos, y_pos, z_pos));
@@ -747,10 +741,11 @@ var GELUID = {
   // Roteer geluid.
   roteer_geluid: new Audio('../sounds/drag.mp3'),
 
-  // Init functie.
-  init: function () {
+  // TODO: optie geluid.
+  optie_geluid: new Audio('../sounds/drag.mp3'),
 
-  },
+  // Init functie.
+  init: function () {},
 
   // Alle functies.
   functions: {
@@ -760,6 +755,13 @@ var GELUID = {
 
       // Speel het geluid af.
       GELUID.roteer_geluid.play();
+    },
+
+    // Speel het optie geluid af.
+    speel_optie_geluid: function () {
+
+      // Speel het optie geluid af.
+      GELUID.optie_geluid.play();
     }
   }
 };
