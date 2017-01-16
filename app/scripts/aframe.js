@@ -215,64 +215,162 @@ var RUBIKSCUBE = {
       // Verkrijg de benodigde zijdes als array.
       var benodigde_zijdes = RUBIKSCUBE.functions.benodigde_zijdes(id);
 
+      var positie_info = RUBIKSCUBE.functions.verkrijg_kubus_info(id);
+
+      function verkrijg_kleurcode(positie) {
+        var [x, y] = positie_info[positie];
+        return RUBIKSCUBE.rubiks_cube_state.faces[positie].elements[x - 1][y - 1];
+      }
+
       if(benodigde_zijdes.indexOf('back') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-1" class="zijde zijde-1" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-1" class="zijde zijde-1" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('back') + '-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('front') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-2" class="zijde zijde-2" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-2" class="zijde zijde-2" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('front') + '-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('up') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-3" class="zijde zijde-3" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-3" class="zijde zijde-3" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('up') + '-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('down') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-4" class="zijde zijde-4" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-4" class="zijde zijde-4" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('down') + '-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('right') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-5" class="zijde zijde-5" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-5" class="zijde zijde-5" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('right') + '-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('left') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-6" class="zijde zijde-6" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-6" class="zijde zijde-6" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('left') + '-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
       }
 
       return zijdes;
     },
 
     benodigde_zijdes: function(id) {
+
+      // Geef de benodigde zijdes terug als array.
+      return Object.keys(RUBIKSCUBE.functions.verkrijg_kubus_info(id));
+    },
+
+    verkrijg_kubus_info: function(id) {
+
+      // Hoop info.
       var ids = {
-        1: ['back', 'down', 'left'],
-        2: ['down', 'left'],
-        3: ['down', 'front', 'left'],
-        4: ['back', 'left'],
-        5: ['left'],
-        6: ['front', 'left'],
-        7: ['back', 'left', 'up'],
-        8: ['left', 'up'],
-        9: ['front', 'left', 'up'],
-        10: ['back', 'down'],
-        11: ['down'],
-        12: ['down', 'front'],
-        13: ['back'],
-        14: [],
-        15: ['front'],
-        16: ['back', 'up'],
-        17: ['up'],
-        18: ['front', 'up'],
-        19: ['back', 'down', 'right'],
-        20: ['down', 'right'],
-        21: ['front', 'right', 'down'],
-        22: ['back', 'right'],
-        23: ['right'],
-        24: ['front', 'right'],
-        25: ['right', 'up', 'back'],
-        26: ['right', 'up'],
-        27: ['front', 'right', 'up']
+        1: {
+          'back':  [3, 3],
+          'down':  [3, 1],
+          'left':  [3, 1]
+        },
+        2: {
+          'down':  [2, 1],
+          'left':  [3, 2]
+        },
+        3: {
+          'down':  [1, 1],
+          'front': [3, 1],
+          'left':  [3, 3]
+        },
+        4: {
+          'back':  [2, 3],
+          'left':  [2, 1]
+        },
+        5: {
+          'left':  [2, 2]
+        },
+        6: {
+          'front': [2, 1],
+          'left':  [2, 3]
+        },
+        7: {
+          'back':  [1, 3],
+          'left':  [1, 1],
+          'up':    [1, 1]
+        },
+        8: {
+          'left':  [1, 2],
+          'up':    [2, 1]
+        },
+        9: {
+          'front': [1, 1],
+          'left':  [1, 3],
+          'up':    [3, 1]
+        },
+        10: {
+          'back':  [3, 2],
+          'down':  [3, 2]
+        },
+        11: {
+          'down':  [2, 2]
+        },
+        12: {
+          'down':  [1, 2],
+          'front': [3, 2]
+        },
+        13: {
+          'back':  [2, 2]
+        },
+        14: {
+
+        },
+        15: {
+          'front': [2, 2]
+        },
+        16: {
+          'back':  [1, 2],
+          'up':    [1, 2]
+        },
+        17: {
+          'up':    [2, 2]
+        },
+        18: {
+          'front': [1, 2],
+          'up':    [3, 2]
+        },
+        19: {
+          'back':  [3, 2],
+          'down':  [3, 3],
+          'right': [3, 3]
+        },
+        20: {
+          'down':  [2, 3],
+          'right': [3, 2]
+        },
+        21: {
+          'front': [3, 3],
+          'right': [3, 1],
+          'down':  [1, 3]
+        },
+        22: {
+          'back':  [2, 1],
+          'right': [2, 3]
+        },
+        23: {
+          'right': [2, 2]
+        },
+        24: {
+          'front': [2, 3],
+          'right': [2, 1]
+        },
+        25: {
+          'right': [1, 3],
+          'up':    [1, 3],
+          'back':  [1, 1]
+        },
+        26: {
+          'right': [1, 2],
+          'up':    [2, 3]
+        },
+        27: {
+          'front': [1, 3],
+          'right': [1, 1],
+          'up':    [3, 3]
+        }
       };
 
+      // Geef de info voor de benodigde kubus.
       return ids[id];
     },
 
@@ -378,6 +476,16 @@ var RUBIKSCUBE = {
 
       // Geef de rotatie terug als een array.
       return RUBIKSCUBE.$rubiks_cube.attr('rotation');
+    },
+
+    // Update de rubik's cube.
+    update_rubiks_cube: function () {
+
+      // Verwijder de rubik's cube.
+      RUBIKSCUBE.$rubiks_cube.empty();
+
+      // Voeg hem weer toe. #SORRYFOUTJE
+      RUBIKSCUBE.functions.voeg_rubiks_cube_toe(3);
     }
   }
 };
