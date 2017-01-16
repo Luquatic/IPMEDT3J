@@ -6,6 +6,6 @@ $(document).ready(function() {
   $nieuw_venster.click(function () {
 
     // Open de A Frame pagina in een apart tabblad.
-    window.open('aframe_v2.html');
+    window.open('aframe.html');
   });
 });

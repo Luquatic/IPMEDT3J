@@ -1,31 +1,37 @@
 <!doctype html>
 <html class="no-js" lang="nl">
   <head>
+    <!-- Meta -->
     <meta charset="utf-8">
     <meta name="description" content="Het vak IPMEDT3 / Projectgroep J (Project Mediatechnologie 3) op Hogeschool Leiden">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jessey & CO. | Rubik's Cube - A Frame</title>
+
+    <!-- Titel -->
+    <title>Jessey &amp; CO. | Rubik's Cube - A Frame</title>
 
     <!-- Humans -->
     <link type="text/plain" rel="author" href="humans.txt" />
 
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <!-- build:css styles/vendor-aframe.css -->
+    <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/material-design-lite/material.min.css" />
     <link rel="stylesheet" href="/bower_components/material-design-icons/iconfont/material-icons.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:css styles/aframe-aframe.css -->
+    <!-- build:css styles/aframe.css -->
     <link rel="stylesheet" href="styles/aframe.css">
     <!-- endbuild -->
 
-    <!-- build:js scripts/vendor/modernizr-aframe.js -->
-    <script src="/bower_components/modernizr/modernizr.js"></script>
-    <script src="/bower_components/aframe/dist/aframe.min.js"></script>
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script type="text/javascript" src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor/aframe.js -->
+    <script type="text/javascript" src="/bower_components/aframe/dist/aframe.min.js"></script>
     <!-- endbuild -->
   </head>
 
@@ -35,58 +41,55 @@
     <![endif]-->
 
     <!-- VR SCENE -->
-    <a-scene>
+    <a-scene id="scene">
 
       <!-- CAMERA -->
       <a-camera look-controls="look-controls">
-        <a-cursor color="white">
-          <a-entity id="--:--:-x" class="getal" data-nummer="0" mixin="timer" text="text:0" position="0.27 1.4 -1"></a-entity>
-          <a-entity id="--:--:x-" class="getal" data-nummer="0" mixin="timer" text="text:0" position="0.17 1.4 -1"></a-entity>
-          <a-entity id="--:--x--" class="getal" data-nummer="0" mixin="timer" text="text::" position="0.12 1.4 -1"></a-entity>
-          <a-entity id="--:-x:--" class="getal" data-nummer="0" mixin="timer" text="text:0" position="0.02 1.4 -1"></a-entity>
-          <a-entity id="--:x-:--" class="getal" data-nummer="0" mixin="timer" text="text:0" position="-0.08 1.4 -1"></a-entity>
-          <a-entity id="--x--:--" class="getal" data-nummer="0" mixin="timer" text="text::" position="-0.13 1.4 -1"></a-entity>
-          <a-entity id="-x:--:--" class="getal" data-nummer="0" mixin="timer" text="text:0" position="-0.23 1.4 -1"></a-entity>
-          <a-entity id="x-:--:--" class="getal" data-nummer="0" mixin="timer" text="text:0" position="-0.33 1.4 -1"></a-entity>
-        </a-cursor>
+        <a-cursor color="black"></a-cursor>
       </a-camera>
 
       <!-- ASSETS -->
-      <a-assets>
-        <!--3D MODELS-->
-        <a-asset-item id="rubiks-cube-obj" src="models/rubiks_cube.obj"></a-asset-item>
-        <a-asset-item id="rubiks-cube-mtl" src="models/rubiks_cube.mtl"></a-asset-item>
-        <!--MIXINS-->
-        <a-mixin id="box" geometry="height:3;width:1.5" material="visible:false"></a-mixin>
-        <a-mixin id="timer" scale="0.2 0.2 0.2" blend-character-model="" material="color:white"></a-mixin>
-        <!--IMAGES-->
-        <img id="arrow" src="images/arrow.png">
-        <img id="sky" src="images/sky.jpg">
-        <img id="snow" src="images/snow.gif">
+      <a-assets id="assets">
+
+        <!-- 3D MODEL -->
+        <a-asset-item id="rubiks-cube-onderdeel-obj" src="models/rubiks_cube_onderdeel.obj"></a-asset-item>
+        <a-asset-item id="rubiks-cube-onderdeel-mtl" src="models/rubiks_cube_onderdeel.mtl"></a-asset-item>
+
+        <a-asset-item id="mountain-obj" src="models/mountain.obj"></a-asset-item>
+        <a-asset-item id="mountain-mtl" src="models/mountain.mtl"></a-asset-item>
+
+        <!-- IMAGES -->
+        <img id="image-pijl" src="images/arrow.png">
+
+        <!-- KLEUREN -->
+        <a-mixin id="mixin-kleur-FFFFFF" material="color: #FFFFFF"></a-mixin>
+        <a-mixin id="mixin-kleur-CCCCCC" material="color: #CCCCCC"></a-mixin>
+        <a-mixin id="mixin-kleur-000000" material="color: #000000"></a-mixin>
+
+        <!-- GEOMETRY-->
+        <a-mixin id="mixin-geometry-kleur" geometry="primitive:cylinder; height:0.1; radius:0.4;"></a-mixin>
+
+        <!-- ROTATION -->
+        <a-mixin id="mixin-rotation-90-0-0" rotation="90 0 0"></a-mixin>
+
+        <!-- KUBUS MIXIN -->
+        <a-mixin id="mixin-kubus" obj-model="obj: #rubiks-cube-onderdeel-obj; mtl: #rubiks-cube-onderdeel-mtl"></a-mixin>
       </a-assets>
 
-      <!-- OBJECTS -->
-      <a-obj-model id="rubiks-cube" src="#rubiks-cube-obj" mtl="#rubiks-cube-mtl" position="0 1 -8" rotation="0 0 0" visible="true"></a-obj-model>
+      <!-- RUBIKS CUBE -->
+      <a-entity id="rubiks-cube" rotation="0 0 0"></a-entity>
 
-      <!-- BOXES -->
-      <a-entity id="leftBox" position="-4 1 -8" mixin="box"></a-entity>
-      <a-entity id="upperBox" position="0 5 -8" mixin="box" rotation="0 0 90"></a-entity>
-      <a-entity id="rightBox" position="4 1 -8" mixin="box"></a-entity>
-      <a-entity id="bottomBox" position="0 -3 -8" mixin="box" rotation="0 0 90"></a-entity>
-      <a-entity position="0 1.28 -2.34" id="plane" geometry="primitive:plane;width:2;height:2;" material="shader:gif;src:#snow;opacity:.8;transparent:true;"></a-entity>
+      <!--MOUNTAIN-->
+      <a-obj-model src="#mountain-obj" mtl="#mountain-mtl" material="" obj-model="obj:#mountain-obj;mtl:#mountain-mtl" position="18.8 -13.99 -42.97" rotation="0 90 0" scale="2 2 2"></a-obj-model>
 
-      <!-- SKY -->
-      <a-sky src="#sky"></a-sky>
+      <!-- OPTIES -->
+      <a-entity id="opties" position="12.5 1.5 -12.5"></a-entity>
 
-      <!-- ARROWS -->
-      <a-image id="leftArrow" src="#arrow" position="-4 1 -8" material="opacity:0.7" geometry="primitive:plane"></a-image>
-      <a-image id="upperArrow" src="#arrow" position="0 5 -8" material="opacity:0.7" rotation="0 0 270"></a-image>
-      <a-image id="rightArrow" src="#arrow" position="4 1 -8" material="opacity:0.7" rotation="0 0 180"></a-image>
-      <a-image id="bottomArrow" src="#arrow" position="0 -3 -8" material="opacity:0.7" rotation="0 0 90"></a-image>
-
+      <!-- PIJLEN -->
+      <a-entity id="pijlen" position="0 1.6 -10"></a-entity>
     </a-scene>
 
-    <!-- build:js scripts/vendor-aframe.js -->
+    <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/modernizr/modernizr.js"></script>
@@ -94,14 +97,12 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js scripts/plugins-aframe.js -->
-    <script src="scripts/vendor/aframe-gif-shader.min.js"></script>
-    <script src="scripts/vendor/aframe-gif-component.min.js"></script>
-    <script src="scripts/vendor/aframe-text-component.min.js"></script>
+    <!-- build:js scripts/plugins.js -->
+    <script type="text/javascript" src="scripts/vendor/aframe-text-component.min.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js scripts/aframe-aframe.js -->
-    <script src="scripts/aframe.js"></script>
+    <!-- build:js scripts/aframe.js -->
+    <script type="text/javascript" src="scripts/aframe.js"></script>
     <!-- endbuild -->
   </body>
 </html>
