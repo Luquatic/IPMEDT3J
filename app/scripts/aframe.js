@@ -215,7 +215,10 @@ var RUBIKSCUBE = {
       // Verkrijg de benodigde zijdes als array.
       var benodigde_zijdes = RUBIKSCUBE.functions.benodigde_zijdes(id);
 
+      // Verkrijg de positie informatie.
       var positie_info = RUBIKSCUBE.functions.verkrijg_kubus_info(id);
+
+      var kleurcode = 0;
 
       function verkrijg_kleurcode(positie) {
         var [x, y] = positie_info[positie];
@@ -223,27 +226,33 @@ var RUBIKSCUBE = {
       }
 
       if(benodigde_zijdes.indexOf('back') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-1" class="zijde zijde-1" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('back') + '-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>';
+        kleurcode = verkrijg_kleurcode('back');
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('front') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-2" class="zijde zijde-2" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('front') + '-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>';
+        kleurcode = verkrijg_kleurcode('front');
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('up') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-3" class="zijde zijde-3" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('up') + '-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>';
+        kleurcode = verkrijg_kleurcode('up');
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('down') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-4" class="zijde zijde-4" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('down') + '-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>';
+        kleurcode = verkrijg_kleurcode('down');
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('right') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-5" class="zijde zijde-5" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('right') + '-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>';
+        kleurcode = verkrijg_kleurcode('right');
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('left') != -1) {
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-6" class="zijde zijde-6" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + verkrijg_kleurcode('left') + '-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+        kleurcode = verkrijg_kleurcode('left');
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
       }
 
       return zijdes;
@@ -397,16 +406,24 @@ var RUBIKSCUBE = {
       // Loop door alle zijdes heen
       for(var i = 1; i <= 6; i++) {
 
+        // Verkrijg de zijdes.
         var $zijdes = $('.zijde-' + i);
 
-        // Haal alle zijdes op.
-        var mixins = $zijdes.attr('mixin').split(' ');
+        // Loop door elke zijde heen.
+        $zijdes.each(function () {
 
-        // Wijzig de kleur mixin.
-        mixins[1] = 'kleuren-palet-' + id + '-kleur-' + i + '-mixin';
+          // Deze zijde als jQuery object.
+          var $zijde = $(this);
 
-        // Wijzig de mixin attributen
-        $zijdes.attr('mixin', mixins.join(' '));
+          // Haal alle zijdes op.
+          var mixins = $zijde.attr('mixin').split(' ');
+
+          // Wijzig de kleur mixin.
+          mixins[1] = 'kleuren-palet-' + id + '-kleur-' + i + '-mixin';
+
+          // Wijzig de mixin attributen
+          $zijde.attr('mixin', mixins.join(' '));
+        });
       }
     },
 
@@ -482,7 +499,7 @@ var RUBIKSCUBE = {
     update_rubiks_cube: function () {
 
       // Verwijder de rubik's cube.
-      RUBIKSCUBE.$rubiks_cube.empty();
+      RUBIKSCUBE.$rubiks_cube.html("");
 
       // Voeg hem weer toe. #SORRYFOUTJE
       RUBIKSCUBE.functions.voeg_rubiks_cube_toe(3);
