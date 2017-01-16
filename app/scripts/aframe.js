@@ -11,6 +11,9 @@ var KLEUREN = {
   // API url.
   api_url: 'http://www.colr.org/json/colors/random/',
 
+  // Het huidige kleuren palet.
+  huidig_palet: 1,
+
   // Initialize functie.
   init: function (aantal_paletten) {
 
@@ -168,6 +171,18 @@ var KLEUREN = {
         });
       });
     },
+
+    // Update het kleurenpalet.
+    update_kleurenpalet: function (id) {
+
+      // Update het huidig palet.
+      KLEUREN.huidig_palet = id;
+    },
+
+    // Verkrijg het kleurenpalet.
+    verkrijg_kleurenpalet: function () {
+      return KLEUREN.huidig_palet;
+    }
   }
 };
 
@@ -218,7 +233,9 @@ var RUBIKSCUBE = {
       // Verkrijg de positie informatie.
       var positie_info = RUBIKSCUBE.functions.verkrijg_kubus_info(id);
 
-      var kleurcode = 0;
+      // Placeholder voor de kleur code.
+      var kleurcode    = 0,
+          kleurenpalet = KLEUREN.functions.verkrijg_kleurenpalet();
 
       function verkrijg_kleurcode(positie) {
         var [x, y] = positie_info[positie];
@@ -227,32 +244,32 @@ var RUBIKSCUBE = {
 
       if(benodigde_zijdes.indexOf('back') != -1) {
         kleurcode = verkrijg_kleurcode('back');
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-' + kleurenpalet + '-kleur-' + kleurcode + '-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('front') != -1) {
         kleurcode = verkrijg_kleurcode('front');
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-' + kleurenpalet + '-kleur-' + kleurcode + '-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('up') != -1) {
         kleurcode = verkrijg_kleurcode('up');
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-' + kleurenpalet + '-kleur-' + kleurcode + '-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('down') != -1) {
         kleurcode = verkrijg_kleurcode('down');
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-' + kleurenpalet + '-kleur-' + kleurcode + '-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('right') != -1) {
         kleurcode = verkrijg_kleurcode('right');
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-' + kleurenpalet + '-kleur-' + kleurcode + '-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>';
       }
 
       if(benodigde_zijdes.indexOf('left') != -1) {
         kleurcode = verkrijg_kleurcode('left');
-        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-' + kleurcode + '-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-' + kleurcode + '" class="zijde zijde-' + kleurcode + '" mixin="mixin-kleur-FFFFFF kleuren-palet-' + kleurenpalet + '-kleur-' + kleurcode + '-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
       }
 
       return zijdes;
@@ -642,6 +659,9 @@ var OPTIES = {
 
           // Verander de kleur van de Rubik's Cube.
           RUBIKSCUBE.functions.set_kleuren(id);
+
+          // Update het kleuren palet.
+          KLEUREN.functions.update_kleurenpalet(id)
         });
       }
     },
