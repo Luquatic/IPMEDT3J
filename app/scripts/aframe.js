@@ -286,8 +286,8 @@ var RUBIKSCUBE = {
       // Hoop info.
       var ids = {
         1: {
-          'back':  [3, 3],
-          'down':  [3, 1],
+          'back':  [3, 1],
+          'down':  [1, 1],
           'left':  [3, 1]
         },
         2: {
@@ -295,12 +295,12 @@ var RUBIKSCUBE = {
           'left':  [3, 2]
         },
         3: {
-          'down':  [1, 1],
+          'down':  [3, 1],
           'front': [3, 1],
           'left':  [3, 3]
         },
         4: {
-          'back':  [2, 3],
+          'back':  [2, 1],
           'left':  [2, 1]
         },
         5: {
@@ -311,7 +311,7 @@ var RUBIKSCUBE = {
           'left':  [2, 3]
         },
         7: {
-          'back':  [1, 3],
+          'back':  [1, 1],
           'left':  [1, 1],
           'up':    [1, 1]
         },
@@ -326,13 +326,13 @@ var RUBIKSCUBE = {
         },
         10: {
           'back':  [3, 2],
-          'down':  [3, 2]
+          'down':  [1, 2]
         },
         11: {
           'down':  [2, 2]
         },
         12: {
-          'down':  [1, 2],
+          'down':  [3, 2],
           'front': [3, 2]
         },
         13: {
@@ -356,9 +356,9 @@ var RUBIKSCUBE = {
           'up':    [3, 2]
         },
         19: {
-          'back':  [3, 2],
-          'down':  [3, 3],
-          'right': [3, 3]
+          'back':  [3, 3],
+          'down':  [1, 3],
+          'right': [3, 1]
         },
         20: {
           'down':  [2, 3],
@@ -366,24 +366,24 @@ var RUBIKSCUBE = {
         },
         21: {
           'front': [3, 3],
-          'right': [3, 1],
-          'down':  [1, 3]
+          'right': [3, 3],
+          'down':  [3, 3]
         },
         22: {
-          'back':  [2, 1],
-          'right': [2, 3]
+          'back':  [2, 3],
+          'right': [2, 1]
         },
         23: {
           'right': [2, 2]
         },
         24: {
           'front': [2, 3],
-          'right': [2, 1]
+          'right': [2, 3]
         },
         25: {
-          'right': [1, 3],
+          'right': [1, 1],
           'up':    [1, 3],
-          'back':  [1, 1]
+          'back':  [1, 3]
         },
         26: {
           'right': [1, 2],
@@ -391,7 +391,7 @@ var RUBIKSCUBE = {
         },
         27: {
           'front': [1, 3],
-          'right': [1, 1],
+          'right': [1, 3],
           'up':    [3, 3]
         }
       };
@@ -520,6 +520,16 @@ var RUBIKSCUBE = {
 
       // Voeg hem weer toe. #SORRYFOUTJE
       RUBIKSCUBE.functions.voeg_rubiks_cube_toe(3);
+    },
+
+    // Draai de Rubik's Cube.
+    draai_rubiks_cube: function (zijde, aantal_draaien) {
+
+      // Draai de Rubik's Cube.
+      RUBIKSCUBE.rubiks_cube_state.move(zijde + aantal_draaien);
+
+      // Update de Rubik's Cube.
+      RUBIKSCUBE.functions.update_rubiks_cube();
     }
   }
 };
