@@ -1,6 +1,6 @@
-[submodule "app/scripts/vendor/cubejs"]
-	path = app/scripts/vendor/cubejs
-	url = https://github.com/akheron/cubejs.git
 [submodule "app/scripts/vendor/aframe-text-component"]
 	path = app/scripts/vendor/aframe-text-component
 	url = https://github.com/ngokevin/aframe-text-component.git
+[submodule "app/scripts/vendor/rubikscube-javascript"]
+	path = app/scripts/vendor/rubikscube-javascript
+	url = https://github.com/tdegrunt/rubikscube-javascript.git

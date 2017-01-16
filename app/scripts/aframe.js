@@ -180,7 +180,17 @@ var RUBIKSCUBE = {
   // De Rubik's Cube HTML tag.
   $rubiks_cube: $('#rubiks-cube'),
 
-  // Init function.
+  // Rubik's Cube state.
+  rubiks_cube_state: new Cube({
+    'back':  new Matrix([['w','w','w'], ['w','w','w'], ['w','w','w']]),
+    'right': new Matrix([['g','g','g'], ['g','g','g'], ['g','g','g']]),
+    'up':    new Matrix([['o','o','o'], ['o','o','o'], ['o','o','o']]),
+    'down':  new Matrix([['r','r','r'], ['r','r','r'], ['r','r','r']]),
+    'left':  new Matrix([['y','y','y'], ['y','y','y'], ['y','y','y']]),
+    'front': new Matrix([['b','b','b'], ['b','b','b'], ['b','b','b']])
+  }),
+
+// Init function.
   init: function (grid) {
 
     // Voeg de geometry toe.
@@ -191,6 +201,8 @@ var RUBIKSCUBE = {
 
     // Bepaal de positie van de Rubik's Cube.
     RUBIKSCUBE.functions.bepaal_positie(grid);
+
+    console.log(RUBIKSCUBE.rubiks_cube_state.faces);
   },
 
   // Functions
@@ -199,13 +211,70 @@ var RUBIKSCUBE = {
     // Verkijg de 6 zijdes.
     verkrijg_zijdes: function (id) {
 
-      // Maak de 6 zijdes als entities.
-      return '<a-entity id="kubus-' + id + '-zijde-1" class="zijde zijde-1" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-2" class="zijde zijde-2" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-3" class="zijde zijde-3" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-4" class="zijde zijde-4" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-5" class="zijde zijde-5" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>' +
-             '<a-entity id="kubus-' + id + '-zijde-6" class="zijde zijde-6" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+      // Alle zijdes placeholder.
+      var zijdes = '';
+
+      var benodigde_zijdes = RUBIKSCUBE.functions.benodigde_zijdes(id);
+
+      if(benodigde_zijdes.indexOf('back') != -1) {
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-1" class="zijde zijde-1" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-1-mixin geometry-1-mixin" position=" 0 1.6 -1"></a-entity>';
+      }
+
+      if(benodigde_zijdes.indexOf('front') != -1) {
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-2" class="zijde zijde-2" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-2-mixin geometry-1-mixin" position=" 0 1.6  1"></a-entity>';
+      }
+
+      if(benodigde_zijdes.indexOf('up') != -1) {
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-3" class="zijde zijde-3" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-3-mixin geometry-2-mixin" position=" 0 2.6  0"></a-entity>';
+      }
+
+      if(benodigde_zijdes.indexOf('down') != -1) {
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-4" class="zijde zijde-4" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-4-mixin geometry-2-mixin" position=" 0 0.6  0"></a-entity>';
+      }
+
+      if(benodigde_zijdes.indexOf('right') != -1) {
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-5" class="zijde zijde-5" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-5-mixin geometry-3-mixin" position=" 1 1.6  0"></a-entity>';
+      }
+
+      if(benodigde_zijdes.indexOf('left') != -1) {
+        zijdes += '<a-entity id="kubus-' + id + '-zijde-6" class="zijde zijde-6" mixin="mixin-kleur-FFFFFF kleuren-palet-1-kleur-6-mixin geometry-3-mixin" position="-1 1.6  0"></a-entity>';
+      }
+
+      return zijdes;
+    },
+
+    benodigde_zijdes: function(id) {
+      var ids = {
+        1: ['back', 'down', 'left'],
+        2: ['down', 'left'],
+        3: ['down', 'front', 'left'],
+        4: ['back', 'left'],
+        5: ['left'],
+        6: ['front', 'left'],
+        7: ['back', 'left', 'up'],
+        8: ['left', 'up'],
+        9: ['front', 'left', 'up'],
+        10: ['back', 'down'],
+        11: ['down'],
+        12: ['down', 'front'],
+        13: ['back'],
+        14: [],
+        15: ['front'],
+        16: ['back', 'up'],
+        17: ['up'],
+        18: ['front', 'up'],
+        19: ['back', 'down', 'right'],
+        20: ['down', 'right'],
+        21: ['front', 'right', 'down'],
+        22: ['back', 'right'],
+        23: ['right'],
+        24: ['front', 'right'],
+        25: ['right', 'up', 'back'],
+        26: ['right', 'up'],
+        27: ['front', 'right', 'up']
+      };
+
+      return ids[id];
     },
 
     // Verkijg de blender kubus.
@@ -335,14 +404,14 @@ var OPTIES = {
     // Voeg hovers toe aan de kleuren
     OPTIES.functions.set_kleuren_hover();
 
-    // Voeg de optie grid toe.
-    OPTIES.functions.voeg_optie_grid_toe();
-
-    // Voeg een aantal grid opties toe.
-    OPTIES.functions.voeg_grid_keuzes_toe(2, 3);
-
-    // Voeg de grid hover toe.
-    OPTIES.functions.set_grid_hover();
+    // // Voeg de optie grid toe.
+    // OPTIES.functions.voeg_optie_grid_toe();
+    //
+    // // Voeg een aantal grid opties toe.
+    // OPTIES.functions.voeg_grid_keuzes_toe(2, 3);
+    //
+    // // Voeg de grid hover toe.
+    // OPTIES.functions.set_grid_hover();
   },
 
   // Alle functies.
