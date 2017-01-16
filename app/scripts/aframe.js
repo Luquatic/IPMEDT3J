@@ -182,12 +182,12 @@ var RUBIKSCUBE = {
 
   // Rubik's Cube state.
   rubiks_cube_state: new Cube({
-    'back':  new Matrix([['w','w','w'], ['w','w','w'], ['w','w','w']]),
-    'right': new Matrix([['g','g','g'], ['g','g','g'], ['g','g','g']]),
-    'up':    new Matrix([['o','o','o'], ['o','o','o'], ['o','o','o']]),
-    'down':  new Matrix([['r','r','r'], ['r','r','r'], ['r','r','r']]),
-    'left':  new Matrix([['y','y','y'], ['y','y','y'], ['y','y','y']]),
-    'front': new Matrix([['b','b','b'], ['b','b','b'], ['b','b','b']])
+    'back':  new Matrix([['1','1','1'], ['1','1','1'], ['1','1','1']]),
+    'front': new Matrix([['2','2','2'], ['2','2','2'], ['2','2','2']]),
+    'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
+    'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
+    'right': new Matrix([['5','5','5'], ['5','5','5'], ['5','5','5']]),
+    'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
   }),
 
 // Init function.
@@ -201,8 +201,6 @@ var RUBIKSCUBE = {
 
     // Bepaal de positie van de Rubik's Cube.
     RUBIKSCUBE.functions.bepaal_positie(grid);
-
-    console.log(RUBIKSCUBE.rubiks_cube_state.faces);
   },
 
   // Functions
@@ -214,6 +212,7 @@ var RUBIKSCUBE = {
       // Alle zijdes placeholder.
       var zijdes = '';
 
+      // Verkrijg de benodigde zijdes als array.
       var benodigde_zijdes = RUBIKSCUBE.functions.benodigde_zijdes(id);
 
       if(benodigde_zijdes.indexOf('back') != -1) {
