@@ -527,8 +527,11 @@ var RUBIKSCUBE = {
     // Draai de Rubik's Cube.
     draai_rubiks_cube: function (zijde, aantal_draaien) {
 
+      // Maak de movement string.
+      var move = '' + zijde + aantal_draaien;
+
       // Draai de Rubik's Cube.
-      RUBIKSCUBE.rubiks_cube_state.move(zijde + aantal_draaien);
+      RUBIKSCUBE.rubiks_cube_state.move(move);
 
       // Update de Rubik's Cube.
       RUBIKSCUBE.functions.update_rubiks_cube();
@@ -863,6 +866,9 @@ var PIJLEN = {
 
     // Voeg een event listener toe aan de pijlen.
     PIJLEN.functions.roteer_pijl_hover();
+
+    // Voeg een event listener toe aan de Rubik's Cube pijlen.
+    PIJLEN.functions.rubiks_cube_pijlen_hover();
   },
 
   // De functions.
@@ -981,19 +987,50 @@ var PIJLEN = {
     verkrijg_rubiks_cube_pijlen: function () {
 
       // Geef de Rubik's Cube pijlen terug.
-      return '<a-image id="rubiks-cube-pijl-l-b" class="rubiks-cube-pijl" data-zijde="t" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position="-4.00  2.00 0" rotation="0 0   0"></a-image>' +
-             '<a-image id="rubiks-cube-pijl-r-b" class="rubiks-cube-pijl" data-zijde="t" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position=" 4.00  2.00 0" rotation="0 0 180"></a-image>' +
+      return '<a-image id="rubiks-cube-pijl-l-b" class="rubiks-cube-pijl" data-zijde="u" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position="-4.00  2.00 0" rotation="0 0   0"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-r-b" class="rubiks-cube-pijl" data-zijde="u" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position=" 4.00  2.00 0" rotation="0 0 180"></a-image>' +
              '<a-image id="rubiks-cube-pijl-l-o" class="rubiks-cube-pijl" data-zijde="d" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position="-4.00 -2.00 0" rotation="0 0   0"></a-image>' +
              '<a-image id="rubiks-cube-pijl-r-o" class="rubiks-cube-pijl" data-zijde="d" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position=" 4.00 -2.00 0" rotation="0 0 180"></a-image>' +
              '<a-image id="rubiks-cube-pijl-b-l" class="rubiks-cube-pijl" data-zijde="l" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position="-2.00  4.00 0" rotation="0 0 270"></a-image>' +
              '<a-image id="rubiks-cube-pijl-o-l" class="rubiks-cube-pijl" data-zijde="l" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position="-2.00 -4.00 0" rotation="0 0  90"></a-image>' +
-             '<a-image id="rubiks-cube-pijl-b-r" class="rubiks-cube-pijl" data-zijde="r" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position=" 2.00  4.00 0" rotation="0 0 270"></a-image>' +
-             '<a-image id="rubiks-cube-pijl-o-r" class="rubiks-cube-pijl" data-zijde="r" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position=" 2.00 -4.00 0" rotation="0 0  90"></a-image>';
+             '<a-image id="rubiks-cube-pijl-b-r" class="rubiks-cube-pijl" data-zijde="r" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position=" 2.00  4.00 0" rotation="0 0 270"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-o-r" class="rubiks-cube-pijl" data-zijde="r" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position=" 2.00 -4.00 0" rotation="0 0  90"></a-image>';
     },
 
     // Event listener voor de Rubik's Cube pijlen.
     rubiks_cube_pijlen_hover: function () {
 
+      // Verkrijg alle rubik's Cube pijlen.
+      var pijlen = document.getElementsByClassName('rubiks-cube-pijl');
+
+      // Ga door alle pijlen heen.
+      for (var i = 0; i < pijlen.length; i++) {
+
+        // De pijl.
+        var pijl = document.getElementsByClassName('rubiks-cube-pijl')[i];
+
+        // Voeg de event listener toe.
+        pijl.addEventListener('mouseenter', function () {
+
+          // Verkrijg de zijde en het aantal rotaties.
+          var zijde    = $(this).attr('data-zijde'),
+              rotaties = $(this).attr('data-rotaties');
+
+          // Draai de Rubik's Cube.
+          this.iid = setInterval(function () {
+
+            // Roteer de Rubik's Cube.
+            RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
+          }, 1000);
+        });
+
+        // Voeg aan de pijl een eventlistener toe.
+        pijl.addEventListener('mouseleave', function () {
+
+          // Stop de interval.
+          this.iid = clearInterval(this.iid);
+        });
+      }
     }
   }
 };
