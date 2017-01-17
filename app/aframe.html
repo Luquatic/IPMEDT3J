@@ -74,6 +74,9 @@
 
         <!-- KUBUS MIXIN -->
         <a-mixin id="mixin-kubus" obj-model="obj: #rubiks-cube-onderdeel-obj; mtl: #rubiks-cube-onderdeel-mtl"></a-mixin>
+
+        <!-- OPACITY -->
+        <a-mixin id="mixin-opacity-50" material="opacity: 0.5"></a-mixin>
       </a-assets>
 
       <!-- RUBIKS CUBE -->
@@ -87,6 +90,10 @@
 
       <!-- PIJLEN -->
       <a-entity id="pijlen" position="0 1.6 -10"></a-entity>
+
+      <!-- RUBIK'S CUBE PIJLEN -->
+      <a-entity id="rubiks-cube-pijlen" position="0 1.6 -12.5"></a-entity>
+
     </a-scene>
 
     <!-- build:js scripts/vendor.js -->

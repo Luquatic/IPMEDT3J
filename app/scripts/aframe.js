@@ -845,8 +845,11 @@ var PIJLEN = {
   // JQuery selectors.
   $: {
 
-    // Scene
-    pijlen: $('#pijlen')
+    // Pijlen
+    pijlen: $('#pijlen'),
+
+    // Rubiks Cube pijlen.
+    rubiks_cube_pijlen: $('#rubiks-cube-pijlen')
   },
 
   // Initialiseer de klasse.
@@ -854,6 +857,9 @@ var PIJLEN = {
 
     // Voeg de pijlen toe.
     PIJLEN.functions.voeg_roteer_pijlen_toe();
+
+    // Voeg de Rubik's Cube pijlen toe.
+    PIJLEN.functions.voeg_rubiks_cube_pijlen_toe();
 
     // Voeg een event listener toe aan de pijlen.
     PIJLEN.functions.roteer_pijl_hover();
@@ -871,7 +877,7 @@ var PIJLEN = {
       // Verkrijg de pijlen.
       pijlen.push(PIJLEN.functions.verkrijg_roteer_pijlen());
 
-      // Voeg de pijlen toe aan de array.
+      // Voeg de pijlen toe aan de scene.
       PIJLEN.$.pijlen.append(pijlen);
     },
 
@@ -879,10 +885,10 @@ var PIJLEN = {
     verkrijg_roteer_pijlen: function () {
 
       // Geef de pijlen terug.
-      return '<a-image id="pijl-y-as-links"   class="pijl" data-as-rotatie="y" data-met-de-klok-mee="0" src="#image-pijl" position="-5  0 0" material="opacity: 0.7" rotation="0 0   0"></a-image>' +
-             '<a-image id="pijl-x-as-beneden" class="pijl" data-as-rotatie="x" data-met-de-klok-mee="1" src="#image-pijl" position=" 0 -5 0" material="opacity: 0.7" rotation="0 0  90"></a-image>' +
-             '<a-image id="pijl-y-as-rechts"  class="pijl" data-as-rotatie="y" data-met-de-klok-mee="1" src="#image-pijl" position=" 5  0 0" material="opacity: 0.7" rotation="0 0 180"></a-image>' +
-             '<a-image id="pijl-x-as-boven"   class="pijl" data-as-rotatie="x" data-met-de-klok-mee="0" src="#image-pijl" position=" 0  5 0" material="opacity: 0.7" rotation="0 0 270"></a-image>';
+      return '<a-image id="pijl-y-as-links"   class="pijl" data-as-rotatie="y" data-met-de-klok-mee="0" src="#image-pijl" position="-5  0 0" mixin="mixin-opacity-50" rotation="0 0   0"></a-image>' +
+             '<a-image id="pijl-x-as-beneden" class="pijl" data-as-rotatie="x" data-met-de-klok-mee="1" src="#image-pijl" position=" 0 -5 0" mixin="mixin-opacity-50" rotation="0 0  90"></a-image>' +
+             '<a-image id="pijl-y-as-rechts"  class="pijl" data-as-rotatie="y" data-met-de-klok-mee="1" src="#image-pijl" position=" 5  0 0" mixin="mixin-opacity-50" rotation="0 0 180"></a-image>' +
+             '<a-image id="pijl-x-as-boven"   class="pijl" data-as-rotatie="x" data-met-de-klok-mee="0" src="#image-pijl" position=" 0  5 0" mixin="mixin-opacity-50" rotation="0 0 270"></a-image>';
     },
 
     // Event listener voor de pijlen.
@@ -956,6 +962,38 @@ var PIJLEN = {
 
       // Verander de Rubik's Cube van rotatie.
       RUBIKSCUBE.functions.roteer_rubiks_cube(x, y);
+    },
+
+    // Voeg de Rubik's Cube pijlen toe.
+    voeg_rubiks_cube_pijlen_toe: function () {
+
+      // De Rubik's Cube pijlen.
+      var pijlen = [];
+
+      // Verkrijg de Rubik's Cube pijlen.
+      pijlen.push(PIJLEN.functions.verkrijg_rubiks_cube_pijlen());
+
+      // Voeg de pijlen toe aan de scene.
+      PIJLEN.$.rubiks_cube_pijlen.append(pijlen);
+    },
+
+    // Verkrijg de Rubik's Cube pijlen.
+    verkrijg_rubiks_cube_pijlen: function () {
+
+      // Geef de Rubik's Cube pijlen terug.
+      return '<a-image id="rubiks-cube-pijl-l-b" class="rubiks-cube-pijl" data-zijde="t" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position="-4.00  2.00 0" rotation="0 0   0"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-r-b" class="rubiks-cube-pijl" data-zijde="t" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position=" 4.00  2.00 0" rotation="0 0 180"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-l-o" class="rubiks-cube-pijl" data-zijde="d" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position="-4.00 -2.00 0" rotation="0 0   0"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-r-o" class="rubiks-cube-pijl" data-zijde="d" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position=" 4.00 -2.00 0" rotation="0 0 180"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-b-l" class="rubiks-cube-pijl" data-zijde="l" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position="-2.00  4.00 0" rotation="0 0 270"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-o-l" class="rubiks-cube-pijl" data-zijde="l" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position="-2.00 -4.00 0" rotation="0 0  90"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-b-r" class="rubiks-cube-pijl" data-zijde="r" data-rotaties="3" src="#image-pijl" mixin="mixin-opacity-50" position=" 2.00  4.00 0" rotation="0 0 270"></a-image>' +
+             '<a-image id="rubiks-cube-pijl-o-r" class="rubiks-cube-pijl" data-zijde="r" data-rotaties="1" src="#image-pijl" mixin="mixin-opacity-50" position=" 2.00 -4.00 0" rotation="0 0  90"></a-image>';
+    },
+
+    // Event listener voor de Rubik's Cube pijlen.
+    rubiks_cube_pijlen_hover: function () {
+
     }
   }
 };
