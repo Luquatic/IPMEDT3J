@@ -275,12 +275,14 @@ var RUBIKSCUBE = {
       return zijdes;
     },
 
+    // Verkrijg de benodigde zijdes.
     benodigde_zijdes: function(id) {
 
       // Geef de benodigde zijdes terug als array.
       return Object.keys(RUBIKSCUBE.functions.verkrijg_kubus_info(id));
     },
 
+    // Verkrijg de kubus info.
     verkrijg_kubus_info: function(id) {
 
       // Hoop info.
@@ -851,30 +853,30 @@ var PIJLEN = {
   init: function () {
 
     // Voeg de pijlen toe.
-    PIJLEN.functions.voeg_pijlen_toe();
+    PIJLEN.functions.voeg_roteer_pijlen_toe();
 
     // Voeg een event listener toe aan de pijlen.
-    PIJLEN.functions.pijl_hover();
+    PIJLEN.functions.roteer_pijl_hover();
   },
 
   // De functions.
   functions: {
 
     // Voeg de pijlen toe aan de scene.
-    voeg_pijlen_toe: function () {
+    voeg_roteer_pijlen_toe: function () {
 
       // Pijlen array
       var pijlen = [];
 
       // Verkrijg de pijlen.
-      pijlen.push(PIJLEN.functions.verkrijg_pijlen());
+      pijlen.push(PIJLEN.functions.verkrijg_roteer_pijlen());
 
       // Voeg de pijlen toe aan de array.
       PIJLEN.$.pijlen.append(pijlen);
     },
 
     // Verkrijg de pijlen om de scene te draaien.
-    verkrijg_pijlen: function () {
+    verkrijg_roteer_pijlen: function () {
 
       // Geef de pijlen terug.
       return '<a-image id="pijl-y-as-links"   class="pijl" data-as-rotatie="y" data-met-de-klok-mee="0" src="#image-pijl" position="-5  0 0" material="opacity: 0.7" rotation="0 0   0"></a-image>' +
@@ -884,7 +886,7 @@ var PIJLEN = {
     },
 
     // Event listener voor de pijlen.
-    pijl_hover: function () {
+    roteer_pijl_hover: function () {
 
       // Verkrijg alle pijlen.
       var pijlen = document.getElementsByClassName('pijl');
