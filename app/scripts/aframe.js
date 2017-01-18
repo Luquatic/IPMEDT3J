@@ -895,6 +895,9 @@ var OPTIES = {
         // Verander de kleuren.
         $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
         $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
+
+        // Handel de bestelling af.
+        OPTIES.functions.handel_bestelling_af();
       });
 
       // Voeg een event listener toe.
@@ -904,6 +907,11 @@ var OPTIES = {
         $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-000000');
         $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-FFFFFF');
       });
+    },
+
+    // Handel de bestelling af.
+    handel_bestelling_af: function () {
+      // TODO handel de bestelling af.
     }
   }
 };
