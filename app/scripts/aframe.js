@@ -936,6 +936,9 @@ var PIJLEN = {
         // Voeg aan de pijl een eventlistener toe.
         pijl.addEventListener('mouseenter', function () {
 
+          // Start de timer.
+          TIMER.functions.start();
+
           // Verkijg de as en de rotatie.
           var as              = $(this).attr('data-as-rotatie'),
               met_de_klok_mee = $(this).attr('data-met-de-klok-mee');
@@ -1035,6 +1038,9 @@ var PIJLEN = {
 
         // Voeg de event listener toe.
         pijl.addEventListener('mouseenter', function () {
+
+          // Start de timer.
+          TIMER.functions.start();
 
           // Verkrijg de zijde en het aantal rotaties.
           var zijde    = $(this).attr('data-zijde'),
