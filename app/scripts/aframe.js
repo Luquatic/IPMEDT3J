@@ -1012,7 +1012,7 @@ var PIJLEN = {
       var huidige_rotatie = RUBIKSCUBE.functions.verkrijg_rotatie_rubiks_cube(),
           x               = huidige_rotatie.x,
           y               = huidige_rotatie.y,
-          teller          = 90;
+          teller          = 360;
 
       // Controleer of het met de klok mee moet.
       if(met_de_klok_mee == 0) {
@@ -1036,7 +1036,8 @@ var PIJLEN = {
       }
 
       // Verander de Rubik's Cube van rotatie.
-      RUBIKSCUBE.functions.roteer_rubiks_cube(x, y);
+      $('#rotate_animation').remove();
+      RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="3000" to="' + x + ' ' + y + ' 0"></a-animation>');
     },
 
     // Voeg de Rubik's Cube pijlen toe.
