@@ -970,7 +970,9 @@ var PIJLEN = {
           if(PIJLEN.interval != null)
           {
             // Stop de interval.
-            PIJLEN.interval = clearInterval(PIJLEN.interval);
+            clearInterval(PIJLEN.interval);
+
+            // Zet de interval naar null.
             PIJLEN.interval = null;
           }
         });
@@ -1081,7 +1083,9 @@ var PIJLEN = {
           if(PIJLEN.interval != null)
           {
             // Stop de interval.
-            PIJLEN.interval = clearInterval(PIJLEN.interval);
+            clearInterval(PIJLEN.interval);
+
+            // Zet de interval naar null.
             PIJLEN.interval = null;
           }
         });
