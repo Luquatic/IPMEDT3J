@@ -196,13 +196,23 @@ var RUBIKSCUBE = {
   $rubiks_cube: $('#rubiks-cube'),
 
   // Rubik's Cube state.
+  // rubiks_cube_state: new Cube({
+  //   'back':  new Matrix([['1','1','1'], ['1','1','1'], ['1','1','1']]),
+  //   'front': new Matrix([['2','2','2'], ['2','2','2'], ['2','2','2']]),
+  //   'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
+  //   'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
+  //   'right': new Matrix([['5','5','5'], ['5','5','5'], ['5','5','5']]),
+  //   'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
+  // }),
+
+  // Rubik's Cube state.
   rubiks_cube_state: new Cube({
-    'back':  new Matrix([['1','1','1'], ['1','1','1'], ['1','1','1']]),
-    'front': new Matrix([['2','2','2'], ['2','2','2'], ['2','2','2']]),
+    'back':  new Matrix([['5','5','5'], ['1','1','1'], ['1','1','1']]),
+    'front': new Matrix([['6','6','6'], ['2','2','2'], ['2','2','2']]),
     'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
     'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
-    'right': new Matrix([['5','5','5'], ['5','5','5'], ['5','5','5']]),
-    'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
+    'right': new Matrix([['2','2','2'], ['5','5','5'], ['5','5','5']]),
+    'left':  new Matrix([['1','1','1'], ['6','6','6'], ['6','6','6']]),
   }),
 
 // Init function.
@@ -911,9 +921,6 @@ var PIJLEN = {
     rubiks_cube_pijlen: $('#rubiks-cube-pijlen')
   },
 
-  // Interval
-  interval: null,
-
   // Initialiseer de klasse.
   init: function () {
 
@@ -971,45 +978,21 @@ var PIJLEN = {
         // Voeg aan de pijl een eventlistener toe.
         pijl.addEventListener('mouseenter', function () {
 
-          // Controleer interval.
-          if(PIJLEN.interval == null)
-          {
-            // Start de timer.
-            TIMER.functions.start();
+          // Verkijg de as en de rotatie.
+          var as              = $(this).attr('data-as-rotatie'),
+              met_de_klok_mee = $(this).attr('data-met-de-klok-mee');
 
-            // Verkijg de as en de rotatie.
-            var as              = $(this).attr('data-as-rotatie'),
-                met_de_klok_mee = $(this).attr('data-met-de-klok-mee');
+          // Laat de Rubik's Cube roteren met een interval.
+          setTimeout(function () {
 
-            // Laat de Rubik's Cube roteren met een interval.
-            PIJLEN.interval = setInterval(function () {
+            // Laat de Rubik's Cube draaien.
+            PIJLEN.functions.doe_rubiks_cube_draaien(as, met_de_klok_mee);
 
-              // Laat de Rubik's Cube draaien.
-              PIJLEN.functions.doe_rubiks_cube_draaien(as, met_de_klok_mee);
+            // Speel het draai geluid af.
+            GELUID.functions.speel_roteer_geluid();
 
-              // Speel het draai geluid af.
-              GELUID.functions.speel_roteer_geluid();
-
-              // Controleer voor de oplossing.
-              PIJLEN.functions.controleer_voor_oplossing();
-
-            // Per seconden.
-            }, 1000);
-          }
-        });
-
-        // Voeg aan de pijl een eventlistener toe.
-        pijl.addEventListener('mouseleave', function () {
-
-          // Controleer interval.
-          if(PIJLEN.interval != null)
-          {
-            // Stop de interval.
-            clearInterval(PIJLEN.interval);
-
-            // Zet de interval naar null.
-            PIJLEN.interval = null;
-          }
+          // Per seconden.
+          }, 1000);
         });
       }
     },
@@ -1090,42 +1073,24 @@ var PIJLEN = {
         // Voeg de event listener toe.
         pijl.addEventListener('mouseenter', function () {
 
-          // Controleer interval.
-          if(PIJLEN.interval == null)
-          {
-            // Start de timer.
-            TIMER.functions.start();
+          // Start de timer.
+          TIMER.functions.start();
 
-            // Verkrijg de zijde en het aantal rotaties.
-            var zijde    = $(this).attr('data-zijde'),
-                rotaties = $(this).attr('data-rotaties');
+          // Verkrijg de zijde en het aantal rotaties.
+          var zijde    = $(this).attr('data-zijde'),
+              rotaties = $(this).attr('data-rotaties');
 
-            // Draai de Rubik's Cube.
-            PIJLEN.interval = setInterval(function () {
+          // Draai de Rubik's Cube.
+          setTimeout(function () {
 
-              // Roteer de Rubik's Cube.
-              RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
+            // Roteer de Rubik's Cube.
+            RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
 
-              // Controleer voor de oplossing.
-              PIJLEN.functions.controleer_voor_oplossing();
+            // Controleer voor de oplossing.
+            PIJLEN.functions.controleer_voor_oplossing();
 
-            // Voor 1 seconden.
-            }, 1000);
-          }
-        });
-
-        // Voeg aan de pijl een eventlistener toe.
-        pijl.addEventListener('mouseleave', function () {
-
-          // Controleer interval.
-          if(PIJLEN.interval != null)
-          {
-            // Stop de interval.
-            clearInterval(PIJLEN.interval);
-
-            // Zet de interval naar null.
-            PIJLEN.interval = null;
-          }
+          // Voor 1 seconden.
+          }, 1000);
         });
       }
     },
