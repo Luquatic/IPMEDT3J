@@ -1104,8 +1104,12 @@ var PIJLEN = {
         // Stop de timer.
         TIMER.functions.stop();
 
-        // Voeg de bestelknop toe.
-        OPTIES.functions.voeg_bestelknop_toe();
+        // Controleer of de bestelknop al toegevoegd is.
+        if(!$('#optie-bestelknop-achtergrond').length)
+        {
+          // Voeg de bestelknop toe.
+          OPTIES.functions.voeg_bestelknop_toe();
+        }
       }
     }
   }
