@@ -513,17 +513,20 @@ var RUBIKSCUBE = {
     // Roteer de Rubik's Cube.
     roteer_rubiks_cube: function (x, y) {
 
+      var milliseconden = 3000;
+
       // Controleer of de animatie niet bestaat.
       if(!$('#rotate_animation').length) {
 
         // Verander de rotatie van de rubik's cube.
-        RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="3000" to="' + x + ' ' + y + ' 0"></a-animation>');
+        RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="' + milliseconden + '" to="' + x + ' ' + y + ' 0"></a-animation>');
 
+        // Start een timeout.
         setTimeout(function () {
 
           // Verwijder de oude animatie.
           $('#rotate_animation').remove();
-        }, 3000);
+        }, milliseconden);
       }
     },
 
