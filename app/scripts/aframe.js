@@ -535,6 +535,30 @@ var RUBIKSCUBE = {
 
       // Update de Rubik's Cube.
       RUBIKSCUBE.functions.update_rubiks_cube();
+    },
+
+    // Is de Rubik's Cube opgelost
+    is_opgelost: function () {
+
+      // Alle zijdes als variabele.
+      var back  = RUBIKSCUBE.functions.is_zijde_opgelost('back'),
+          front = RUBIKSCUBE.functions.is_zijde_opgelost('front'),
+          up    = RUBIKSCUBE.functions.is_zijde_opgelost('up'),
+          down  = RUBIKSCUBE.functions.is_zijde_opgelost('down'),
+          right = RUBIKSCUBE.functions.is_zijde_opgelost('right'),
+          left  = RUBIKSCUBE.functions.is_zijde_opgelost('left');
+
+      // Geef terug of alle zijdes opgelost zijn.
+      return _.every([back, front, up, down, right, left], function(zijde) { return zijde; });
+    },
+
+    // Controleer of de opgegeven zijde is opgelost.
+    is_zijde_opgelost: function (zijde) {
+      if(_.uniq(_.flatten(_.map(RUBIKSCUBE.rubiks_cube_state.faces[zijde].elements, _.values))).length == 1) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };
@@ -1021,6 +1045,8 @@ var PIJLEN = {
 
             // Roteer de Rubik's Cube.
             RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
+
+            console.log(RUBIKSCUBE.functions.is_opgelost());
           }, 1000);
         });
 
