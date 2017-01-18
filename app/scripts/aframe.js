@@ -879,6 +879,9 @@ var PIJLEN = {
     rubiks_cube_pijlen: $('#rubiks-cube-pijlen')
   },
 
+  // Interval
+  interval: null,
+
   // Initialiseer de klasse.
   init: function () {
 
@@ -936,29 +939,38 @@ var PIJLEN = {
         // Voeg aan de pijl een eventlistener toe.
         pijl.addEventListener('mouseenter', function () {
 
-          // Start de timer.
-          TIMER.functions.start();
+          // Controleer interval.
+          if(PIJLEN.interval == null)
+          {
+            // Start de timer.
+            TIMER.functions.start();
 
-          // Verkijg de as en de rotatie.
-          var as              = $(this).attr('data-as-rotatie'),
-              met_de_klok_mee = $(this).attr('data-met-de-klok-mee');
+            // Verkijg de as en de rotatie.
+            var as              = $(this).attr('data-as-rotatie'),
+                met_de_klok_mee = $(this).attr('data-met-de-klok-mee');
 
-          // Laat de Rubik's Cube roteren met een interval.
-          this.iid = setInterval(function () {
+            // Laat de Rubik's Cube roteren met een interval.
+            PIJLEN.interval = setInterval(function () {
 
-            // Laat de Rubik's Cube draaien.
-            PIJLEN.functions.doe_rubiks_cube_draaien(as, met_de_klok_mee);
+              // Laat de Rubik's Cube draaien.
+              PIJLEN.functions.doe_rubiks_cube_draaien(as, met_de_klok_mee);
 
-            // Speel het draai geluid af.
-            GELUID.functions.speel_roteer_geluid();
-          }, 250);
+              // Speel het draai geluid af.
+              GELUID.functions.speel_roteer_geluid();
+            }, 250);
+          }
         });
 
         // Voeg aan de pijl een eventlistener toe.
         pijl.addEventListener('mouseleave', function () {
 
-          // Stop de interval.
-          this.iid = clearInterval(this.iid);
+          // Controleer interval.
+          if(PIJLEN.interval != null)
+          {
+            // Stop de interval.
+            PIJLEN.interval = clearInterval(PIJLEN.interval);
+            PIJLEN.interval = null;
+          }
         });
       }
     },
@@ -1039,28 +1051,37 @@ var PIJLEN = {
         // Voeg de event listener toe.
         pijl.addEventListener('mouseenter', function () {
 
-          // Start de timer.
-          TIMER.functions.start();
+          // Controleer interval.
+          if(PIJLEN.interval == null)
+          {
+            // Start de timer.
+            TIMER.functions.start();
 
-          // Verkrijg de zijde en het aantal rotaties.
-          var zijde    = $(this).attr('data-zijde'),
-              rotaties = $(this).attr('data-rotaties');
+            // Verkrijg de zijde en het aantal rotaties.
+            var zijde    = $(this).attr('data-zijde'),
+                rotaties = $(this).attr('data-rotaties');
 
-          // Draai de Rubik's Cube.
-          this.iid = setInterval(function () {
+            // Draai de Rubik's Cube.
+            PIJLEN.interval = setInterval(function () {
 
-            // Roteer de Rubik's Cube.
-            RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
+              // Roteer de Rubik's Cube.
+              RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
 
-            console.log(RUBIKSCUBE.functions.is_opgelost());
-          }, 1000);
+            // Voor 1 seconden.
+            }, 1000);
+          }
         });
 
         // Voeg aan de pijl een eventlistener toe.
         pijl.addEventListener('mouseleave', function () {
 
-          // Stop de interval.
-          this.iid = clearInterval(this.iid);
+          // Controleer interval.
+          if(PIJLEN.interval != null)
+          {
+            // Stop de interval.
+            PIJLEN.interval = clearInterval(PIJLEN.interval);
+            PIJLEN.interval = null;
+          }
         });
       }
     }
