@@ -957,7 +957,9 @@ var PIJLEN = {
 
               // Speel het draai geluid af.
               GELUID.functions.speel_roteer_geluid();
-            }, 250);
+
+            // Per seconden.
+            }, 1000);
           }
         });
 
@@ -982,7 +984,7 @@ var PIJLEN = {
       var huidige_rotatie = RUBIKSCUBE.functions.verkrijg_rotatie_rubiks_cube(),
           x               = huidige_rotatie.x,
           y               = huidige_rotatie.y,
-          teller          = 10;
+          teller          = 90;
 
       // Controleer of het met de klok mee moet.
       if(met_de_klok_mee == 0) {
