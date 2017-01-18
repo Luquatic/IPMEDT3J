@@ -1095,6 +1095,82 @@ var GELUID = {
 // Timer klasse.
 var TIMER = {
 
+  // jQuery
+  $: {
+
+    // De timer.
+    timer: $('#timer')
+  },
+
+  // De stopwatch
+  timer: new Stopwatch(),
+
+  // Placeholder interval.
+  interval: null,
+
+  // Init function.
+  init: function() {
+
+  },
+
+  // Alle functions.
+  functions: {
+
+    // Start de timer.
+    start: function () {
+
+      // Start de timer.
+      TIMER.timer.start();
+
+      // Start de interval.
+      TIMER.functions.start_interval();
+    },
+
+    // Stop de timer.
+    stop: function () {
+
+      // Stop de timer.
+      TIMER.timer.stop();
+
+      // Stop de interval.
+      TIMER.functions.stop_interval();
+    },
+
+    // Verkijg de miniseconden.
+    verkrijg_milliseconden: function () {
+
+      // Verkrijg de verstreken tijd.
+      return TIMER.timer.getElapsed();
+    },
+
+    // Start de interval.
+    start_interval: function () {
+
+      // Start de interval.
+      TIMER.interval = setInterval(function () {
+
+        // Update de timer.
+        TIMER.functions.update_timer();
+      }, 1);
+    },
+
+    // Stop de interval.
+    stop_interval: function () {
+
+      // Stop de interval.
+      TIMER.interval = clearInterval(TIMER.interval);
+    },
+
+    // Update de timer.
+    update_timer: function () {
+
+      // Verkrijg de milliseconden.
+      var milliseconden = TIMER.functions.verkrijg_milliseconden();
+
+      // Update de timer.
+      TIMER.$.timer.attr('text', 'text:' + moment(milliseconden).format('mm:ss:SSS'));
+    }
+  }
 };
 
 // Wacht totdat het document geladen is.
@@ -1115,4 +1191,7 @@ $(document).ready(function() {
 
   // Initialiseer de pijlen.
   PIJLEN.init();
+
+  // Initialiseer de timer.
+  TIMER.init();
 });
