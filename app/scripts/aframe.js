@@ -592,6 +592,9 @@ var OPTIES = {
     //
     // // Voeg de grid hover toe.
     // OPTIES.functions.set_grid_hover();
+
+    // TODO
+    OPTIES.functions.voeg_bestelknop_toe();
   },
 
   // Alle functies.
@@ -861,8 +864,40 @@ var OPTIES = {
 
     // Voeg een bestelknop toe.
     voeg_bestelknop_toe: function () {
-      // TODO: nog te implementeren.
+
+      // Voeg bestelknop toe.
+      OPTIES.$opties.append(
+        '<a-entity id="optie-bestelknop-achtergrond" class="optie-bestelknop-achtergrond" mixin="mixin-kleur-000000" position="0 -4 0.1" geometry="depth:0.1; height:1.2; width:6.5;" >' +
+          '<a-entity id="optie-bestelknop-tekst" text="text: BESTELLEN" mixin="mixin-kleur-FFFFFF" position="-1.7 -0.2 0.05"></a-entity>' +
+        '</a-entity>'
+      );
+
+      // Voeg de event listener toe.
+      OPTIES.functions.bestelknop_hover();
     },
+
+    // Voeg een hover toe aan de bestelknop.
+    bestelknop_hover: function () {
+
+      // De knop.
+      var knop = document.getElementById('optie-bestelknop-achtergrond');
+
+      // Voeg een event listener toe.
+      knop.addEventListener('mouseenter', function () {
+
+        // Verander de kleuren.
+        $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
+        $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
+      });
+
+      // Voeg een event listener toe.
+      knop.addEventListener('mouseleave', function () {
+
+        // Verander de kleuren.
+        $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-000000');
+        $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-FFFFFF');
+      });
+    }
   }
 };
 
