@@ -1119,21 +1119,29 @@ var TIMER = {
     // Start de timer.
     start: function () {
 
-      // Start de timer.
-      TIMER.timer.start();
+      // Controleer of de interval nog niet bestaat.
+      if (TIMER.interval == null)
+      {
+        // Start de timer.
+        TIMER.timer.start();
 
-      // Start de interval.
-      TIMER.functions.start_interval();
+        // Start de interval.
+        TIMER.functions.start_interval();
+      }
     },
 
     // Stop de timer.
     stop: function () {
 
-      // Stop de timer.
-      TIMER.timer.stop();
+      // Controleer of de interval bestaat.
+      if (TIMER.interval != null)
+      {
+        // Stop de timer.
+        TIMER.timer.stop();
 
-      // Stop de interval.
-      TIMER.functions.stop_interval();
+        // Stop de interval.
+        TIMER.functions.stop_interval();
+      }
     },
 
     // Verkijg de miniseconden.
@@ -1159,6 +1167,9 @@ var TIMER = {
 
       // Stop de interval.
       TIMER.interval = clearInterval(TIMER.interval);
+
+      // Zet het attribuut weer naar null.
+      TIMER.interval = null;
     },
 
     // Update de timer.
