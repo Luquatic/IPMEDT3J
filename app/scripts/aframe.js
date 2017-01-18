@@ -513,18 +513,18 @@ var RUBIKSCUBE = {
     // Roteer de Rubik's Cube.
     roteer_rubiks_cube: function (x, y) {
 
-      // De animatie.
-      var $animation = $('#rotate_animation');
+      // Controleer of de animatie niet bestaat.
+      if(!$('#rotate_animation').length) {
 
-      // Controleer of de animatie bestaat.
-      if(!$animation.length) {
+        // Verander de rotatie van de rubik's cube.
+        RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="3000" to="' + x + ' ' + y + ' 0"></a-animation>');
 
-        // Verwijder de oude animatie.
-        $animation.remove();
+        setTimeout(function () {
+
+          // Verwijder de oude animatie.
+          $('#rotate_animation').remove();
+        }, 3000);
       }
-
-      // Verander de rotatie van de rubik's cube.
-      RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="3000" to="' + x + ' ' + y + ' 0"></a-animation>');
     },
 
     // Verkijg de rotatie van de Rubik's Cube.
