@@ -592,9 +592,6 @@ var OPTIES = {
     //
     // // Voeg de grid hover toe.
     // OPTIES.functions.set_grid_hover();
-
-    // TODO
-    OPTIES.functions.voeg_bestelknop_toe();
   },
 
   // Alle functies.
@@ -993,6 +990,9 @@ var PIJLEN = {
               // Speel het draai geluid af.
               GELUID.functions.speel_roteer_geluid();
 
+              // Controleer voor de oplossing.
+              PIJLEN.functions.controleer_voor_oplossing();
+
             // Per seconden.
             }, 1000);
           }
@@ -1106,6 +1106,9 @@ var PIJLEN = {
               // Roteer de Rubik's Cube.
               RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
 
+              // Controleer voor de oplossing.
+              PIJLEN.functions.controleer_voor_oplossing();
+
             // Voor 1 seconden.
             }, 1000);
           }
@@ -1124,6 +1127,20 @@ var PIJLEN = {
             PIJLEN.interval = null;
           }
         });
+      }
+    },
+
+    // Controleer of de Rubik's Cube opgelost is.
+    controleer_voor_oplossing: function () {
+
+      // Als de Rubik's Cube opgelost is.
+      if(RUBIKSCUBE.functions.is_opgelost()) {
+
+        // Stop de timer.
+        TIMER.functions.stop();
+
+        // Voeg de bestelknop toe.
+        OPTIES.functions.voeg_bestelknop_toe();
       }
     }
   }
