@@ -592,6 +592,9 @@ var OPTIES = {
   // De scene als Jquery object.
   $opties: $('#opties'),
 
+  // De geselecteerde kleur.
+  kleur_id: 1,
+
   // Init functie.
   init: function (aantal_paletten) {
 
@@ -716,17 +719,24 @@ var OPTIES = {
           // ID.
           var id = $(this).attr('data-kleuren-palet-id');
 
-          // Speel het optie geluid af.
-          GELUID.functions.speel_optie_geluid();
+          // Controleer voor verandering.
+          if(id != OPTIES.kleur_id)
+          {
+            // Update het id.
+            OPTIES.kleur_id = id;
 
-          // Zorg dat de kleuren veranderen van de achtergrond.
-          OPTIES.functions.set_kleuren_achtergrond(id);
+            // Speel het optie geluid af.
+            GELUID.functions.speel_optie_geluid();
 
-          // Verander de kleur van de Rubik's Cube.
-          RUBIKSCUBE.functions.set_kleuren(id);
+            // Zorg dat de kleuren veranderen van de achtergrond.
+            OPTIES.functions.set_kleuren_achtergrond(id);
 
-          // Update het kleuren palet.
-          KLEUREN.functions.update_kleurenpalet(id)
+            // Verander de kleur van de Rubik's Cube.
+            RUBIKSCUBE.functions.set_kleuren(id);
+
+            // Update het kleuren palet.
+            KLEUREN.functions.update_kleurenpalet(id)
+          }
         });
       }
     },
@@ -756,11 +766,6 @@ var OPTIES = {
           $(achtergrond).attr('mixin', 'mixin-kleur-FFFFFF');
         }
       }
-    },
-
-    // Speel het optie geluid af.
-    speel_optie_geluid_af: function () {
-      // TODO: nog te implementeren.
     },
 
     // Voeg de optie voor de kleuren paletten toe.
