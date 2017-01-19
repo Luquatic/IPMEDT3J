@@ -47,7 +47,7 @@ var KLEUREN = {
 
               // Sla het index nummer van het palet en de kleur op.
               var palet_code = kleuren_paletten.indexOf(kleuren_paletten[x]) + 1,
-                kleur_code = kleuren_paletten[x].indexOf(kleuren_paletten[x][y]) + 1;
+                  kleur_code = kleuren_paletten[x].indexOf(kleuren_paletten[x][y]) + 1;
 
               // Voeg de kleur toe.
               kleuren_mixins.push('<a-mixin id="kleuren-palet-' + palet_code + '-kleur-' + kleur_code + '-mixin" material="color: ' + kleuren_paletten[x][y] + '"></a-mixin>');
