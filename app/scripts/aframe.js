@@ -716,6 +716,9 @@ var OPTIES = {
           // ID.
           var id = $(this).attr('data-kleuren-palet-id');
 
+          // Speel het optie geluid af.
+          GELUID.functions.speel_optie_geluid();
+
           // Zorg dat de kleuren veranderen van de achtergrond.
           OPTIES.functions.set_kleuren_achtergrond(id);
 
@@ -1104,6 +1107,9 @@ var PIJLEN = {
           // Draai de Rubik's Cube.
           setTimeout(function () {
 
+            // Speel het zet geluid af.
+            GELUID.functions.speel_zet_geluid();
+
             // Roteer de Rubik's Cube.
             RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
 
@@ -1142,8 +1148,11 @@ var GELUID = {
   // Roteer geluid.
   roteer_geluid: new Audio('../sounds/drag.mp3'),
 
-  // TODO: optie geluid.
-  optie_geluid: new Audio('../sounds/drag.mp3'),
+  // Optie geluid
+  optie_geluid: new Audio('../sounds/select.mp3'),
+
+  // Zet geluid
+  zet_geluid: new Audio('../sounds/move.mp3'),
 
   // Init functie.
   init: function () {},
@@ -1163,6 +1172,13 @@ var GELUID = {
 
       // Speel het optie geluid af.
       GELUID.optie_geluid.play();
+    },
+
+    // Speel het zet geluid af.
+    speel_zet_geluid: function () {
+
+      // Speel het zet geluid af.
+      GELUID.zet_geluid.play();
     }
   }
 };
