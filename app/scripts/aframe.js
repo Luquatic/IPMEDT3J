@@ -908,6 +908,9 @@ var OPTIES = {
       // Voeg een event listener toe.
       knop.addEventListener('mouseenter', function () {
 
+        // Speel het optie geluid af.
+        GELUID.functions.speel_optie_geluid();
+
         // Verander de kleuren.
         $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
         $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
@@ -915,19 +918,35 @@ var OPTIES = {
         // Handel de bestelling af.
         OPTIES.functions.handel_bestelling_af();
       });
-
-      // Voeg een event listener toe.
-      knop.addEventListener('mouseleave', function () {
-
-        // Verander de kleuren.
-        $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-000000');
-        $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-FFFFFF');
-      });
     },
 
     // Handel de bestelling af.
     handel_bestelling_af: function () {
-      // TODO handel de bestelling af.
+
+      // Voeg de melding aan de cursor toe.
+      OPTIES.functions.voeg_melding_toe();
+
+      // Wacht 2 seconden.
+      setTimeout(function () {
+
+        // Ga naar de homepage.
+        window.location.href = window.location.origin;
+
+        // Wacht voor 2 seconden.
+      }, 15000);
+    },
+
+    // Laat een melding aan de gebruiker zien.
+    voeg_melding_toe: function () {
+
+      // Voeg de melding aan de cursor toe.
+      $('#cursor').append(
+        '<a-entity id="melding" mixin="mixin-kleur-000000 mixin-opacity-50" position="0 0 -5" geometry="depth:0.1; height:100; width:100">' +
+          '<a-entity id="melding-achtergrond" mixin="mixin-kleur-000000" geometry="depth:0.1; height:5; width:10">' +
+            '<a-entity id="melding-text" text="text: ZET UW VR BRIL AF" mixin="mixin-kleur-FFFFFF" position="-3 -0.25 0.1"></a-entity>' +
+          '</a-entity>' +
+        '</a-entity>'
+      );
     }
   }
 };
