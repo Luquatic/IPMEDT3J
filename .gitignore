@@ -4,6 +4,7 @@ dist
 bower_components
 opdrachten/test/
 Adviesrapport.docx
+~$viesrapport.docx
 
 # Geen .idea/ map van Jetbrain.
 .idea/
