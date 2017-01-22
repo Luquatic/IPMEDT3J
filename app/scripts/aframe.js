@@ -47,7 +47,7 @@ var KLEUREN = {
 
               // Sla het index nummer van het palet en de kleur op.
               var palet_code = kleuren_paletten.indexOf(kleuren_paletten[x]) + 1,
-                kleur_code = kleuren_paletten[x].indexOf(kleuren_paletten[x][y]) + 1;
+                  kleur_code = kleuren_paletten[x].indexOf(kleuren_paletten[x][y]) + 1;
 
               // Voeg de kleur toe.
               kleuren_mixins.push('<a-mixin id="kleuren-palet-' + palet_code + '-kleur-' + kleur_code + '-mixin" material="color: ' + kleuren_paletten[x][y] + '"></a-mixin>');
@@ -513,8 +513,21 @@ var RUBIKSCUBE = {
     // Roteer de Rubik's Cube.
     roteer_rubiks_cube: function (x, y) {
 
-      // Verander de rotatie van de rubik's cube.
-      RUBIKSCUBE.$rubiks_cube.attr('rotation', x + ' ' + y + ' 0');
+      var milliseconden = 3000;
+
+      // Controleer of de animatie niet bestaat.
+      if(!$('#rotate_animation').length) {
+
+        // Verander de rotatie van de rubik's cube.
+        RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="' + milliseconden + '" to="' + x + ' ' + y + ' 0"></a-animation>');
+
+        // Start een timeout.
+        setTimeout(function () {
+
+          // Verwijder de oude animatie.
+          $('#rotate_animation').remove();
+        }, milliseconden);
+      }
     },
 
     // Verkijg de rotatie van de Rubik's Cube.
@@ -578,6 +591,9 @@ var OPTIES = {
 
   // De scene als Jquery object.
   $opties: $('#opties'),
+
+  // De geselecteerde kleur.
+  kleur_id: 1,
 
   // Init functie.
   init: function (aantal_paletten) {
@@ -703,14 +719,24 @@ var OPTIES = {
           // ID.
           var id = $(this).attr('data-kleuren-palet-id');
 
-          // Zorg dat de kleuren veranderen van de achtergrond.
-          OPTIES.functions.set_kleuren_achtergrond(id);
+          // Controleer voor verandering.
+          if(id != OPTIES.kleur_id)
+          {
+            // Update het id.
+            OPTIES.kleur_id = id;
 
-          // Verander de kleur van de Rubik's Cube.
-          RUBIKSCUBE.functions.set_kleuren(id);
+            // Speel het optie geluid af.
+            GELUID.functions.speel_optie_geluid();
 
-          // Update het kleuren palet.
-          KLEUREN.functions.update_kleurenpalet(id)
+            // Zorg dat de kleuren veranderen van de achtergrond.
+            OPTIES.functions.set_kleuren_achtergrond(id);
+
+            // Verander de kleur van de Rubik's Cube.
+            RUBIKSCUBE.functions.set_kleuren(id);
+
+            // Update het kleuren palet.
+            KLEUREN.functions.update_kleurenpalet(id)
+          }
         });
       }
     },
@@ -740,11 +766,6 @@ var OPTIES = {
           $(achtergrond).attr('mixin', 'mixin-kleur-FFFFFF');
         }
       }
-    },
-
-    // Speel het optie geluid af.
-    speel_optie_geluid_af: function () {
-      // TODO: nog te implementeren.
     },
 
     // Voeg de optie voor de kleuren paletten toe.
@@ -892,18 +913,45 @@ var OPTIES = {
       // Voeg een event listener toe.
       knop.addEventListener('mouseenter', function () {
 
+        // Speel het optie geluid af.
+        GELUID.functions.speel_optie_geluid();
+
         // Verander de kleuren.
         $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
         $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
-      });
 
-      // Voeg een event listener toe.
-      knop.addEventListener('mouseleave', function () {
-
-        // Verander de kleuren.
-        $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-000000');
-        $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-FFFFFF');
+        // Handel de bestelling af.
+        OPTIES.functions.handel_bestelling_af();
       });
+    },
+
+    // Handel de bestelling af.
+    handel_bestelling_af: function () {
+
+      // Voeg de melding aan de cursor toe.
+      OPTIES.functions.voeg_melding_toe();
+
+      // Wacht 2 seconden.
+      setTimeout(function () {
+
+        // Ga naar de homepage.
+        window.location.href = window.location.origin;
+
+        // Wacht voor 2 seconden.
+      }, 15000);
+    },
+
+    // Laat een melding aan de gebruiker zien.
+    voeg_melding_toe: function () {
+
+      // Voeg de melding aan de cursor toe.
+      $('#cursor').append(
+        '<a-entity id="melding" mixin="mixin-kleur-000000 mixin-opacity-50" position="0 0 -5" geometry="depth:0.1; height:100; width:100">' +
+          '<a-entity id="melding-achtergrond" mixin="mixin-kleur-000000" geometry="depth:0.1; height:5; width:10">' +
+            '<a-entity id="melding-text" text="text: ZET UW VR BRIL AF" mixin="mixin-kleur-FFFFFF" position="-3 -0.25 0.1"></a-entity>' +
+          '</a-entity>' +
+        '</a-entity>'
+      );
     }
   }
 };
@@ -1028,8 +1076,7 @@ var PIJLEN = {
       }
 
       // Verander de Rubik's Cube van rotatie.
-      $('#rotate_animation').remove();
-      RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="3000" to="' + x + ' ' + y + ' 0"></a-animation>');
+      RUBIKSCUBE.functions.roteer_rubiks_cube(x, y);
     },
 
     // Voeg de Rubik's Cube pijlen toe.
@@ -1084,6 +1131,9 @@ var PIJLEN = {
           // Draai de Rubik's Cube.
           setTimeout(function () {
 
+            // Speel het zet geluid af.
+            GELUID.functions.speel_zet_geluid();
+
             // Roteer de Rubik's Cube.
             RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
 
@@ -1122,8 +1172,11 @@ var GELUID = {
   // Roteer geluid.
   roteer_geluid: new Audio('../sounds/drag.mp3'),
 
-  // TODO: optie geluid.
-  optie_geluid: new Audio('../sounds/drag.mp3'),
+  // Optie geluid
+  optie_geluid: new Audio('../sounds/select.mp3'),
+
+  // Zet geluid
+  zet_geluid: new Audio('../sounds/move.mp3'),
 
   // Init functie.
   init: function () {},
@@ -1143,6 +1196,13 @@ var GELUID = {
 
       // Speel het optie geluid af.
       GELUID.optie_geluid.play();
+    },
+
+    // Speel het zet geluid af.
+    speel_zet_geluid: function () {
+
+      // Speel het zet geluid af.
+      GELUID.zet_geluid.play();
     }
   }
 };
