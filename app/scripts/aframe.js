@@ -950,8 +950,22 @@ var OPTIES = {
       // Wacht 2 seconden.
       setTimeout(function () {
 
-        // Ga naar de homepage.
-        window.location.href = window.location.origin;
+        // Homepage
+        var homepage = window.location.origin;
+
+        // Controleer of het de iFrame is.
+        if(window.frameElement)
+        {
+          // Ga naar de homepage.
+          window.top.location.href = homepage;
+        }
+
+        else
+        {
+          // Ga naar de homepage.
+          window.location.href = homepage;
+        }
+
 
         // Wacht voor 2 seconden.
       }, 15000);
