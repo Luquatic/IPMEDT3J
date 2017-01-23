@@ -37,7 +37,7 @@
     <![endif]-->
 
     <!-- VR SCENE -->
-    <a-scene id="scene">
+    <a-scene stats id="scene">
 
       <!-- CAMERA -->
       <a-camera look-controls="look-controls" wasd-controls-enabled="false">
@@ -82,7 +82,7 @@
       <a-entity id="rubiks-cube" rotation="0 0 0"></a-entity>
 
       <!--MOUNTAIN-->
-      <a-entity collada-model="#mountain-dae" material="src: #mountain" position="18.8 -13.99 -42.97" rotation="0 90 0" scale="2 2 2"></a-entity>
+      <!--<a-entity collada-model="#mountain-dae" material="src: #mountain" position="18.8 -13.99 -42.97" rotation="0 90 0" scale="2 2 2"></a-entity>-->
 
       <!-- GROUND -->
       <a-entity id="groundBack" position="0 -10.75 0" geometry="depth:200;height:2;width:200;skipCache:false" material="src:#grass;repeat:25 25"></a-entity>

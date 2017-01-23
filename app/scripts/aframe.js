@@ -50,7 +50,7 @@ var KLEUREN = {
                   kleur_code = kleuren_paletten[x].indexOf(kleuren_paletten[x][y]) + 1;
 
               // Voeg de kleur toe.
-              kleuren_mixins.push('<a-mixin id="kleuren-palet-' + palet_code + '-kleur-' + kleur_code + '-mixin" material="color: ' + kleuren_paletten[x][y] + '"></a-mixin>');
+              kleuren_mixins.push('<a-mixin id="kleuren-palet-' + palet_code + '-kleur-' + kleur_code + '-mixin" class="kleuren-palet-' + (x + 1) + '-kleur-' + (y + 1) + '" data-kleur="' + kleuren_paletten[x][y] + '" material="color: ' + kleuren_paletten[x][y] + '"></a-mixin>');
             }
           }
 
@@ -947,11 +947,30 @@ var OPTIES = {
       // Voeg de melding aan de cursor toe.
       OPTIES.functions.voeg_melding_toe();
 
+      // De kleuren.
+      var kleuren = {};
+
+      // Verkrijg alle kleuren.
+      for(var x = 1; x <= 6; x++)
+      {
+        // Voeg de kleur toe aan de array.
+        kleuren['kleur-' + x] = $('.kleuren-palet-' + KLEUREN.huidig_palet + '-kleur-' + x).attr('data-kleur');
+      }
+
+      function serialize(obj) {
+        var str = [];
+        for(var p in obj)
+          if (obj.hasOwnProperty(p)) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          }
+        return str.join("&");
+      }
+
       // Wacht 2 seconden.
       setTimeout(function () {
 
         // Homepage
-        var homepage = window.location.origin;
+        var homepage = window.location.origin + '?' + serialize(kleuren);
 
         // Controleer of het de iFrame is.
         if(window.frameElement)
@@ -966,8 +985,7 @@ var OPTIES = {
           window.location.href = homepage;
         }
 
-
-        // Wacht voor 2 seconden.
+        // Wacht voor 15 seconden.
       }, 15000);
     },
 

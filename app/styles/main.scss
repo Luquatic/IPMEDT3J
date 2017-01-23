@@ -296,3 +296,35 @@ header {
 .mdl-mega-footer--bottom-section {
   padding-top: 32px;
 }
+
+// Kleuren
+td.kleur {
+  border: solid thin lightgray;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.kleur-1 {
+  background-color: #B71234;
+}
+
+.kleur-2 {
+  background-color: #FF5800;
+}
+
+.kleur-3 {
+  background-color: #0246AD;
+}
+
+.kleur-4 {
+  background-color: #009B48;
+}
+
+.kleur-5 {
+  background-color: #FFD500;
+}
+
+.kleur-6 {
+  background-color: #FFFFFF;
+}
