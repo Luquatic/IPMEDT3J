@@ -540,11 +540,27 @@ var RUBIKSCUBE = {
     // Update de rubik's cube.
     update_rubiks_cube: function () {
 
-      // Verwijder de rubik's cube.
-      RUBIKSCUBE.$rubiks_cube.html("");
+      // Voeg de Rubik's Cube opnieuw toe.
+      RUBIKSCUBE.functions.voeg_rubiks_cube_opnieuw_toe();
 
       // Voeg hem weer toe. #SORRYFOUTJE
       RUBIKSCUBE.functions.voeg_rubiks_cube_toe(3);
+    },
+
+    // Voeg de Rubik's Cube opnieuw toe.
+    voeg_rubiks_cube_opnieuw_toe: function () {
+
+      // Verwijder de Rubik's Cube.
+      RUBIKSCUBE.$rubiks_cube.remove();
+
+      // Voeg een nieuwe container toe.
+      $('<a-entity id="rubiks-cube" rotation="0 0 0"></a-entity>').insertAfter('#assets');
+
+      // Initialiseer de Rubik's Cube jQuery object opnieuw.
+      RUBIKSCUBE.$rubiks_cube = $('#rubiks-cube');
+
+      // Bepaal de positie
+      RUBIKSCUBE.functions.bepaal_positie(3);
     },
 
     // Draai de Rubik's Cube.
