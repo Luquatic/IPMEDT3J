@@ -28,15 +28,15 @@ var HOMEPAGE = {
       HOMEPAGE.$.knop_nieuw_venster.click(function () {
 
         // Open in nieuw venster.
-        HOMEPAGE.functions.open_in_nieuw_venster();
+        HOMEPAGE.functions.open_in_nieuw_venster(this);
       });
     },
 
     // Open in nieuw venster.
-    open_in_nieuw_venster: function () {
+    open_in_nieuw_venster: function (knop) {
 
       // URL
-      var url = $(this).attr('data-link');
+      var url = $(knop).attr('data-link');
 
       // Open de A Frame pagina in een apart tabblad.
       window.open(url);
