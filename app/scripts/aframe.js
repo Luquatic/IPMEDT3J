@@ -215,6 +215,9 @@ var RUBIKSCUBE = {
     'left':  new Matrix([['1','1','1'], ['6','6','6'], ['6','6','6']]),
   }),
 
+  // Of de Rubik's Cube geroteerd word.
+  wordt_geroteerd: false,
+
 // Init function.
   init: function (grid) {
 
@@ -513,10 +516,14 @@ var RUBIKSCUBE = {
     // Roteer de Rubik's Cube.
     roteer_rubiks_cube: function (x, y) {
 
+      // Aantal milliseconden.
       var milliseconden = 3000;
 
       // Controleer of de animatie niet bestaat.
       if(!$('#rotate_animation').length) {
+
+        // Geef aan dat de Rubik's Cube geroteerd wordt.
+        RUBIKSCUBE.wordt_geroteerd = true;
 
         // Verander de rotatie van de rubik's cube.
         RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="' + milliseconden + '" to="' + x + ' ' + y + ' 0"></a-animation>');
@@ -526,6 +533,10 @@ var RUBIKSCUBE = {
 
           // Verwijder de oude animatie.
           $('#rotate_animation').remove();
+
+          // Geef aan dat de Rubik's Cube niet meer geroteerd wordt.
+          RUBIKSCUBE.wordt_geroteerd = false;
+
         }, milliseconden);
       }
     },
@@ -593,12 +604,10 @@ var RUBIKSCUBE = {
 
     // Controleer of de opgegeven zijde is opgelost.
     is_zijde_opgelost: function (zijde) {
-      if(_.uniq(_.flatten(_.map(RUBIKSCUBE.rubiks_cube_state.faces[zijde].elements, _.values))).length == 1) {
-        return true;
-      } else {
-        return false;
-      }
-    }
+
+      // Controleer of de opgegeven zijde is opgelost.
+      return _.uniq(_.flatten(_.map(RUBIKSCUBE.rubiks_cube_state.faces[zijde].elements, _.values))).length == 1;
+    },
   }
 };
 
@@ -1177,27 +1186,31 @@ var PIJLEN = {
         // Voeg de event listener toe.
         pijl.addEventListener('mouseenter', function () {
 
-          // Start de timer.
-          TIMER.functions.start();
+          // Controleer of de Rubik's Cube gedraaid wordt.
+          if (!RUBIKSCUBE.wordt_geroteerd)
+          {
+            // Start de timer.
+            TIMER.functions.start();
 
-          // Verkrijg de zijde en het aantal rotaties.
-          var zijde    = $(this).attr('data-zijde'),
+            // Verkrijg de zijde en het aantal rotaties.
+            var zijde    = $(this).attr('data-zijde'),
               rotaties = $(this).attr('data-rotaties');
 
-          // Draai de Rubik's Cube.
-          setTimeout(function () {
+            // Draai de Rubik's Cube.
+            setTimeout(function () {
 
-            // Speel het zet geluid af.
-            GELUID.functions.speel_zet_geluid();
+              // Speel het zet geluid af.
+              GELUID.functions.speel_zet_geluid();
 
-            // Roteer de Rubik's Cube.
-            RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
+              // Roteer de Rubik's Cube.
+              RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
 
-            // Controleer voor de oplossing.
-            PIJLEN.functions.controleer_voor_oplossing();
+              // Controleer voor de oplossing.
+              PIJLEN.functions.controleer_voor_oplossing();
 
-          // Voor 1 seconden.
-          }, 1000);
+              // Voor 1 seconden.
+            }, 1000);
+          }
         });
       }
     },
