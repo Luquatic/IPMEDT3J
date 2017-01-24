@@ -735,24 +735,28 @@ var OPTIES = {
           // ID.
           var id = $(this).attr('data-kleuren-palet-id');
 
-          // Controleer voor verandering.
-          if(id != OPTIES.kleur_id)
-          {
-            // Update het id.
-            OPTIES.kleur_id = id;
+          // Gebruiker moet de optie 1 seconden hoveren.
+          setTimeout(function () {
 
-            // Speel het optie geluid af.
-            GELUID.functions.speel_optie_geluid();
+            // Controleer voor verandering.
+            if(id != OPTIES.kleur_id)
+            {
+              // Update het id.
+              OPTIES.kleur_id = id;
 
-            // Zorg dat de kleuren veranderen van de achtergrond.
-            OPTIES.functions.set_kleuren_achtergrond(id);
+              // Speel het optie geluid af.
+              GELUID.functions.speel_optie_geluid();
 
-            // Verander de kleur van de Rubik's Cube.
-            RUBIKSCUBE.functions.set_kleuren(id);
+              // Zorg dat de kleuren veranderen van de achtergrond.
+              OPTIES.functions.set_kleuren_achtergrond(id);
 
-            // Update het kleuren palet.
-            KLEUREN.functions.update_kleurenpalet(id)
-          }
+              // Verander de kleur van de Rubik's Cube.
+              RUBIKSCUBE.functions.set_kleuren(id);
+
+              // Update het kleuren palet.
+              KLEUREN.functions.update_kleurenpalet(id)
+            }
+          }, 1000);
         });
       }
     },
@@ -929,15 +933,19 @@ var OPTIES = {
       // Voeg een event listener toe.
       knop.addEventListener('mouseenter', function () {
 
-        // Speel het optie geluid af.
-        GELUID.functions.speel_optie_geluid();
+        // De gebruiker moet de knop 1 seconden hoveren.
+        setTimeout(function () {
 
-        // Verander de kleuren.
-        $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
-        $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
+          // Speel het optie geluid af.
+          GELUID.functions.speel_optie_geluid();
 
-        // Handel de bestelling af.
-        OPTIES.functions.handel_bestelling_af();
+          // Verander de kleuren.
+          $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
+          $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
+
+          // Handel de bestelling af.
+          OPTIES.functions.handel_bestelling_af();
+        }, 1000);
       });
     },
 
