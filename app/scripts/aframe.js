@@ -1,3 +1,43 @@
+// VR klasse.
+var VR = {
+
+  // jQuery
+  $: {
+
+    // De scene.
+    scene: $('#scene')
+  },
+
+  // Init.
+  init: function () {
+
+    // Verwijder de fullscreen knop als het een iframe is.
+    VR.functions.verwijder_fullscreen_knop();
+  },
+
+  // Functions
+  functions: {
+
+    // Controleer of het een iframe is.
+    is_in_iframe: function () {
+
+      // Geef terug of het in een iframe zit.
+      return window.frameElement;
+    },
+
+    // Verwijder de VR knop.
+    verwijder_fullscreen_knop: function () {
+
+      // Controleer of het in een iframe zit.
+      if(VR.functions.is_in_iframe())
+      {
+        // Voeg het attribuut vr-mode-ui toe.
+        VR.$.scene.attr('vr-mode-ui', 'enabled: false');
+      }
+    }
+  }
+};
+
 // Kleuren klasse.
 var KLEUREN = {
 
@@ -1374,6 +1414,9 @@ $(document).ready(function() {
   // Het grid van de Rubik's Cube.
   var grid            = 3,
       aantal_paletten = 4;
+
+  // Initialiseer de VR.
+  VR.init();
 
   // Initialiseer de kleuren.
   KLEUREN.init(aantal_paletten);
