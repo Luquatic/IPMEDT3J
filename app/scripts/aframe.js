@@ -245,16 +245,6 @@ var RUBIKSCUBE = {
     'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
   }),
 
-  // Rubik's Cube state.
-  // rubiks_cube_state: new Cube({
-  //   'back':  new Matrix([['5','5','5'], ['1','1','1'], ['1','1','1']]),
-  //   'front': new Matrix([['6','6','6'], ['2','2','2'], ['2','2','2']]),
-  //   'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
-  //   'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
-  //   'right': new Matrix([['2','2','2'], ['5','5','5'], ['5','5','5']]),
-  //   'left':  new Matrix([['1','1','1'], ['6','6','6'], ['6','6','6']]),
-  // }),
-
   // Of de Rubik's Cube geroteerd word.
   wordt_geroteerd: false,
 
@@ -1194,7 +1184,7 @@ var PIJLEN = {
       }
 
       // Verander de Rubik's Cube van rotatie.
-      RUBIKSCUBE.functions.roteer_rubiks_cube(x, y);
+      RUBIKSCUBE.functions. roteer_rubiks_cube(x, y);
     },
 
     // Voeg de Rubik's Cube pijlen toe.
