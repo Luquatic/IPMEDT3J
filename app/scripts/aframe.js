@@ -266,7 +266,7 @@ var RUBIKSCUBE = {
     setTimeout(function () {
 
       // Hussel de Rubik's Cube.
-      RUBIKSCUBE.functions.hussel_rubiks_cube(['u1', 'l1', 'r1', 'd1']);
+      RUBIKSCUBE.functions.hussel_rubiks_cube(['u1', 'd1', 'l1', 'r1']);
 
     // Wacht 1 seconden.
     }, 1000);
