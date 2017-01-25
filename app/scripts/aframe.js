@@ -1012,6 +1012,9 @@ var OPTIES = {
               // Verander de wordt afgerekend boolean.
               OPTIES.wordt_besteld = true;
 
+              // Stop de timer.
+              TIMER.functions.stop();
+
               // Speel het optie geluid af.
               GELUID.functions.speel_optie_geluid();
 
@@ -1072,7 +1075,7 @@ var OPTIES = {
         }
 
         // Wacht voor 15 seconden.
-      }, 60000);
+      }, 15000);
     },
 
     // Laat een melding aan de gebruiker zien.
