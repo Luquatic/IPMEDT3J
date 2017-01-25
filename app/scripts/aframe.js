@@ -247,8 +247,11 @@ var RUBIKSCUBE = {
     'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
   }),
 
-  // Of de Rubik's Cube geroteerd word.
+  // Of de Rubik's Cube geroteerd wordt.
   wordt_geroteerd: false,
+
+  // Of de Rubik's Cube opgelost wordt.
+  wordt_opgelost: false,
 
 // Init function.
   init: function (grid) {
@@ -1242,8 +1245,11 @@ var PIJLEN = {
         pijl.addEventListener('mouseenter', function () {
 
           // Controleer of de Rubik's Cube gedraaid wordt.
-          if (!RUBIKSCUBE.wordt_geroteerd)
+          if (!RUBIKSCUBE.wordt_geroteerd && !RUBIKSCUBE.wordt_opgelost)
           {
+            // Zet de wordt opgelost variabele.
+            RUBIKSCUBE.wordt_opgelost = true;
+
             // Start de timer.
             TIMER.functions.start();
 
@@ -1286,6 +1292,9 @@ var PIJLEN = {
           OPTIES.functions.voeg_bestelknop_toe();
         }
       }
+
+      // Zet de wordt opgelost variabele.
+      RUBIKSCUBE.wordt_opgelost = false;
     }
   }
 };
