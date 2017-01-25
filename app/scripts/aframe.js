@@ -1,3 +1,43 @@
+// VR klasse.
+var VR = {
+
+  // jQuery
+  $: {
+
+    // De scene.
+    scene: $('#scene')
+  },
+
+  // Init.
+  init: function () {
+
+    // Verwijder de fullscreen knop als het een iframe is.
+    VR.functions.verwijder_fullscreen_knop();
+  },
+
+  // Functions
+  functions: {
+
+    // Controleer of het een iframe is.
+    is_in_iframe: function () {
+
+      // Geef terug of het in een iframe zit.
+      return window.frameElement;
+    },
+
+    // Verwijder de VR knop.
+    verwijder_fullscreen_knop: function () {
+
+      // Controleer of het in een iframe zit.
+      if(VR.functions.is_in_iframe())
+      {
+        // Voeg het attribuut vr-mode-ui toe.
+        VR.$.scene.attr('vr-mode-ui', 'enabled: false');
+      }
+    }
+  }
+};
+
 // Kleuren klasse.
 var KLEUREN = {
 
@@ -50,7 +90,7 @@ var KLEUREN = {
                   kleur_code = kleuren_paletten[x].indexOf(kleuren_paletten[x][y]) + 1;
 
               // Voeg de kleur toe.
-              kleuren_mixins.push('<a-mixin id="kleuren-palet-' + palet_code + '-kleur-' + kleur_code + '-mixin" material="color: ' + kleuren_paletten[x][y] + '"></a-mixin>');
+              kleuren_mixins.push('<a-mixin id="kleuren-palet-' + palet_code + '-kleur-' + kleur_code + '-mixin" class="kleuren-palet-' + (x + 1) + '-kleur-' + (y + 1) + '" data-kleur="' + kleuren_paletten[x][y] + '" material="color: ' + kleuren_paletten[x][y] + '"></a-mixin>');
             }
           }
 
@@ -181,6 +221,8 @@ var KLEUREN = {
 
     // Verkrijg het kleurenpalet.
     verkrijg_kleurenpalet: function () {
+
+      // Geef het huidig kleurenpalet terug.
       return KLEUREN.huidig_palet;
     }
   }
@@ -196,24 +238,17 @@ var RUBIKSCUBE = {
   $rubiks_cube: $('#rubiks-cube'),
 
   // Rubik's Cube state.
-  // rubiks_cube_state: new Cube({
-  //   'back':  new Matrix([['1','1','1'], ['1','1','1'], ['1','1','1']]),
-  //   'front': new Matrix([['2','2','2'], ['2','2','2'], ['2','2','2']]),
-  //   'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
-  //   'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
-  //   'right': new Matrix([['5','5','5'], ['5','5','5'], ['5','5','5']]),
-  //   'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
-  // }),
-
-  // Rubik's Cube state.
   rubiks_cube_state: new Cube({
-    'back':  new Matrix([['5','5','5'], ['1','1','1'], ['1','1','1']]),
-    'front': new Matrix([['6','6','6'], ['2','2','2'], ['2','2','2']]),
+    'back':  new Matrix([['1','1','1'], ['1','1','1'], ['1','1','1']]),
+    'front': new Matrix([['2','2','2'], ['2','2','2'], ['2','2','2']]),
     'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
     'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
-    'right': new Matrix([['2','2','2'], ['5','5','5'], ['5','5','5']]),
-    'left':  new Matrix([['1','1','1'], ['6','6','6'], ['6','6','6']]),
+    'right': new Matrix([['5','5','5'], ['5','5','5'], ['5','5','5']]),
+    'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
   }),
+
+  // Of de Rubik's Cube geroteerd word.
+  wordt_geroteerd: false,
 
 // Init function.
   init: function (grid) {
@@ -226,6 +261,15 @@ var RUBIKSCUBE = {
 
     // Bepaal de positie van de Rubik's Cube.
     RUBIKSCUBE.functions.bepaal_positie(grid);
+
+    // Anti dispose.
+    setTimeout(function () {
+
+      // Hussel de Rubik's Cube.
+      RUBIKSCUBE.functions.hussel_rubiks_cube(['u1', 'l1', 'r1', 'd1']);
+
+    // Wacht 1 seconden.
+    }, 1000);
   },
 
   // Functions
@@ -513,10 +557,14 @@ var RUBIKSCUBE = {
     // Roteer de Rubik's Cube.
     roteer_rubiks_cube: function (x, y) {
 
+      // Aantal milliseconden.
       var milliseconden = 3000;
 
       // Controleer of de animatie niet bestaat.
       if(!$('#rotate_animation').length) {
+
+        // Geef aan dat de Rubik's Cube geroteerd wordt.
+        RUBIKSCUBE.wordt_geroteerd = true;
 
         // Verander de rotatie van de rubik's cube.
         RUBIKSCUBE.$rubiks_cube.append('<a-animation id="rotate_animation" attribute="rotation" dur="' + milliseconden + '" to="' + x + ' ' + y + ' 0"></a-animation>');
@@ -526,6 +574,10 @@ var RUBIKSCUBE = {
 
           // Verwijder de oude animatie.
           $('#rotate_animation').remove();
+
+          // Geef aan dat de Rubik's Cube niet meer geroteerd wordt.
+          RUBIKSCUBE.wordt_geroteerd = false;
+
         }, milliseconden);
       }
     },
@@ -576,6 +628,16 @@ var RUBIKSCUBE = {
       RUBIKSCUBE.functions.update_rubiks_cube();
     },
 
+    // Hussel de Rubik's Cube.
+    hussel_rubiks_cube: function (rotaties) {
+
+      // Loop door alle rotaties heen.
+      RUBIKSCUBE.rubiks_cube_state.move(rotaties.join());
+
+      // Update de Rubik's Cube.
+      RUBIKSCUBE.functions.update_rubiks_cube();
+    },
+
     // Is de Rubik's Cube opgelost
     is_opgelost: function () {
 
@@ -593,23 +655,25 @@ var RUBIKSCUBE = {
 
     // Controleer of de opgegeven zijde is opgelost.
     is_zijde_opgelost: function (zijde) {
-      if(_.uniq(_.flatten(_.map(RUBIKSCUBE.rubiks_cube_state.faces[zijde].elements, _.values))).length == 1) {
-        return true;
-      } else {
-        return false;
-      }
-    }
+
+      // Controleer of de opgegeven zijde is opgelost.
+      return _.uniq(_.flatten(_.map(RUBIKSCUBE.rubiks_cube_state.faces[zijde].elements, _.values))).length == 1;
+    },
   }
 };
 
 // Opties klasse.
 var OPTIES = {
 
-  // De scene als Jquery object.
-  $opties: $('#opties'),
-
   // De geselecteerde kleur.
   kleur_id: 1,
+
+  // jQuery
+  $: {
+
+    // De scene als Jquery object.
+    opties: $('#opties'),
+  },
 
   // Init functie.
   init: function (aantal_paletten) {
@@ -643,14 +707,14 @@ var OPTIES = {
     voeg_paneel_toe: function () {
 
       // Voeg het paneel toe.
-      OPTIES.$opties.append('<a-entity id="optie-paneel"  mixin="mixin-kleur-CCCCCC" geometry="depth:0.1; height:11; width:7.5"></a-entity>');
+      OPTIES.$.opties.append('<a-entity id="optie-paneel"  mixin="mixin-kleur-CCCCCC" geometry="depth:0.1; height:11; width:7.5"></a-entity>');
     },
 
     // Voeg de optie voor de kleuren paletten toe.
     voeg_optie_kleuren_toe: function () {
 
       // Voeg de suboptie kleuren toe.
-      OPTIES.$opties.append(
+      OPTIES.$.opties.append(
         '<a-entity id="optie-kleuren">' +
           '<a-entity id="optie-titel-kleuren" class="optie-titel" position="-3.25 4.25 0.1" text="text:Kies een kleurenschema; size:0.3; style:normal" mixin="mixin-kleur-000000"></a-entity>' +
         '</a-entity>'
@@ -735,24 +799,28 @@ var OPTIES = {
           // ID.
           var id = $(this).attr('data-kleuren-palet-id');
 
-          // Controleer voor verandering.
-          if(id != OPTIES.kleur_id)
-          {
-            // Update het id.
-            OPTIES.kleur_id = id;
+          // Gebruiker moet de optie 1 seconden hoveren.
+          setTimeout(function () {
 
-            // Speel het optie geluid af.
-            GELUID.functions.speel_optie_geluid();
+            // Controleer voor verandering.
+            if(id != OPTIES.kleur_id)
+            {
+              // Update het id.
+              OPTIES.kleur_id = id;
 
-            // Zorg dat de kleuren veranderen van de achtergrond.
-            OPTIES.functions.set_kleuren_achtergrond(id);
+              // Speel het optie geluid af.
+              GELUID.functions.speel_optie_geluid();
 
-            // Verander de kleur van de Rubik's Cube.
-            RUBIKSCUBE.functions.set_kleuren(id);
+              // Zorg dat de kleuren veranderen van de achtergrond.
+              OPTIES.functions.set_kleuren_achtergrond(id);
 
-            // Update het kleuren palet.
-            KLEUREN.functions.update_kleurenpalet(id)
-          }
+              // Verander de kleur van de Rubik's Cube.
+              RUBIKSCUBE.functions.set_kleuren(id);
+
+              // Update het kleuren palet.
+              KLEUREN.functions.update_kleurenpalet(id)
+            }
+          }, 1000);
         });
       }
     },
@@ -788,7 +856,7 @@ var OPTIES = {
     voeg_optie_grid_toe: function () {
 
       // Voeg de suboptie kleuren toe.
-      OPTIES.$opties.append(
+      OPTIES.$.opties.append(
         '<a-entity id="optie-grid">' +
           '<a-entity id="optie-titel-grid" class="optie-titel" position="-3.25 -3 0.1" text="text:Kies een grid; size:0.3; style:normal" mixin="mixin-kleur-000000"></a-entity>' +
         '</a-entity>'
@@ -910,7 +978,7 @@ var OPTIES = {
     voeg_bestelknop_toe: function () {
 
       // Voeg bestelknop toe.
-      OPTIES.$opties.append(
+      OPTIES.$.opties.append(
         '<a-entity id="optie-bestelknop-achtergrond" class="optie-bestelknop-achtergrond" mixin="mixin-kleur-000000" position="0 -4 0.1" geometry="depth:0.1; height:1.2; width:6.5;" >' +
           '<a-entity id="optie-bestelknop-tekst" text="text: BESTELLEN" mixin="mixin-kleur-FFFFFF" position="-1.7 -0.2 0.05"></a-entity>' +
         '</a-entity>'
@@ -929,15 +997,19 @@ var OPTIES = {
       // Voeg een event listener toe.
       knop.addEventListener('mouseenter', function () {
 
-        // Speel het optie geluid af.
-        GELUID.functions.speel_optie_geluid();
+        // De gebruiker moet de knop 1 seconden hoveren.
+        setTimeout(function () {
 
-        // Verander de kleuren.
-        $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
-        $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
+          // Speel het optie geluid af.
+          GELUID.functions.speel_optie_geluid();
 
-        // Handel de bestelling af.
-        OPTIES.functions.handel_bestelling_af();
+          // Verander de kleuren.
+          $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
+          $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
+
+          // Handel de bestelling af.
+          OPTIES.functions.handel_bestelling_af();
+        }, 1000);
       });
     },
 
@@ -947,13 +1019,45 @@ var OPTIES = {
       // Voeg de melding aan de cursor toe.
       OPTIES.functions.voeg_melding_toe();
 
+      // De kleuren.
+      var kleuren = {};
+
+      // Verkrijg alle kleuren.
+      for(var x = 1; x <= 6; x++)
+      {
+        // Voeg de kleur toe aan de array.
+        kleuren['kleur-' + x] = $('.kleuren-palet-' + KLEUREN.huidig_palet + '-kleur-' + x).attr('data-kleur');
+      }
+
+      function serialize(obj) {
+        var str = [];
+        for(var p in obj)
+          if (obj.hasOwnProperty(p)) {
+            str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+          }
+        return str.join('&');
+      }
+
       // Wacht 2 seconden.
       setTimeout(function () {
 
-        // Ga naar de homepage.
-        window.location.href = window.location.origin;
+        // Homepage
+        var homepage = window.location.origin + '?' + serialize(kleuren);
 
-        // Wacht voor 2 seconden.
+        // Controleer of het de iFrame is.
+        if(window.frameElement)
+        {
+          // Ga naar de homepage.
+          window.top.location.href = homepage;
+        }
+
+        else
+        {
+          // Ga naar de homepage.
+          window.location.href = homepage;
+        }
+
+        // Wacht voor 15 seconden.
       }, 15000);
     },
 
@@ -1092,7 +1196,7 @@ var PIJLEN = {
       }
 
       // Verander de Rubik's Cube van rotatie.
-      RUBIKSCUBE.functions.roteer_rubiks_cube(x, y);
+      RUBIKSCUBE.functions. roteer_rubiks_cube(x, y);
     },
 
     // Voeg de Rubik's Cube pijlen toe.
@@ -1137,27 +1241,31 @@ var PIJLEN = {
         // Voeg de event listener toe.
         pijl.addEventListener('mouseenter', function () {
 
-          // Start de timer.
-          TIMER.functions.start();
+          // Controleer of de Rubik's Cube gedraaid wordt.
+          if (!RUBIKSCUBE.wordt_geroteerd)
+          {
+            // Start de timer.
+            TIMER.functions.start();
 
-          // Verkrijg de zijde en het aantal rotaties.
-          var zijde    = $(this).attr('data-zijde'),
+            // Verkrijg de zijde en het aantal rotaties.
+            var zijde    = $(this).attr('data-zijde'),
               rotaties = $(this).attr('data-rotaties');
 
-          // Draai de Rubik's Cube.
-          setTimeout(function () {
+            // Draai de Rubik's Cube.
+            setTimeout(function () {
 
-            // Speel het zet geluid af.
-            GELUID.functions.speel_zet_geluid();
+              // Speel het zet geluid af.
+              GELUID.functions.speel_zet_geluid();
 
-            // Roteer de Rubik's Cube.
-            RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
+              // Roteer de Rubik's Cube.
+              RUBIKSCUBE.functions.draai_rubiks_cube(zijde, rotaties);
 
-            // Controleer voor de oplossing.
-            PIJLEN.functions.controleer_voor_oplossing();
+              // Controleer voor de oplossing.
+              PIJLEN.functions.controleer_voor_oplossing();
 
-          // Voor 1 seconden.
-          }, 1000);
+              // Voor 1 seconden.
+            }, 1000);
+          }
         });
       }
     },
@@ -1321,6 +1429,9 @@ $(document).ready(function() {
   // Het grid van de Rubik's Cube.
   var grid            = 3,
       aantal_paletten = 4;
+
+  // Initialiseer de VR.
+  VR.init();
 
   // Initialiseer de kleuren.
   KLEUREN.init(aantal_paletten);

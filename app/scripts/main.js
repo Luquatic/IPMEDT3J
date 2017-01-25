@@ -7,14 +7,14 @@ var HOMEPAGE = {
     knop_nieuw_venster: $('#nieuw-venster'),
   },
 
-  // Scene
-  scene: document.querySelector('a-scene'),
-
   // Init
   init: function () {
 
     // Voeg de event listener toe.
     HOMEPAGE.functions.voeg_event_listeners_toe();
+
+    // Verander de kleuren.
+    HOMEPAGE.functions.verander_kleuren();
   },
 
   // Functions
@@ -42,14 +42,36 @@ var HOMEPAGE = {
       window.open(url);
     },
 
-    // Open de VR omgeving in fullscreen.
-    open_in_full_screen: function () {
+    verkrijg_parameter: function (naam) {
 
-      // Controleer of de VR scene geladen is.
-      if (HOMEPAGE.scene.isLoaded)
-      {
-        // Open de VR omgeving in fullscreen.
-        HOMEPAGE.scene.enterVR();
+      // De url
+      var url = window.location.href;
+
+      // Haal het op bij de naam.
+      var resultaten = new RegExp('[\\?&]' + naam + '=([^&#]*)').exec(url);
+
+      // Controleer of er wat opgehaald kan worden.
+      if (!resultaten) { return null; }
+
+      // Geef het resultaat terug.
+      return decodeURIComponent(resultaten[1]) || null;
+    },
+
+    // Verander de kleuren.
+    verander_kleuren: function () {
+
+      // Ga door alle kleuren heen.
+      for(var x = 1; x <= 6; x++) {
+
+        // Verkrijg de kleur.
+        var kleur = HOMEPAGE.functions.verkrijg_parameter('kleur-' + x);
+
+        // Controleer of de kleur bestaat.
+        if(kleur)
+        {
+          // Verander de kleur van de cirkel.
+          $('.kleur-' + x).css('background-color', kleur);
+        }
       }
     }
   }
