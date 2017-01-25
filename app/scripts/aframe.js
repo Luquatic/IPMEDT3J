@@ -221,6 +221,8 @@ var KLEUREN = {
 
     // Verkrijg het kleurenpalet.
     verkrijg_kleurenpalet: function () {
+
+      // Geef het huidig kleurenpalet terug.
       return KLEUREN.huidig_palet;
     }
   }
@@ -657,11 +659,15 @@ var RUBIKSCUBE = {
 // Opties klasse.
 var OPTIES = {
 
-  // De scene als Jquery object.
-  $opties: $('#opties'),
-
   // De geselecteerde kleur.
   kleur_id: 1,
+
+  // jQuery
+  $: {
+
+    // De scene als Jquery object.
+    opties: $('#opties'),
+  },
 
   // Init functie.
   init: function (aantal_paletten) {
@@ -695,14 +701,14 @@ var OPTIES = {
     voeg_paneel_toe: function () {
 
       // Voeg het paneel toe.
-      OPTIES.$opties.append('<a-entity id="optie-paneel"  mixin="mixin-kleur-CCCCCC" geometry="depth:0.1; height:11; width:7.5"></a-entity>');
+      OPTIES.$.opties.append('<a-entity id="optie-paneel"  mixin="mixin-kleur-CCCCCC" geometry="depth:0.1; height:11; width:7.5"></a-entity>');
     },
 
     // Voeg de optie voor de kleuren paletten toe.
     voeg_optie_kleuren_toe: function () {
 
       // Voeg de suboptie kleuren toe.
-      OPTIES.$opties.append(
+      OPTIES.$.opties.append(
         '<a-entity id="optie-kleuren">' +
           '<a-entity id="optie-titel-kleuren" class="optie-titel" position="-3.25 4.25 0.1" text="text:Kies een kleurenschema; size:0.3; style:normal" mixin="mixin-kleur-000000"></a-entity>' +
         '</a-entity>'
@@ -844,7 +850,7 @@ var OPTIES = {
     voeg_optie_grid_toe: function () {
 
       // Voeg de suboptie kleuren toe.
-      OPTIES.$opties.append(
+      OPTIES.$.opties.append(
         '<a-entity id="optie-grid">' +
           '<a-entity id="optie-titel-grid" class="optie-titel" position="-3.25 -3 0.1" text="text:Kies een grid; size:0.3; style:normal" mixin="mixin-kleur-000000"></a-entity>' +
         '</a-entity>'
@@ -966,7 +972,7 @@ var OPTIES = {
     voeg_bestelknop_toe: function () {
 
       // Voeg bestelknop toe.
-      OPTIES.$opties.append(
+      OPTIES.$.opties.append(
         '<a-entity id="optie-bestelknop-achtergrond" class="optie-bestelknop-achtergrond" mixin="mixin-kleur-000000" position="0 -4 0.1" geometry="depth:0.1; height:1.2; width:6.5;" >' +
           '<a-entity id="optie-bestelknop-tekst" text="text: BESTELLEN" mixin="mixin-kleur-FFFFFF" position="-1.7 -0.2 0.05"></a-entity>' +
         '</a-entity>'
