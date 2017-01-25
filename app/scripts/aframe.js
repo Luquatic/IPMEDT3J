@@ -678,6 +678,9 @@ var OPTIES = {
     opties: $('#opties'),
   },
 
+  // Wordt besteld
+  wordt_besteld: false,
+
   // Init functie.
   init: function (aantal_paletten) {
 
@@ -1000,19 +1003,27 @@ var OPTIES = {
       // Voeg een event listener toe.
       knop.addEventListener('mouseenter', function () {
 
-        // De gebruiker moet de knop 1 seconden hoveren.
-        setTimeout(function () {
+          // De gebruiker moet de knop 1 seconden hoveren.
+          setTimeout(function () {
 
-          // Speel het optie geluid af.
-          GELUID.functions.speel_optie_geluid();
+            // Als er niet al afgerekend wordt
+            if(!OPTIES.wordt_besteld)
+            {
+              // Verander de wordt afgerekend boolean.
+              OPTIES.wordt_besteld = true;
 
-          // Verander de kleuren.
-          $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
-          $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
+              // Speel het optie geluid af.
+              GELUID.functions.speel_optie_geluid();
 
-          // Handel de bestelling af.
-          OPTIES.functions.handel_bestelling_af();
-        }, 1000);
+              // Verander de kleuren.
+              $('#optie-bestelknop-achtergrond').attr('mixin', 'mixin-kleur-FFFFFF');
+              $('#optie-bestelknop-tekst').attr('mixin', 'mixin-kleur-000000');
+
+              // Handel de bestelling af.
+              OPTIES.functions.handel_bestelling_af();
+            }
+          }, 1000);
+
       });
     },
 
@@ -1061,7 +1072,7 @@ var OPTIES = {
         }
 
         // Wacht voor 15 seconden.
-      }, 15000);
+      }, 60000);
     },
 
     // Laat een melding aan de gebruiker zien.
@@ -1069,7 +1080,7 @@ var OPTIES = {
 
       // Voeg de melding aan de cursor toe.
       $('#cursor').append(
-        '<a-entity id="melding" mixin="mixin-kleur-000000 mixin-opacity-50" position="0 0 -5" geometry="depth:0.1; height:100; width:100">' +
+        '<a-entity id="melding" mixin="mixin-kleur-000000 mixin-opacity-75" position="0 0 -5" geometry="depth:0.1; height:100; width:100">' +
           '<a-entity id="melding-achtergrond" mixin="mixin-kleur-000000" geometry="depth:0.1; height:5; width:10">' +
             '<a-entity id="melding-text" text="text: ZET UW VR BRIL AF" mixin="mixin-kleur-FFFFFF" position="-3 -0.25 0.1"></a-entity>' +
           '</a-entity>' +
