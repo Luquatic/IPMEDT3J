@@ -236,24 +236,24 @@ var RUBIKSCUBE = {
   $rubiks_cube: $('#rubiks-cube'),
 
   // Rubik's Cube state.
-  // rubiks_cube_state: new Cube({
-  //   'back':  new Matrix([['1','1','1'], ['1','1','1'], ['1','1','1']]),
-  //   'front': new Matrix([['2','2','2'], ['2','2','2'], ['2','2','2']]),
-  //   'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
-  //   'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
-  //   'right': new Matrix([['5','5','5'], ['5','5','5'], ['5','5','5']]),
-  //   'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
-  // }),
-
-  // Rubik's Cube state.
   rubiks_cube_state: new Cube({
-    'back':  new Matrix([['5','5','5'], ['1','1','1'], ['1','1','1']]),
-    'front': new Matrix([['6','6','6'], ['2','2','2'], ['2','2','2']]),
+    'back':  new Matrix([['1','1','1'], ['1','1','1'], ['1','1','1']]),
+    'front': new Matrix([['2','2','2'], ['2','2','2'], ['2','2','2']]),
     'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
     'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
-    'right': new Matrix([['2','2','2'], ['5','5','5'], ['5','5','5']]),
-    'left':  new Matrix([['1','1','1'], ['6','6','6'], ['6','6','6']]),
+    'right': new Matrix([['5','5','5'], ['5','5','5'], ['5','5','5']]),
+    'left':  new Matrix([['6','6','6'], ['6','6','6'], ['6','6','6']]),
   }),
+
+  // Rubik's Cube state.
+  // rubiks_cube_state: new Cube({
+  //   'back':  new Matrix([['5','5','5'], ['1','1','1'], ['1','1','1']]),
+  //   'front': new Matrix([['6','6','6'], ['2','2','2'], ['2','2','2']]),
+  //   'up':    new Matrix([['3','3','3'], ['3','3','3'], ['3','3','3']]),
+  //   'down':  new Matrix([['4','4','4'], ['4','4','4'], ['4','4','4']]),
+  //   'right': new Matrix([['2','2','2'], ['5','5','5'], ['5','5','5']]),
+  //   'left':  new Matrix([['1','1','1'], ['6','6','6'], ['6','6','6']]),
+  // }),
 
   // Of de Rubik's Cube geroteerd word.
   wordt_geroteerd: false,
@@ -269,6 +269,9 @@ var RUBIKSCUBE = {
 
     // Bepaal de positie van de Rubik's Cube.
     RUBIKSCUBE.functions.bepaal_positie(grid);
+
+    // Hussel de Rubik's Cube.
+    RUBIKSCUBE.functions.hussel_rubiks_cube(['u1', 'l1', 'r1', 'd1']);
   },
 
   // Functions
@@ -622,6 +625,16 @@ var RUBIKSCUBE = {
 
       // Draai de Rubik's Cube.
       RUBIKSCUBE.rubiks_cube_state.move(move);
+
+      // Update de Rubik's Cube.
+      RUBIKSCUBE.functions.update_rubiks_cube();
+    },
+
+    // Hussel de Rubik's Cube.
+    hussel_rubiks_cube: function (rotaties) {
+
+      // Loop door alle rotaties heen.
+      RUBIKSCUBE.rubiks_cube_state.move(rotaties.join());
 
       // Update de Rubik's Cube.
       RUBIKSCUBE.functions.update_rubiks_cube();
