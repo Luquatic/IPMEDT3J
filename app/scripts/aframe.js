@@ -262,8 +262,14 @@ var RUBIKSCUBE = {
     // Bepaal de positie van de Rubik's Cube.
     RUBIKSCUBE.functions.bepaal_positie(grid);
 
-    // Hussel de Rubik's Cube.
-    RUBIKSCUBE.functions.hussel_rubiks_cube(['u1', 'l1', 'r1', 'd1']);
+    // Anti dispose.
+    setTimeout(function () {
+
+      // Hussel de Rubik's Cube.
+      RUBIKSCUBE.functions.hussel_rubiks_cube(['u1', 'l1', 'r1', 'd1']);
+
+    // Wacht 1 seconden.
+    }, 1000);
   },
 
   // Functions
