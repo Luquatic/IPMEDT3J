@@ -1,6 +1,8 @@
 [submodule "app/scripts/vendor/aframe-text-component"]
 	path = app/scripts/vendor/aframe-text-component
 	url = https://github.com/ngokevin/aframe-text-component.git
+	ignore = dirty
 [submodule "app/scripts/vendor/rubikscube-javascript"]
 	path = app/scripts/vendor/rubikscube-javascript
 	url = https://github.com/tdegrunt/rubikscube-javascript.git
+	ignore = dirty
